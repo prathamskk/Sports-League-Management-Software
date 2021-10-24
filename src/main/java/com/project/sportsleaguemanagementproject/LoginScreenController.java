@@ -93,28 +93,39 @@ public class LoginScreenController {
 
                 String username = edtusername.getText();
                 String password = edtpassword.getText();
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
-                Statement statement = connection.createStatement();
-                String sql = "select * from logininfo where username='" + username + "'and password='" + password + "'";
-                ResultSet resultSet = statement.executeQuery(sql);
 
-                if (resultSet.next()) {
-                    String temp = resultSet.getString("type");
-                    String admin = "admin";
-                    String scorekeeper = "scorekeeper";
+                if(username == "")
+                {
+                    messageDisplay.setText("username field is empty");
+                }
+                else if(password == "")
+                {
+                    messageDisplay.setText("password field is empty");
+                }
+                else {
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
+                    Statement statement = connection.createStatement();
+                    String sql = "select * from logininfo where username='" + username + "'and password='" + password + "'";
+                    ResultSet resultSet = statement.executeQuery(sql);
 
-                    if (temp.equals(admin)) {
-                        loadAdminScreen(e);
-                    } else if (temp.equals(scorekeeper)) {
-                        loadScorekeeperScreen(e);
+                    if (resultSet.next()) {
+                        String temp = resultSet.getString("type");
+                        String admin = "admin";
+                        String scorekeeper = "scorekeeper";
+
+                        if (temp.equals(admin)) {
+                            loadAdminScreen(e);
+                        } else if (temp.equals(scorekeeper)) {
+                            loadScorekeeperScreen(e);
+                        } else {
+                            loadDefaultScreen(e);
+                        }
                     } else {
-                        loadDefaultScreen(e);
+                        System.out.println("WRONG COMBO");
+                        messageDisplay.setText("Wrong username and password combination");
+                        edtusername.setText("");
+                        edtpassword.setText("");
                     }
-                } else {
-                    System.out.println("WRONG COMBO");
-                    messageDisplay.setText("Wrong username and password combination");
-                    edtusername.setText("");
-                    edtpassword.setText("");
                 }
 
             } catch (Exception exception)
@@ -145,13 +156,22 @@ public class LoginScreenController {
                 String password = edtpassword.getText();
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("select * from logininfo where username='"+username+"'");
-                if(resultSet.next())
+                ResultSet resultSet = statement.executeQuery("select * from logininfo where username='" + username + "'");
+                if (resultSet.next())
                 {
                     System.out.println("USERNAME ALREADY EXISTS");
                     messageDisplay.setText("Username already exists");
                     edtusername.setText("");
                     edtpassword.setText("");
+                }
+
+                else if(username == "")
+                {
+                    messageDisplay.setText("username field is empty");
+                }
+                else if(password == "")
+                {
+                    messageDisplay.setText("password field is empty");
                 }
                 else
                 {
@@ -161,6 +181,7 @@ public class LoginScreenController {
                     messageDisplay.setText("Registration successful");
 
                 }
+
             }
             catch (Exception exception)
             {
