@@ -94,22 +94,20 @@ public class LoginScreenController {
                 String username = edtusername.getText();
                 String password = edtpassword.getText();
 
-                if(username == "")
+                if(username.equals("") || password.equals(""))
                 {
-                    messageDisplay.setText("username field is empty");
-                }
-                else if(password == "")
-                {
-                    messageDisplay.setText("password field is empty");
+                    messageDisplay.setText("username or password field is empty");
                 }
                 else {
+
+
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
                     Statement statement = connection.createStatement();
-                    String sql = "select * from logininfo where username='" + username + "'and password='" + password + "'";
+                    String sql = "select * from account where username='" + username + "'and password='" + password + "'";
                     ResultSet resultSet = statement.executeQuery(sql);
 
                     if (resultSet.next()) {
-                        String temp = resultSet.getString("type");
+                        String temp = resultSet.getString("account_type");
                         String admin = "admin";
                         String scorekeeper = "scorekeeper";
 
@@ -127,6 +125,7 @@ public class LoginScreenController {
                         edtpassword.setText("");
                     }
                 }
+
 
             } catch (Exception exception)
             {
@@ -156,7 +155,7 @@ public class LoginScreenController {
                 String password = edtpassword.getText();
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("select * from logininfo where username='" + username + "'");
+                ResultSet resultSet = statement.executeQuery("select * from account where username='" + username + "'");
                 if (resultSet.next())
                 {
                     System.out.println("USERNAME ALREADY EXISTS");
@@ -165,17 +164,17 @@ public class LoginScreenController {
                     edtpassword.setText("");
                 }
 
-                else if(username == "")
+                else if(username.equals(""))
                 {
                     messageDisplay.setText("username field is empty");
                 }
-                else if(password == "")
+                else if(password.equals(""))
                 {
                     messageDisplay.setText("password field is empty");
                 }
                 else
                 {
-                    String sql = "INSERT INTO logininfo (username,password) VALUES ('" + username + "' , '" + password + "')";
+                    String sql = "INSERT INTO account (username,password) VALUES ('" + username + "' , '" + password + "')";
                     statement.executeUpdate(sql);
                     System.out.println("REGISTRATION SUCCESSFUL");
                     messageDisplay.setText("Registration successful");

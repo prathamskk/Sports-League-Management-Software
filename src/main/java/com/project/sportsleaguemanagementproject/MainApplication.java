@@ -1,6 +1,7 @@
 package com.project.sportsleaguemanagementproject;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,8 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public class MainApplication extends Application
 {
+
     public static void main(String[] args)
     {
         launch();
