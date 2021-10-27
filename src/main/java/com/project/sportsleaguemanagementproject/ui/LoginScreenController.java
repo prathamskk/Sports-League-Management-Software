@@ -1,4 +1,4 @@
-package com.project.sportsleaguemanagementproject;
+package com.project.sportsleaguemanagementproject.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class LoginScreenController {
@@ -26,20 +27,20 @@ public class LoginScreenController {
     @FXML
     private Label messageDisplay;
     @FXML
-    private Button btnlogin;
+    private Button loginButton;
     @FXML
-    private Button btnregister;
+    private Button registerButton;
     @FXML
-    private TextField edtusername;
+    private TextField usernameField;
     @FXML
-    private PasswordField edtpassword;
+    private PasswordField passwordField;
 
 
 
     @FXML
     private void loadDefaultScreen(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("defaultScreen.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("defaultScreen.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -49,7 +50,7 @@ public class LoginScreenController {
     @FXML
     private void loadAdminScreen(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("adminScreen.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminScreen.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -58,7 +59,7 @@ public class LoginScreenController {
     @FXML
     private void loadScorekeeperScreen(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("scorekeeperScreen.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("scorekeeperScreen.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -73,13 +74,13 @@ public class LoginScreenController {
     {
 
 
-        if (e.getSource() == btnlogin)
+        if (e.getSource() == loginButton)
 
         {
             try {
                 String data = null;
                 try {
-                    File myObj = new File("D:\\COLLEGE NOTES\\java stuff\\SportsLeagueManagementProject\\src\\main\\java\\com\\project\\sportsleaguemanagementproject\\data.txt");
+                    File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
                     Scanner myReader = new Scanner(myObj);
                     while (myReader.hasNextLine()) {
                         data = myReader.nextLine();
@@ -91,8 +92,8 @@ public class LoginScreenController {
                 }
 
 
-                String username = edtusername.getText();
-                String password = edtpassword.getText();
+                String username = usernameField.getText();
+                String password = passwordField.getText();
 
                 if(username.equals("") || password.equals(""))
                 {
@@ -121,8 +122,8 @@ public class LoginScreenController {
                     } else {
                         System.out.println("WRONG COMBO");
                         messageDisplay.setText("Wrong username and password combination");
-                        edtusername.setText("");
-                        edtpassword.setText("");
+                        usernameField.setText("");
+                        passwordField.setText("");
                     }
                 }
 
@@ -134,13 +135,13 @@ public class LoginScreenController {
 
         }
 
-        if (e.getSource() == btnregister) {
+        if (e.getSource() == registerButton) {
 
             try
             {
                 String data = null;
                 try {
-                    File myObj = new File("D:\\COLLEGE NOTES\\java stuff\\SportsLeagueManagementProject\\src\\main\\java\\com\\project\\sportsleaguemanagementproject\\data.txt");
+                    File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
                     Scanner myReader = new Scanner(myObj);
                     while (myReader.hasNextLine()) {
                         data = myReader.nextLine();
@@ -151,8 +152,8 @@ public class LoginScreenController {
                     e2.printStackTrace();
                 }
 
-                String username = edtusername.getText();
-                String password = edtpassword.getText();
+                String username = usernameField.getText();
+                String password = passwordField.getText();
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("select * from account where username='" + username + "'");
@@ -160,8 +161,8 @@ public class LoginScreenController {
                 {
                     System.out.println("USERNAME ALREADY EXISTS");
                     messageDisplay.setText("Username already exists");
-                    edtusername.setText("");
-                    edtpassword.setText("");
+                    usernameField.setText("");
+                    passwordField.setText("");
                 }
 
                 else if(username.equals(""))

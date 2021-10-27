@@ -6,4 +6,6 @@ module com.project.sportsleaguemanagementproject {
 
     opens com.project.sportsleaguemanagementproject to javafx.fxml;
     exports com.project.sportsleaguemanagementproject;
+    exports com.project.sportsleaguemanagementproject.ui;
+    opens com.project.sportsleaguemanagementproject.ui to javafx.fxml;
 }
