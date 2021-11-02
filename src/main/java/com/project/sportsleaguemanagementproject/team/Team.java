@@ -2,6 +2,8 @@ package com.project.sportsleaguemanagementproject.team;
 
 import com.project.sportsleaguemanagementproject.player.Player;
 
+import java.util.Arrays;
+
 public class Team {
     public String teamName;
     public int teamSize;
@@ -18,5 +20,21 @@ public class Team {
         this.coach = coach;
         this.manager = manager;
         this.players = players;
+    }
+
+    public Team() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "teamName='" + teamName + '\'' +
+                ", teamSize=" + teamSize +
+                ", coach=" + coach +
+                ", manager=" + manager +
+                ", captain=" + captain +
+                ", players=" + Arrays.toString(players) +
+                '}';
     }
 }

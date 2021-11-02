@@ -1,77 +1,51 @@
-//package com.project.sportsleaguemanagementproject.tournament;
-//
-//import com.project.sportsleaguemanagementproject.team.Team;
-//
-//import java.util.ArrayList;
-//import java.util.Random;
-//
-//
-//public class Tournament{
-//    String name;
-//    String host;
-//    MatchTypes type;
-//    Team[] teams;
-//    ArrayList<Match> matches;
-//
-//    public Tournament(String name, String host, MatchTypes type, Team[] teams) {
-//        this.name = name;
-//        this.host = host;
-//        this.type = type;
-//        this.teams = teams;
-//        shuffleTeams();
-//    }
-//
+package com.project.sportsleaguemanagementproject.tournament;
+
+import com.project.sportsleaguemanagementproject.match.Match;
+import com.project.sportsleaguemanagementproject.team.Team;
+
+import java.util.ArrayList;
+
+public class Tournament {
+    String name;
+    String host;
+    TournamentTypes type;
+    ArrayList<Team> teams;
+    ArrayList<Match> matches;
+
+    public Tournament(String name, String host, TournamentTypes type, ArrayList<Team> teams, ArrayList<Match> matches) {
+        this.name = name;
+        this.host = host;
+        this.type = type;
+        this.teams = teams;
+        this.matches = matches;
+    }
+
 //    public void main(){
-//        TournamentMaker maker;
+//        createBrackets();
+//
 //        switch (type) {
-//            case ONE_DAY_INTERNATIONAL -> maker = () -> null;
+//            case TEST_MATCH -> {
+//            }
+//            case ONE_DAY_INTERNATIONAL -> {
+//            }
 //            case T_20 -> {
 //            }
-//            case TEST_MATCH -> maker = () -> {
-//                ArrayList<Match> matches = new ArrayList<>();
-//                matches.add(new Match(
-//                        host,
-//                        teams[0],
-//                        teams[1],
-//                        -1,
-//                        "",
-//                        "",
-//                        "",
-//                        -1
-//                    )
-//                );
-//                return matches;
-//            };
+//            case T_10 -> {
+//            }
+//            case INDIVIDUAL_MATCH -> {
+//                matches.get(0).setDateOfMatch("yyyy-mm-dd");
+//            }
 //            default -> throw new IllegalStateException("Unexpected value: " + type);
 //        }
-//    }
 //
-//    private void createBrackets(int overs){
-//        for(int i = 0; i < teams.length; i += 2){
-//            matches.add(new Match(
-//                    "",
-//                    teams[i],
-//                    teams[i+1],
-//                    overs,
-//                    "",
-//                    "",
-//                    "",
-//                    -1
-//                )
-//            );
+//
+//    }
+
+//    public void createBrackets(){
+//        while (matches.isEmpty()) {
+//            matches.add(new Match(teams.get(0), teams.get(1)));
+//            teams.remove(0);
+//            teams.remove(1);
 //        }
 //    }
-//
-//    private  void shuffleTeams(){
-//        int index;
-//        Team temp;
-//        Random random = new Random();
-//        for (int i = teams.length - 1; i > 0; i--)
-//        {
-//            index = random.nextInt(i + 1);
-//            temp = teams[index];
-//            teams[index] = teams[i];
-//            teams[i] = temp;
-//        }
-//    }
-//}
+}
