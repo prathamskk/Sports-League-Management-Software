@@ -15,7 +15,10 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -36,12 +39,10 @@ public class LoginScreenController {
     private PasswordField passwordField;
 
 
-
     @FXML
-    private void loadDefaultScreen(ActionEvent event) throws IOException
-    {
+    private void loadDefaultScreen(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("defaultScreen.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -49,37 +50,31 @@ public class LoginScreenController {
     }
 
     @FXML
-    private void loadAdminScreen(ActionEvent event) throws IOException
-    {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("adminScreen.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
-    @FXML
-    private void loadScorekeeperScreen(ActionEvent event) throws IOException
-    {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("scorekeeperScreen.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    private void loadAdminScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminScreen.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
+    @FXML
+    private void loadScorekeeperScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ScoreKeeperScreen.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
 
 
     @FXML
-    public void CheckLoginPerformed(ActionEvent e)
-
-    {
+    public void checkLoginPerformed(ActionEvent e) {
 
 
-        if (e.getSource() == loginButton)
-
-        {
+        if (e.getSource() == loginButton) {
             try {
                 String data = null;
                 try {
@@ -98,11 +93,9 @@ public class LoginScreenController {
                 String username = usernameField.getText();
                 String password = passwordField.getText();
 
-                if(username.equals("") || password.equals(""))
-                {
+                if (username.equals("") || password.equals("")) {
                     messageDisplay.setText("username or password field is empty");
-                }
-                else {
+                } else {
 
 
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
@@ -131,8 +124,7 @@ public class LoginScreenController {
                 }
 
 
-            } catch (Exception exception)
-            {
+            } catch (Exception exception) {
                 exception.printStackTrace();
             }
 
@@ -140,8 +132,7 @@ public class LoginScreenController {
 
         if (e.getSource() == registerButton) {
 
-            try
-            {
+            try {
                 String data = null;
                 try {
                     File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
@@ -160,24 +151,16 @@ public class LoginScreenController {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("select * from account where username='" + username + "'");
-                if (resultSet.next())
-                {
+                if (resultSet.next()) {
                     System.out.println("USERNAME ALREADY EXISTS");
                     messageDisplay.setText("Username already exists");
                     usernameField.setText("");
                     passwordField.setText("");
-                }
-
-                else if(username.equals(""))
-                {
+                } else if (username.equals("")) {
                     messageDisplay.setText("username field is empty");
-                }
-                else if(password.equals(""))
-                {
+                } else if (password.equals("")) {
                     messageDisplay.setText("password field is empty");
-                }
-                else
-                {
+                } else {
                     String sql = "INSERT INTO account (username,password) VALUES ('" + username + "' , '" + password + "')";
                     statement.executeUpdate(sql);
                     System.out.println("REGISTRATION SUCCESSFUL");
@@ -185,9 +168,7 @@ public class LoginScreenController {
 
                 }
 
-            }
-            catch (Exception exception)
-            {
+            } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.MatchMakerScreenController">
+   <children>
+      <VBox layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="314.0" text="Host" />
+                  <TextField fx:id="hostField" prefHeight="26.0" prefWidth="143.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="310.0" text="Team 1" />
+                  <TextField fx:id="team1Field" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="306.0" text="Team 2" />
+                  <TextField fx:id="team2Field" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="299.0" text="Number of Overs" />
+                  <TextField fx:id="oversField" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="292.0" text="Location" />
+                  <TextField fx:id="locationField" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="330.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="285.0" text="Date of Match" />
+                  <DatePicker fx:id="dateOfMatchField" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="344.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="278.0" text="Start Time" />
+                  <TextField fx:id="startTimeField" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="353.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="274.0" text="Duration(Minutes)" />
+                  <TextField fx:id="durationMinutesField" />
+               </children>
+            </HBox>
+            <Button fx:id="confirmAddMatchButton" mnemonicParsing="false" onAction="#onConfirmButton" text="Confirm" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
