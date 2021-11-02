@@ -15,6 +15,7 @@ public class MainApplication extends Application
 
     public static void main(String[] args)
     {
+
         launch();
     }
 
@@ -23,8 +24,10 @@ public class MainApplication extends Application
     {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ui/loginScreen.fxml")));
         Scene loginPage = new Scene(root);
+        loginPage.getStylesheets().add(getClass().getResource("ui/stylesheets/loginScreen.css").toExternalForm());
         loginScreen.setTitle("Sports League Manager");
         loginScreen.setScene(loginPage);
+        loginScreen.setResizable(false);
         loginScreen.show();
 
     }

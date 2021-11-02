@@ -6,28 +6,33 @@ import java.time.*;
 import java.util.Date;
 
 public class Player {
-    //    matches, runs, highest score, average strike rate
-//    batsman, baller, all rounder, wicket keeper
-//    batting style, bowling style
-    public String nationality;
     public String name;
-    public float height;
-    public float weight;
     public int gender;
     public String dateOfBirth;
-    public int age;
+    public float height;
+    public float weight;
+    // playerType
+    //playerStyle
 
-    public Player(String name, String dateOfBirth, int gender, String nationality, float height, float weight) {
-        this.nationality = nationality;
+
+
+
+
+
+
+
+
+    public Player(String name,int gender, String dateOfBirth, float height, float weight) {
         this.name = name;
+        this.dateOfBirth = dateOfBirth;
         this.height = height;
         this.weight = weight;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.age = calculateAge();
+
+//        this.age = calculateAge();
     }
 
-    private int calculateAge() {
+    private int getAge() {
         int age = -1;
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

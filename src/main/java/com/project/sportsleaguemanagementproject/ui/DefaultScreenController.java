@@ -22,7 +22,22 @@ public class DefaultScreenController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
+
+    @FXML
+    private void registerPlayer(ActionEvent event) throws IOException
+    {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerRegistrationForm.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+
+
+
 
 }
