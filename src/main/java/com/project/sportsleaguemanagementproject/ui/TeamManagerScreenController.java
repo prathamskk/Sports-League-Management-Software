@@ -1,5 +1,6 @@
 package com.project.sportsleaguemanagementproject.ui;
 
+import com.project.sportsleaguemanagementproject.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class DefaultScreenController {
+public class TeamManagerScreenController {
     @FXML
     public Button logoutButton;
 
@@ -21,6 +22,7 @@ public class DefaultScreenController {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScreen.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("ui/stylesheets/LoginScreenStyleSheet.css")).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
@@ -35,6 +37,5 @@ public class DefaultScreenController {
         stage.setResizable(false);
         stage.show();
     }
-
 
 }

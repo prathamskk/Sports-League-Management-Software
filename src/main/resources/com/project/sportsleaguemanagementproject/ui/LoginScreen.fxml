@@ -13,5 +13,6 @@
     <Label layoutX="497.0" layoutY="319.0" text="Username" />
     <Label layoutX="499.0" layoutY="372.0" text="Password" />
     <Button fx:id="loginButton" layoutX="668.0" layoutY="415.0" mnemonicParsing="false" onAction="#checkLoginPerformed" text="login" />
-    <Button fx:id="registerButton" layoutX="562.0" layoutY="415.0" mnemonicParsing="false" onAction="#checkLoginPerformed" text="register" />
+    <Button fx:id="registerTeamButton" layoutX="565.0" layoutY="453.0" mnemonicParsing="false" onAction="#checkLoginPerformed" text="register as team manager" />
+   <Button fx:id="registerPlayerButton" layoutX="565.0" layoutY="487.0" mnemonicParsing="false" onAction="#checkLoginPerformed" text="register as player" />
 </AnchorPane>

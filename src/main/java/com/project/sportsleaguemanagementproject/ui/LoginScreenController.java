@@ -32,7 +32,9 @@ public class LoginScreenController {
     @FXML
     private Button loginButton;
     @FXML
-    private Button registerButton;
+    private Button registerTeamButton;
+    @FXML
+    private Button registerPlayerButton;
     @FXML
     private TextField usernameField;
     @FXML
@@ -40,8 +42,17 @@ public class LoginScreenController {
 
 
     @FXML
-    private void loadDefaultScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("defaultScreen.fxml")));
+    private void loadTeamManagerScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerScreen.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+    @FXML
+    private void loadPlayerScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerScreen.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -68,6 +79,7 @@ public class LoginScreenController {
         stage.setResizable(false);
         stage.show();
     }
+
 
 
     @FXML
@@ -107,13 +119,17 @@ public class LoginScreenController {
                         String temp = resultSet.getString("account_type");
                         String admin = "admin";
                         String scorekeeper = "scorekeeper";
-
+                        String team = "team";
+                        String player = "player";
+                        // checks account type
                         if (temp.equals(admin)) {
                             loadAdminScreen(e);
-                        } else if (temp.equals(scorekeeper)) {
+                        }else if (temp.equals(scorekeeper)){
                             loadScorekeeperScreen(e);
-                        } else {
-                            loadDefaultScreen(e);
+                        }else if (temp.equals(team)){
+                            loadTeamManagerScreen(e);
+                        }else if (temp.equals(player)){
+                                loadPlayerScreen(e);
                         }
                     } else {
                         System.out.println("WRONG COMBO");
@@ -130,7 +146,7 @@ public class LoginScreenController {
 
         }
 
-        if (e.getSource() == registerButton) {
+        if (e.getSource() == registerPlayerButton) {
 
             try {
                 String data = null;
@@ -161,7 +177,50 @@ public class LoginScreenController {
                 } else if (password.equals("")) {
                     messageDisplay.setText("password field is empty");
                 } else {
-                    String sql = "INSERT INTO account (username,password) VALUES ('" + username + "' , '" + password + "')";
+                    String sql = "INSERT INTO account (username,password,account_type) VALUES ('" + username + "' , '" + password + "','player')";
+                    statement.executeUpdate(sql);
+                    System.out.println("REGISTRATION SUCCESSFUL");
+                    messageDisplay.setText("Registration successful");
+
+                }
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        if (e.getSource() == registerTeamButton) {
+
+            try {
+                String data = null;
+                try {
+                    File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
+                    Scanner myReader = new Scanner(myObj);
+                    while (myReader.hasNextLine()) {
+                        data = myReader.nextLine();
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e2) {
+                    System.out.println("An error occurred.");
+                    e2.printStackTrace();
+                }
+
+                String username = usernameField.getText();
+                String password = passwordField.getText();
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("select * from account where username='" + username + "'");
+                if (resultSet.next()) {
+                    System.out.println("USERNAME ALREADY EXISTS");
+                    messageDisplay.setText("Username already exists");
+                    usernameField.setText("");
+                    passwordField.setText("");
+                } else if (username.equals("")) {
+                    messageDisplay.setText("username field is empty");
+                } else if (password.equals("")) {
+                    messageDisplay.setText("password field is empty");
+                } else {
+                    String sql = "INSERT INTO account (username,password,account_type) VALUES ('" + username + "' , '" + password + "','team')";
                     statement.executeUpdate(sql);
                     System.out.println("REGISTRATION SUCCESSFUL");
                     messageDisplay.setText("Registration successful");
