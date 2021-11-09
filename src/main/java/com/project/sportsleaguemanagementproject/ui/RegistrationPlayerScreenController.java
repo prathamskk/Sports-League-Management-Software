@@ -38,8 +38,8 @@ public class RegistrationPlayerScreenController implements Initializable {
 
 
     // TODO: 11/9/2021 switch to enum
-    private final String[] genders = PlayerGender.VALUES.toArray();
-    private String[] player_typearr = {"all_rounder","batsman","bowler"};
+    private String[] genders = PlayerGender.VALUES.toArray();
+    private String[] playerTypes = PlayerGender.VALUES.toArray();
     private String selectedGender;
     private String selectedPlayerType;
     private final String username = LoginSingleton.getInstance().username;
@@ -80,7 +80,7 @@ public class RegistrationPlayerScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genderchoicebox.getItems().addAll(genders);
         genderchoicebox.setOnAction(this::getGender);
-        player_typechoicebox.getItems().addAll(player_typearr);
+        player_typechoicebox.getItems().addAll(playerTypes);
         player_typechoicebox.setOnAction(this::getPlayerType);
 
     }
