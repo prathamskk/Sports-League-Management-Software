@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TournamentListController">
+   <children>
+      <TableView fx:id="table" prefHeight="700.0" prefWidth="1080.0">
+        <columns>
+          <TableColumn fx:id="col_name" prefWidth="345.0" text="Name" />
+          <TableColumn fx:id="col_prize" minWidth="0.0" prefWidth="167.0" text="Prize Pool" />
+            <TableColumn fx:id="col_registration" minWidth="0.0" prefWidth="178.0" text="Registrations End" />
+            <TableColumn fx:id="col_teams" prefWidth="171.0" text="Number of Teams" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
