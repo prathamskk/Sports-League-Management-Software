@@ -1,5 +1,6 @@
 package com.project.sportsleaguemanagementproject.ui;
 
+import com.project.sportsleaguemanagementproject.LoginSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,7 @@ public class LoginScreenController {
     @FXML
     private PasswordField passwordField;
 
+    LoginSingleton loginSingleton;
 
     @FXML
     private void loadTeamManagerScreen(ActionEvent event) throws IOException {
@@ -121,6 +123,8 @@ public class LoginScreenController {
                         String scorekeeper = "scorekeeper";
                         String team = "team";
                         String player = "player";
+                        LoginSingleton.getInstance().username = username;
+
                         // checks account type
                         if (temp.equals(admin)) {
                             loadAdminScreen(e);

@@ -1,6 +1,8 @@
 package com.project.sportsleaguemanagementproject.ui;
 
+import com.project.sportsleaguemanagementproject.LoginSingleton;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
+import com.project.sportsleaguemanagementproject.player.PlayerGender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,11 +35,15 @@ public class RegistrationPlayerScreenController implements Initializable {
     private ChoiceBox<String> genderchoicebox;
     @FXML
     private ChoiceBox<String> player_typechoicebox;
-    private String[] genderarr = {"Male","Female","other"};
+
+    LoginSingleton loginSingleton;
+
+    // TODO: 11/9/2021 switch to enum
+    private final String[] genders = PlayerGender.VALUES.toArray();
     private String[] player_typearr = {"all_rounder","batsman","bowler"};
     private String selectedGender;
     private String selectedPlayerType;
-    private String username = "player1";
+    private final String username = LoginSingleton.getInstance().username;
 
     private void getGender(ActionEvent event){
         selectedGender = genderchoicebox.getValue();
@@ -52,7 +58,7 @@ public class RegistrationPlayerScreenController implements Initializable {
     private void submitDetails(ActionEvent e){
         try {
             Connection con = DatabaseConnector.getConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("insert into player_add_request (username,aadhar_no,name,gender,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = con.prepareStatement("insert into player_add_request (username,aadhar_no,name,genders,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
             preparedStatement.setString(1,username);
             preparedStatement.setString(2, aadharno.getText());
             preparedStatement.setString(3,name.getText());
@@ -73,16 +79,10 @@ public class RegistrationPlayerScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        genderchoicebox.getItems().addAll(genderarr);
+        genderchoicebox.getItems().addAll(genders);
         genderchoicebox.setOnAction(this::getGender);
         player_typechoicebox.getItems().addAll(player_typearr);
         player_typechoicebox.setOnAction(this::getPlayerType);
 
     }
-
-    public void getusername(String username){
-        this.username = username;
-    }
-
-
 }
