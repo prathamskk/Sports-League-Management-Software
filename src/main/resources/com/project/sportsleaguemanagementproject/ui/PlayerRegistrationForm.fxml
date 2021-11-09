@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.RegistrationPlayerScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.RegistrationPlayerScreenController">
    <children>
-      <Button layoutX="226.0" layoutY="400.0" mnemonicParsing="false" text="Button" />
+      <HBox alignment="CENTER_LEFT" prefHeight="115.0" prefWidth="1080.0">
+         <children>
+            <Label prefHeight="36.0" prefWidth="243.0" text="Enter Personal info">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="641.0" prefWidth="1080.0">
+         <children>
+            <VBox prefHeight="613.0" prefWidth="164.0" spacing="18.0">
+               <children>
+                  <Label text="Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Aadhar No.">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Gender">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Date of Birth">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Weight">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Height">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Player type">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="613.0" prefWidth="916.0" spacing="25.0">
+               <children>
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="128.0">
+                     <VBox.margin>
+                        <Insets right="650.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="aadharno" prefHeight="25.0" prefWidth="344.0">
+                     <VBox.margin>
+                        <Insets right="650.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ChoiceBox fx:id="genderchoicebox" prefWidth="150.0" />
+                  <DatePicker fx:id="DOB" />
+                  <TextField fx:id="weight" prefHeight="25.0" prefWidth="154.0">
+                     <VBox.margin>
+                        <Insets right="800.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="height">
+                     <VBox.margin>
+                        <Insets right="800.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ChoiceBox fx:id="player_typechoicebox" prefWidth="150.0" />
+                  <Button mnemonicParsing="false" onAction="#submitDetails" text="Submit for verification" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
