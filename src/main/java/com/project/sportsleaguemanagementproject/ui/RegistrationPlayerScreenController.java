@@ -1,8 +1,9 @@
 package com.project.sportsleaguemanagementproject.ui;
 
+import com.project.sportsleaguemanagementproject.player.PlayerGender;
+import com.project.sportsleaguemanagementproject.player.PlayerType;
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
-import com.project.sportsleaguemanagementproject.player.PlayerGender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,7 +40,7 @@ public class RegistrationPlayerScreenController implements Initializable {
 
     // TODO: 11/9/2021 switch to enum
     private String[] genders = PlayerGender.VALUES.toArray();
-    private String[] playerTypes = PlayerGender.VALUES.toArray();
+    private String[] playerTypes = PlayerType.VALUES.toArray();
     private String selectedGender;
     private String selectedPlayerType;
     private final String username = LoginSingleton.getInstance().username;

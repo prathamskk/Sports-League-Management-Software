@@ -1,7 +1,10 @@
 package com.project.sportsleaguemanagementproject.player;
 
 public enum PlayerGender {
-    MALE("male"), FEMALE("female"), OTHER("other"), VALUES("");
+    MALE("male"),
+    FEMALE("female"),
+    OTHER("other"),
+    VALUES("");
 
     private String gender;
 
@@ -14,7 +17,7 @@ public enum PlayerGender {
     }
 
     public String[] toArray(){
-        int length = PlayerGender.values().length;
+        int length = PlayerGender.values().length - 1;
         PlayerGender[] playerGenderValues = PlayerGender.values();
         String[] ret = new String[length];
         for(int i = 0;  i < length; i++){
