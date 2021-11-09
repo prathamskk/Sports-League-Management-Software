@@ -1,6 +1,6 @@
 package com.project.sportsleaguemanagementproject.ui;
 
-import com.project.sportsleaguemanagementproject.LoginSingleton;
+import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

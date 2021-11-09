@@ -1,4 +1,4 @@
-package com.project.sportsleaguemanagementproject;
+package com.project.sportsleaguemanagementproject.singleton;
 
 public class LoginSingleton {
     private static LoginSingleton single_instance = null;

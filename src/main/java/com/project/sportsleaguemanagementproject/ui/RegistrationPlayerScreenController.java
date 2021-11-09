@@ -1,6 +1,6 @@
 package com.project.sportsleaguemanagementproject.ui;
 
-import com.project.sportsleaguemanagementproject.LoginSingleton;
+import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.player.PlayerGender;
 import javafx.event.ActionEvent;
@@ -36,7 +36,6 @@ public class RegistrationPlayerScreenController implements Initializable {
     @FXML
     private ChoiceBox<String> player_typechoicebox;
 
-    LoginSingleton loginSingleton;
 
     // TODO: 11/9/2021 switch to enum
     private final String[] genders = PlayerGender.VALUES.toArray();
@@ -58,7 +57,7 @@ public class RegistrationPlayerScreenController implements Initializable {
     private void submitDetails(ActionEvent e){
         try {
             Connection con = DatabaseConnector.getConnection();
-            PreparedStatement preparedStatement = con.prepareStatement("insert into player_add_request (username,aadhar_no,name,genders,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = con.prepareStatement("insert into player_add_request (username,aadhar_no,name,gender,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
             preparedStatement.setString(1,username);
             preparedStatement.setString(2, aadharno.getText());
             preparedStatement.setString(3,name.getText());
