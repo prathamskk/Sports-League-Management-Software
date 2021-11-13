@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.project.sportsleaguemanagementproject.ui.VerifyPlayerRegistrationController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="700.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.VerifyPlayerRegistrationController">
+   <children>
+      <Pagination fx:id="pagination" prefHeight="700.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+       <fx:define>
+           <TableView fx:id="verifyPlayerRegistrationTable" prefHeight="700.0" prefWidth="1080.0">
+               <columns>
+                   <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="username" />
+                   <TableColumn fx:id="aadharNoColumn" prefWidth="75.0" text="aadhar_no" />
+                   <TableColumn fx:id="nameColumn" prefWidth="75.0" text="name" />
+                   <TableColumn fx:id="genderColumn" prefWidth="75.0" text="gender" />
+                   <TableColumn fx:id="dobColumn" prefWidth="75.0" text="dob" />
+                   <TableColumn fx:id="weightColumn" prefWidth="75.0" text="weight" />
+                   <TableColumn fx:id="heightColumn" prefWidth="75.0" text="height" />
+                   <TableColumn fx:id="playerTypeColumn" prefWidth="75.0" text="player_type" />
+                   <TableColumn fx:id="buttonsColumn" prefWidth="75.0" text="buttons" />
+               </columns>
+           </TableView>
+       </fx:define>
+   </children>
 </AnchorPane>

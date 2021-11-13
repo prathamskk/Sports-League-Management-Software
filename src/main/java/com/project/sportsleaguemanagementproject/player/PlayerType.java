@@ -1,16 +1,18 @@
 package com.project.sportsleaguemanagementproject.player;
 
 public enum PlayerType {
-    ALL_ROUNDER("all_rounder"),
-    BATSMAN("batsman"),
-    BOWLER("bowler");
+    ALL_ROUNDER("all_rounder", 0),
+    BATSMAN("batsman", 1),
+    BOWLER("bowler", 2);
 
     private final String type;
+    private final int id;
 
-    PlayerType(String type) {
+    PlayerType(String type, int id) {
         this.type = type;
+        this.id = id;
     }
-
+// TODO: 11/13/2021 change the comparisons to int everywhere
     public String getType(){
         return type;
     }
