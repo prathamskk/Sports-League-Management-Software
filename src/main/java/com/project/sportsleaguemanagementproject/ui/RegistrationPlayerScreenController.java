@@ -39,8 +39,8 @@ public class RegistrationPlayerScreenController implements Initializable {
 
 
     // TODO: 11/9/2021 switch to enum
-    private String[] genders = PlayerGender.VALUES.toArray();
-    private String[] playerTypes = PlayerType.VALUES.toArray();
+    private final String[] genders = PlayerGender.toArray();
+    private final String[] playerTypes = PlayerType.toArray();
     private String selectedGender;
     private String selectedPlayerType;
     private final String username = LoginSingleton.getInstance().username;
