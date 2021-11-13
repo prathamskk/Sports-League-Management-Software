@@ -2,15 +2,12 @@ package com.project.sportsleaguemanagementproject.model;
 
 import java.util.Date;
 
-public class ModelTournamentList {
+public class ModelUnverifiedPlayers {
     String name;
     int prize;
     Date date;
 
-    public ModelTournamentList(String tournament_name,int  tournament_prize ,Date tournament_date ){
-        this.name = tournament_name;
-        this.prize = tournament_prize;
-        this.date = tournament_date;
+    public ModelUnverifiedPlayers(String tournament_name, int tournament_prize, Date registration_date) {
     }
 
     public String getName() {
@@ -36,5 +33,4 @@ public class ModelTournamentList {
     public void setDate(Date date) {
         this.date = date;
     }
-
 }

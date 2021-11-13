@@ -11,7 +11,6 @@
           <TableColumn fx:id="col_name" prefWidth="345.0" text="Name" />
           <TableColumn fx:id="col_prize" minWidth="0.0" prefWidth="167.0" text="Prize Pool" />
             <TableColumn fx:id="col_registration" minWidth="0.0" prefWidth="178.0" text="Registrations End" />
-            <TableColumn fx:id="col_teams" prefWidth="171.0" text="Number of Teams" />
         </columns>
       </TableView>
    </children>
