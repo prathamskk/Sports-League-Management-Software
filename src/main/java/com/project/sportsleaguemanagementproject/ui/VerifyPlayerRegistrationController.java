@@ -25,89 +25,89 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VerifyPlayerRegistrationController implements Initializable {
+    private Connection con;
     @FXML
     private Pagination pagination;
-    @FXML
-    private TableView<ModelUnverifiedPlayers> verifyPlayerRegistrationTable;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , String> usernameColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , String> aadharNoColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , String> nameColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , String> genderColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , Date> dobColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , Float> weightColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , Float> heightColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , String> playerTypeColumn;
-    @FXML
-    private TableColumn<ModelUnverifiedPlayers , Button> buttonsColumn;
 
-    ObservableList<ModelUnverifiedPlayers> oblist = FXCollections.observableArrayList();
-
-    private final int rowsPerPage = 10;
-    private int pageNumber = 0;
-
-    private Node createPage(int pageIndex) {
-        int fromIndex = pageIndex * rowsPerPage;
-        int toIndex = Math.min(fromIndex + rowsPerPage, oblist.size());
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        aadharNoColumn.setCellValueFactory(new PropertyValueFactory<>("aadharNo"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        dobColumn.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        weightColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        heightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
-        playerTypeColumn.setCellValueFactory(new PropertyValueFactory<>("playerType"));
-        buttonsColumn.setCellValueFactory(new PropertyValueFactory<>("button"));
-        verifyPlayerRegistrationTable.setItems(
-                FXCollections.observableArrayList(
-                        oblist.subList(
-                                fromIndex,
-                                toIndex
-                        )
-                )
-        );
-
-        return new AnchorPane(verifyPlayerRegistrationTable);
-    }
+    private final TableView<ModelUnverifiedPlayers> verifyPlayerRegistrationTable = createTable();
+    private static final int rowsPerPage = 5;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
-            //adding sql data to table
-            Connection con = DatabaseConnector.getConnection();
-            ResultSet rs = con.createStatement().executeQuery("select * from player where verification_status = 'pending'");
-
-            while (rs.next()){
-                oblist.add(
-                        new ModelUnverifiedPlayers(
-                            rs.getString("username"),
-                            rs.getInt("aadhar_no"),
-                            rs.getString("name"),
-                            rs.getString("gender"),
-                            rs.getDate("dob"),
-                            rs.getFloat("weight"),
-                            rs.getFloat("height"),
-                            rs.getString("player_type"),
-                            addButtonToOBList(rs.getRow()) // TODO: 11/13/2021
-                        )
-                );
-            }
+            con = DatabaseConnector.getConnection();
+            pagination.setPageFactory(this::createPage);
         }catch(SQLException ex){
             Logger.getLogger(TournamentListController.class.getName()).log(Level.SEVERE, null , ex);
         }
-
-        pagination = new Pagination((oblist.size() / rowsPerPage + 1), 0);
-        pagination.setPageFactory(this::createPage);
-
-        verifyPlayerRegistrationTable.setItems(oblist);
     }
+
+    private Node createPage(int pageIndex) {
+        this.createData(pageIndex);
+        return verifyPlayerRegistrationTable;
+    }
+
+    private void createData(int pageIndex) {
+        try {
+            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM player where verification_status='pending' LIMIT " + (rowsPerPage * pageIndex ) + ", " + rowsPerPage + ";");
+            verifyPlayerRegistrationTable.getItems().clear();
+            while (rs.next()) {
+                verifyPlayerRegistrationTable.getItems().addAll(
+                        new ModelUnverifiedPlayers(
+                                rs.getString("username"),
+                                rs.getInt("aadhar_no"),
+                                rs.getString("name"),
+                                rs.getString("gender"),
+                                rs.getDate("dob"),
+                                rs.getFloat("weight"),
+                                rs.getFloat("height"),
+                                rs.getString("player_type"),
+                                addButtonToOBList(rs.getRow()) // TODO: 11/13/2021
+                        )
+                );
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TournamentListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+        private TableView<ModelUnverifiedPlayers> createTable(){
+            TableView<ModelUnverifiedPlayers> verifyPlayerRegistrationTable = new TableView<>();
+
+             TableColumn<ModelUnverifiedPlayers , String> usernameColumn = new TableColumn<>("username");
+             TableColumn<ModelUnverifiedPlayers , String> aadharNoColumn = new TableColumn<>("aadharNo");
+             TableColumn<ModelUnverifiedPlayers , String> nameColumn   = new TableColumn<>  ("name");
+             TableColumn<ModelUnverifiedPlayers , String> genderColumn = new TableColumn<>  ("gender");
+             TableColumn<ModelUnverifiedPlayers , Date>   dobColumn      = new TableColumn<>  ("dob");
+             TableColumn<ModelUnverifiedPlayers , Float>  weightColumn   = new TableColumn<> ("weight");
+             TableColumn<ModelUnverifiedPlayers , Float>  heightColumn    = new TableColumn<>("height");
+             TableColumn<ModelUnverifiedPlayers , String> playerTypeColumn=new TableColumn<>("playerType");
+             TableColumn<ModelUnverifiedPlayers , Button> buttonsColumn  = new TableColumn<>("button");
+
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        aadharNoColumn.setCellValueFactory(new PropertyValueFactory<>("aadharNo"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>    ("name"));
+        genderColumn.setCellValueFactory(new PropertyValueFactory<>  ("gender"));
+        dobColumn.setCellValueFactory(new PropertyValueFactory<>     ("dob"));
+        weightColumn.setCellValueFactory(new PropertyValueFactory<>  ("weight"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<>  ("height"));
+        playerTypeColumn.setCellValueFactory(new PropertyValueFactory<>("playerType"));
+        buttonsColumn.setCellValueFactory(new PropertyValueFactory<> ("button"));
+        verifyPlayerRegistrationTable.getColumns().addAll( usernameColumn,
+                                                           aadharNoColumn ,
+                                                           nameColumn  ,
+                                                           genderColumn ,
+                                                           dobColumn ,
+                                                           weightColumn ,
+                                                           heightColumn ,
+                                                           playerTypeColumn,
+                                                        buttonsColumn );
+
+        return verifyPlayerRegistrationTable;
+    }
+
+
 
     Button addButtonToOBList(int rowNumber){
         Button ret = new Button();
