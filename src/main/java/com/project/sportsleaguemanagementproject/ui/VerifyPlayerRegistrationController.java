@@ -4,9 +4,15 @@ import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.ModelUnverifiedPlayers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
@@ -14,12 +20,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,7 +71,7 @@ public class VerifyPlayerRegistrationController implements Initializable {
                                 rs.getFloat("weight"),
                                 rs.getFloat("height"),
                                 rs.getString("player_type"),
-                                addButtonToOBList(rs.getRow()) // TODO: 11/13/2021
+                                addButtonToOBList(rs.getRow(), rs.getString("username")) // TODO: 11/13/2021
                         )
                 );
             }
@@ -109,10 +118,34 @@ public class VerifyPlayerRegistrationController implements Initializable {
 
 
 
-    Button addButtonToOBList(int rowNumber){
+    Button addButtonToOBList(int rowNumber, String username){
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));
         ret.setText(String.valueOf(rowNumber));
+        ret.setOnAction(new EventHandler<ActionEvent>() {
+                            private Stage stage;
+                            private Scene scene;
+                            private Parent root;
+                            @FXML
+                            private void loadAdminScreen(ActionEvent event) throws IOException {
+                                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminScreen.fxml")));
+                                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                scene = new Scene(root);
+                                stage.setScene(scene);
+                                stage.setResizable(false);
+                                stage.show();
+                            }
+            @Override public void handle(ActionEvent e) {
+                try {
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        }
+        );
+
         return ret;
     }
 }

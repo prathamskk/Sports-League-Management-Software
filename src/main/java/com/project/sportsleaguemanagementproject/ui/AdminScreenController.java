@@ -27,6 +27,8 @@ public class AdminScreenController implements Initializable {
     private Parent verifyPlayerRegistration;
     @FXML
     private Parent tournamentList;
+    @FXML
+    private Parent playerVerification;
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
@@ -46,6 +48,11 @@ public class AdminScreenController implements Initializable {
     private void viewTournamentList(){
         borderPane.setCenter(tournamentList);
     }
+    @FXML
+    private void viewPlayerVerification() {
+        borderPane.setCenter(playerVerification);
+    }
+
 
     private Parent loadScreen(String sc) throws IOException{
         return FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sc)));
@@ -54,6 +61,7 @@ public class AdminScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
+            playerVerification = loadScreen("PlayerVerification.fxml");
             verifyPlayerRegistration = loadScreen("VerifyPlayerRegistration.fxml");
             tournamentList = loadScreen("TournamentList.fxml");
         } catch (IOException ex){
