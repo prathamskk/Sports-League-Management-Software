@@ -1,6 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
+import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,12 +65,13 @@ public class LoginScreenController {
 
     @FXML
     private void loadAdminScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminScreen.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+//        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminScreen.fxml")));
+//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml");
     }
 
     @FXML
