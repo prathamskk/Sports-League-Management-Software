@@ -1,6 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.MainApplication;
+import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,39 +26,20 @@ public class AdminScreenController{
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScreen.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("ui/stylesheets/LoginScreenStyleSheet.css")).toExternalForm());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
     @FXML
     private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("VerifyPlayerRegistration.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "VerifyPlayerRegistration.fxml");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("TournamentList.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+
+        SceneSwitcher.switchTo(this.getClass(), event, "TournamentList.fxml");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerVerification.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerVerification.fxml");
     }
 }

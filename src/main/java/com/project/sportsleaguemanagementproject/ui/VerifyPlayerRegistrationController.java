@@ -3,6 +3,8 @@ package com.project.sportsleaguemanagementproject.ui;
 import com.project.sportsleaguemanagementproject.MainApplication;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.ModelUnverifiedPlayers;
+import com.project.sportsleaguemanagementproject.singleton.ButtonClickSingleton;
+import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -119,10 +121,22 @@ public class VerifyPlayerRegistrationController implements Initializable {
 
 
 
-    Button addButtonToOBList(int rowNumber, String username){
+    private Button addButtonToOBList(int rowNumber, String username){
+
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));
         ret.setText(String.valueOf(rowNumber));
+        ret.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                ButtonClickSingleton.getInstance().id = username;
+                try {
+                    SceneSwitcher.switchTo(this.getClass(), e, "PlayerVerification.fxml");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         return ret;
     }
@@ -135,40 +149,19 @@ public class VerifyPlayerRegistrationController implements Initializable {
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScreen.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("ui/stylesheets/LoginScreenStyleSheet.css")).toExternalForm());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
     @FXML
     private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("VerifyPlayerRegistration.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "VerifyPlayerRegistration.fxml");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("TournamentList.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "TournamentList.fxml");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerVerification.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerVerification.fxml");
     }
 }
 

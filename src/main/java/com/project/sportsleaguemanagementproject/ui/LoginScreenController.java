@@ -1,34 +1,19 @@
 package com.project.sportsleaguemanagementproject.ui;
 
+import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Objects;
-import java.util.Scanner;
+import java.sql.*;
+
 
 public class LoginScreenController {
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     @FXML
     private Label messageDisplay;
     @FXML
@@ -46,81 +31,37 @@ public class LoginScreenController {
 
     @FXML
     private void loadTeamManagerScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManagerScreen.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "ManagerScreen.fxml");
     }
     @FXML
     private void loadPlayerScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerScreen.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerScreen.fxml");
     }
 
     @FXML
     private void loadAdminScreen(ActionEvent event) throws IOException {
-//        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminScreen.fxml")));
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.setResizable(false);
-//        stage.show();
         SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml");
     }
 
     @FXML
     private void loadScorekeeperScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ScoreKeeperScreen.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        SceneSwitcher.switchTo(this.getClass(), event, "ScoreKeeperScreen.fxml");
     }
 
 
-
+    private Connection con;
     @FXML
-    public void checkLoginPerformed(ActionEvent e) {
-
-
-        if (e.getSource() == loginButton) {
-            try {
-                String data = null;
-                try {
-                    File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
-                    Scanner myReader = new Scanner(myObj);
-                    while (myReader.hasNextLine()) {
-                        data = myReader.nextLine();
-                    }
-                    myReader.close();
-                } catch (FileNotFoundException e2) {
-                    System.out.println("An error occurred.");
-                    e2.printStackTrace();
-                }
-
-
-                String username = usernameField.getText();
-                String password = passwordField.getText();
-
-                if (username.equals("") || password.equals("")) {
-                    messageDisplay.setText("username or password field is empty");
+    public void checkLoginPerformed(ActionEvent e) throws SQLException, IOException {
+        con = DatabaseConnector.getConnection();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        if (e.getSource() == loginButton){
+            if (username.equals("") || password.equals("")) {
+                messageDisplay.setText("username or password field is empty");
                 } else {
-
-
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
-                    Statement statement = connection.createStatement();
-                    String sql = "select * from account where username='" + username + "'and password='" + password + "'";
-                    ResultSet resultSet = statement.executeQuery(sql);
-
-                    if (resultSet.next()) {
-                        String temp = resultSet.getString("account_type");
+                ResultSet rs = con.createStatement().executeQuery("select * from account where username='" + username + "'and password='" + password + "'");
+                if (rs.next()) {
+                        String temp = rs.getString("account_type");
                         String admin = "admin";
                         String scorekeeper = "scorekeeper";
                         String team = "team";
@@ -144,36 +85,10 @@ public class LoginScreenController {
                         passwordField.setText("");
                     }
                 }
-
-
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-
         }
-
         if (e.getSource() == registerPlayerButton) {
-
-            try {
-                String data = null;
-                try {
-                    File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
-                    Scanner myReader = new Scanner(myObj);
-                    while (myReader.hasNextLine()) {
-                        data = myReader.nextLine();
-                    }
-                    myReader.close();
-                } catch (FileNotFoundException e2) {
-                    System.out.println("An error occurred.");
-                    e2.printStackTrace();
-                }
-
-                String username = usernameField.getText();
-                String password = passwordField.getText();
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("select * from account where username='" + username + "'");
-                if (resultSet.next()) {
+            ResultSet rs = con.createStatement().executeQuery("select * from account where username='" + username + "'");
+                if (rs.next()) {
                     System.out.println("USERNAME ALREADY EXISTS");
                     messageDisplay.setText("Username already exists");
                     usernameField.setText("");
@@ -183,40 +98,16 @@ public class LoginScreenController {
                 } else if (password.equals("")) {
                     messageDisplay.setText("password field is empty");
                 } else {
-                    String sql = "INSERT INTO account (username,password,account_type) VALUES ('" + username + "' , '" + password + "','player')";
-                    statement.executeUpdate(sql);
+                    con.createStatement().executeUpdate("INSERT INTO account (username,password,account_type) VALUES ('" + username + "' , '" + password + "','player')");
                     System.out.println("REGISTRATION SUCCESSFUL");
                     messageDisplay.setText("Registration successful");
 
                 }
-
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
         }
 
         if (e.getSource() == registerTeamButton) {
-
-            try {
-                String data = null;
-                try {
-                    File myObj = new File("src/main/resources/com/project/sportsleaguemanagementproject/data.txt");
-                    Scanner myReader = new Scanner(myObj);
-                    while (myReader.hasNextLine()) {
-                        data = myReader.nextLine();
-                    }
-                    myReader.close();
-                } catch (FileNotFoundException e2) {
-                    System.out.println("An error occurred.");
-                    e2.printStackTrace();
-                }
-
-                String username = usernameField.getText();
-                String password = passwordField.getText();
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportsleaguemanagement", "root", data);
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("select * from account where username='" + username + "'");
-                if (resultSet.next()) {
+                ResultSet rs = con.createStatement().executeQuery("select * from account where username='" + username + "'");
+                if (rs.next()) {
                     System.out.println("USERNAME ALREADY EXISTS");
                     messageDisplay.setText("Username already exists");
                     usernameField.setText("");
@@ -226,16 +117,11 @@ public class LoginScreenController {
                 } else if (password.equals("")) {
                     messageDisplay.setText("password field is empty");
                 } else {
-                    String sql = "INSERT INTO account (username,password,account_type) VALUES ('" + username + "' , '" + password + "','team')";
-                    statement.executeUpdate(sql);
+                    con.createStatement().executeUpdate("INSERT INTO account (username,password,account_type) VALUES ('" + username + "' , '" + password + "','team')");
                     System.out.println("REGISTRATION SUCCESSFUL");
                     messageDisplay.setText("Registration successful");
 
                 }
-
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
         }
     }
 
