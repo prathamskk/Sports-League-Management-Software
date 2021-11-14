@@ -17,18 +17,11 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AdminScreenController implements Initializable {
+public class AdminScreenController{
 
     @FXML
     public Button logoutButton;
-    @FXML
-    public BorderPane borderPane;
-    @FXML
-    private Parent verifyPlayerRegistration;
-    @FXML
-    private Parent tournamentList;
-    @FXML
-    private Parent playerVerification;
+
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
@@ -41,34 +34,30 @@ public class AdminScreenController implements Initializable {
         stage.show();
     }
     @FXML
-    private void verifyregisterPlayer(){
-        borderPane.setCenter(verifyPlayerRegistration);
+    private void verifyregisterPlayer(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("VerifyPlayerRegistration.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
     @FXML
-    private void viewTournamentList(){
-        borderPane.setCenter(tournamentList);
+    private void viewTournamentList(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("TournamentList.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
     @FXML
-    private void viewPlayerVerification() {
-        borderPane.setCenter(playerVerification);
+    private void viewPlayerVerification(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerVerification.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
-
-
-    private Parent loadScreen(String sc) throws IOException{
-        return FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sc)));
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try{
-            playerVerification = loadScreen("PlayerVerification.fxml");
-            verifyPlayerRegistration = loadScreen("VerifyPlayerRegistration.fxml");
-            tournamentList = loadScreen("TournamentList.fxml");
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
-
-    }
-
-
 }
