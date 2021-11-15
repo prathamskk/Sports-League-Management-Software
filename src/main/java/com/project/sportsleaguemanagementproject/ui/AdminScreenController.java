@@ -29,8 +29,8 @@ public class AdminScreenController{
         SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
     @FXML
-    private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "VerifyPlayerRegistration.fxml");
+    private void viewPendingPlayerTable(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {

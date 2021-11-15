@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +21,31 @@ import java.util.logging.Logger;
 
 public class PlayerVerifyScreenController implements Initializable {
     @FXML
+    private Button acceptButton;
+    @FXML
+    private Button rejectButton;
+    @FXML
+    private TextArea denyReasonTextArea;
+
+    @FXML
     private Label usernameLabel;
+    @FXML
+    private Label aadharNoLabel;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label genderLabel;
+    @FXML
+    private Label DOBLabel;
+    @FXML
+    private Label weightLabel;
+    @FXML
+    private Label heightLabel;
+    @FXML
+    private Label playerTypeLabel;
+    @FXML
+    private Label notifyLabel;
+
 
     private final String id = ButtonClickSingleton.getInstance().id;
     private Connection con;
@@ -36,8 +61,28 @@ public class PlayerVerifyScreenController implements Initializable {
     private void fillData() throws SQLException {
         ResultSet rs = con.createStatement().executeQuery("select * from player where username='"+id+"';");
         rs.next();
-        usernameLabel.setText(rs.getString("username"));
+        usernameLabel.setText(rs.getString  ("username"));
+        aadharNoLabel.setText(rs.getString("aadhar_no"));
+        nameLabel.setText(rs.getString("name"));
+        genderLabel.setText(rs.getString("gender"));
+        DOBLabel.setText(rs.getString("dob"));
+        weightLabel.setText(rs.getString("weight"));
+        heightLabel.setText(rs.getString("height"));
+        playerTypeLabel.setText(rs.getString("player_type"));
+     }
+    @FXML
+     private void handleAcceptButton(ActionEvent event) throws SQLException {
+        con.createStatement().executeUpdate("update player set verification_status = 'verified'  WHERE username = '"+id+"';");
+     }
+     @FXML
+    private void handleRejectButton(ActionEvent event) throws SQLException {
+        String reason = denyReasonTextArea.getText();
+        if(reason.equals("")){
+            notifyLabel.setText("Please enter Reason");
 
+        }else{
+            con.createStatement().executeUpdate("update player set verification_status = 'rejected' , reason = '"+reason+"' WHERE username = '"+id+"';");
+        }
     }
 
     @FXML
@@ -49,8 +94,8 @@ public class PlayerVerifyScreenController implements Initializable {
         SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
     @FXML
-    private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "VerifyPlayerRegistration.fxml");
+    private void viewPendingPlayerTable(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {

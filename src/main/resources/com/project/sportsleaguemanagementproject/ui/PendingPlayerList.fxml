@@ -7,7 +7,7 @@
 
 
 <?import javafx.scene.control.Button?>
-<BorderPane fx:id="bordePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.VerifyPlayerRegistrationController">
+<BorderPane fx:id="bordePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.pendingPlayerListController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
@@ -25,7 +25,7 @@
    <left>
       <VBox alignment="CENTER" prefHeight="700.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#verifyregisterPlayer" text="verify player registration" />
+            <Button mnemonicParsing="false" onAction="#viewPendingPlayerTable" text="verify player registration" />
             <Button mnemonicParsing="false" onAction="#viewTournamentList" text="tournament list" />
             <Button mnemonicParsing="false" onAction="#logout" text="logout" />
          </children></VBox>

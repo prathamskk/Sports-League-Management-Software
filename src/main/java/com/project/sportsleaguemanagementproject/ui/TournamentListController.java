@@ -108,7 +108,7 @@ public class TournamentListController implements Initializable {
     }
     @FXML
     private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "VerifyPlayerRegistration.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {

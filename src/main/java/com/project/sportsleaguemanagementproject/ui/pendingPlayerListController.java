@@ -1,29 +1,19 @@
 package com.project.sportsleaguemanagementproject.ui;
 
-import com.project.sportsleaguemanagementproject.MainApplication;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.ModelUnverifiedPlayers;
 import com.project.sportsleaguemanagementproject.singleton.ButtonClickSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,17 +21,16 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VerifyPlayerRegistrationController implements Initializable {
+public class pendingPlayerListController implements Initializable {
     private Connection con;
     @FXML
     private Pagination pagination;
 
-    private final TableView<ModelUnverifiedPlayers> verifyPlayerRegistrationTable = createTable();
+    private final TableView<ModelUnverifiedPlayers> PendingPlayerListTable = createTable();
     private static final int rowsPerPage = 5;
 
     @Override
@@ -56,15 +45,15 @@ public class VerifyPlayerRegistrationController implements Initializable {
 
     private Node createPage(int pageIndex) {
         this.createData(pageIndex);
-        return verifyPlayerRegistrationTable;
+        return PendingPlayerListTable;
     }
 
     private void createData(int pageIndex) {
         try {
             ResultSet rs = con.createStatement().executeQuery("SELECT * FROM player where verification_status='pending' LIMIT " + (rowsPerPage * pageIndex ) + ", " + rowsPerPage + ";");
-            verifyPlayerRegistrationTable.getItems().clear();
+            PendingPlayerListTable.getItems().clear();
             while (rs.next()) {
-                verifyPlayerRegistrationTable.getItems().addAll(
+                PendingPlayerListTable.getItems().addAll(
                         new ModelUnverifiedPlayers(
                                 rs.getString("username"),
                                 rs.getInt("aadhar_no"),
@@ -85,7 +74,7 @@ public class VerifyPlayerRegistrationController implements Initializable {
     }
 
         private TableView<ModelUnverifiedPlayers> createTable(){
-            TableView<ModelUnverifiedPlayers> verifyPlayerRegistrationTable = new TableView<>();
+            TableView<ModelUnverifiedPlayers> PendingPlayerListTable = new TableView<>();
 
              TableColumn<ModelUnverifiedPlayers , String> usernameColumn = new TableColumn<>("username");
              TableColumn<ModelUnverifiedPlayers , String> aadharNoColumn = new TableColumn<>("aadharNo");
@@ -106,7 +95,7 @@ public class VerifyPlayerRegistrationController implements Initializable {
         heightColumn.setCellValueFactory(new PropertyValueFactory<>  ("height"));
         playerTypeColumn.setCellValueFactory(new PropertyValueFactory<>("playerType"));
         buttonsColumn.setCellValueFactory(new PropertyValueFactory<> ("button"));
-        verifyPlayerRegistrationTable.getColumns().addAll( usernameColumn,
+        PendingPlayerListTable.getColumns().addAll( usernameColumn,
                                                            aadharNoColumn ,
                                                            nameColumn  ,
                                                            genderColumn ,
@@ -116,7 +105,7 @@ public class VerifyPlayerRegistrationController implements Initializable {
                                                            playerTypeColumn,
                                                         buttonsColumn );
 
-        return verifyPlayerRegistrationTable;
+        return PendingPlayerListTable;
     }
 
 
@@ -152,8 +141,8 @@ public class VerifyPlayerRegistrationController implements Initializable {
         SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
     @FXML
-    private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "VerifyPlayerRegistration.fxml");
+    private void viewPendingPlayerTable(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {

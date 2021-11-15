@@ -12,7 +12,7 @@
    <left>
       <VBox alignment="CENTER" prefHeight="700.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#verifyregisterPlayer" text="verify player registration" />
+            <Button mnemonicParsing="false" onAction="#viewPendingPlayerTable" text="verify player registration" />
             <Button mnemonicParsing="false" onAction="#viewTournamentList" text="tournament list" />
             <Button mnemonicParsing="false" onAction="#logout" text="logout" />
          </children></VBox>
