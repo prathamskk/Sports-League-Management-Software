@@ -1,51 +1,64 @@
 package com.project.sportsleaguemanagementproject.tournament;
 
-import com.project.sportsleaguemanagementproject.match.Match;
 import com.project.sportsleaguemanagementproject.team.Team;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 public class Tournament {
     String name;
     String host;
     TournamentTypes type;
+    String prize;
+    Date finalRegistrationDate;
+    boolean registrationDone = false;
+    Date startDate;
+    Date endDate;
     ArrayList<Team> teams;
-    ArrayList<Match> matches;
+    int maxNoOfTeams;
+    Brackets brackets;
 
-    public Tournament(String name, String host, TournamentTypes type, ArrayList<Team> teams, ArrayList<Match> matches) {
+    public Tournament(String name, String host, TournamentTypes type, String prize, Date finalRegistrationDate, Date startDate, int maxNoOfTeams) {
         this.name = name;
         this.host = host;
         this.type = type;
-        this.teams = teams;
-        this.matches = matches;
+        this.prize = prize;
+        this.finalRegistrationDate = finalRegistrationDate;
+        this.startDate = startDate;
+        this.maxNoOfTeams = maxNoOfTeams;
     }
 
-//    public void main(){
-//        createBrackets();
-//
-//        switch (type) {
-//            case TEST_MATCH -> {
-//            }
-//            case ONE_DAY_INTERNATIONAL -> {
-//            }
-//            case T_20 -> {
-//            }
-//            case T_10 -> {
-//            }
-//            case INDIVIDUAL_MATCH -> {
-//                matches.get(0).setDateOfMatch("yyyy-mm-dd");
-//            }
-//            default -> throw new IllegalStateException("Unexpected value: " + type);
-//        }
-//
-//
-//    }
+    public void setEndDate(Date endDate){
+        this.endDate = endDate;
+    }
 
-//    public void createBrackets(){
-//        while (matches.isEmpty()) {
-//            matches.add(new Match(teams.get(0), teams.get(1)));
-//            teams.remove(0);
-//            teams.remove(1);
-//        }
-//    }
+    public boolean addTeam(Team team){
+        if(teams.size() < maxNoOfTeams) {
+            teams.add(team);
+            return true;
+        }
+        else return false;
+    }
+    public boolean addTeams(ArrayList<Team> teams){
+        boolean addedAll = true;
+        for (Team t: teams) {
+            if(!addTeam(t)){
+                addedAll = false;
+                break;
+            }
+        }
+        return  addedAll;
+    }
+
+    public void createBrackets(){
+        brackets = new Brackets(teams);
+    }
+    public void updateBrackets(ArrayList<Team> winningTeams){
+        brackets.updateBrackets(winningTeams);
+    }
+
+    public Brackets getBrackets() {
+        return brackets;
+    }
 }
