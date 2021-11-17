@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class PlayerScreenController{
 
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
 
 
     @FXML
