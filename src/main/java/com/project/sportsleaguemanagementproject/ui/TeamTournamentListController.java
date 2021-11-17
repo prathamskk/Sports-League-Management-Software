@@ -1,23 +1,17 @@
 package com.project.sportsleaguemanagementproject.ui;
 
-import com.project.sportsleaguemanagementproject.MainApplication;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
-public class TeamManagerScreenController {
-
+public class TeamTournamentListController {
     @FXML
-   private Button logoutButton;
+    private Button logoutButton;
+
+
 
 
     @FXML
@@ -33,5 +27,4 @@ public class TeamManagerScreenController {
 
         SceneSwitcher.switchTo(this.getClass(), event, "TeamTournamentList.fxml");
     }
-
 }

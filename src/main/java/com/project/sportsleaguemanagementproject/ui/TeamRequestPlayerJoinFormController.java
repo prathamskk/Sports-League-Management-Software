@@ -114,8 +114,8 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
         SceneSwitcher.switchTo(this.getClass(), event, "TeamRequestPlayerJoinForm.fxml");
     }
     @FXML
-    private void viewPlayerTournamentList(ActionEvent event) throws IOException {
+    private void viewTeamTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamTournamentList.fxml");
     }
 }
