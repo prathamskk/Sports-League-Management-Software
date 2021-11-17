@@ -35,6 +35,10 @@ public class Match {
         this.team2 = team;
     }
 
+    public Match() {
+
+    }
+
     @Override
     public String toString() {
         return "Match{" +
