@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -38,38 +40,47 @@ public class AdminTournamentCreatorController implements Initializable {
             VBoxArrayList.add(new VBox());
             VBoxArrayList.get(VBoxIndex).setId("VBox" + VBoxIndex);
             VBoxArrayList.get(VBoxIndex).setAlignment(Pos.CENTER);
-            VBoxArrayList.get(VBoxIndex).setSpacing(20 * (VBoxIndex + 1) * 1);
-            listOfMatchList.add(new ArrayList<Match>());
             for(int j = 0; j < noOfMatches; j++){
-                listOfMatchList.get(noOfTeams/2 - listOfMatchListIndex).add(new Match());
                 DatePicker datePicker = new DatePicker();
                 datePicker.setId("DatePicker" + counter);
+                VBoxArrayList.get(VBoxIndex).getChildren().add(createSpacer());
                 VBoxArrayList.get(VBoxIndex).getChildren().add(datePicker);
+                VBoxArrayList.get(VBoxIndex).getChildren().add(createSpacer());
                 counter++;
             }
             VBoxIndex++;
-            listOfMatchListIndex--;
-            noOfMatches/=2;
         }
         outerHBox.getChildren().addAll(VBoxArrayList);
     }
-    public ArrayList<ArrayList<Match>> thing(int noOfTeams){
-        ArrayList<ArrayList<Match>> listOfMatchList = new ArrayList<>();
-        int noOfMatches = noOfTeams/2;
-        int listOfMatchListIndex = noOfTeams/2;
-        for(int i = noOfTeams/2; i > 0; i/=2){
-            listOfMatchList.add(new ArrayList<Match>());
-            for(int j = 0; j < noOfMatches; j++){
-                listOfMatchList.get(noOfTeams/2 - listOfMatchListIndex).add(new Match());
-            }
-            listOfMatchListIndex--;
-            noOfMatches/=2;
-        }
-        return listOfMatchList;
-    }
+//    public void thing(int x){
+//        ArrayList<ArrayList<Integer>> clist = new ArrayList<>();
+//        int c = 0;
+//        int d = x/2;
+//        int e = x/2;
+//        for(int i = x/2; i > 0; i/=2){
+//            clist.add(new ArrayList<Integer>());
+//            for(int j = 0; j < d; j++){
+//                clist.get(x/2 - e).add(c);
+//                c++;
+//            }
+//            e--;
+//            d/=2;
+//        }
+//        System.out.println(clist);
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("c: " + c);
+//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         noOfTeamsChoiceBox.getItems().addAll(choicesForNoOfTeams);
+    }
+    private Region createSpacer() {
+        final Region spacer = new Region();
+        // Make it always grow or shrink according to the available space
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+        return spacer;
     }
 }
