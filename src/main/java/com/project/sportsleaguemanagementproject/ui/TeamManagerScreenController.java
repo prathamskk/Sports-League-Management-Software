@@ -1,6 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.MainApplication;
+import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,28 +15,24 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class TeamManagerScreenController {
+
     @FXML
     public Button logoutButton;
 
-    @FXML
-    private void logout(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("LoginScreen.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("ui/stylesheets/LoginScreenStyleSheet.css")).toExternalForm());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
 
     @FXML
-    private void registerPlayer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PlayerRegistrationForm.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+    private void logout(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
+    @FXML
+    private void viewTeamRequestPlayerJoinForm(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamRequestPlayerJoinForm.fxml");
+    }
+    @FXML
+    private void viewPlayerTournamentList(ActionEvent event) throws IOException {
+
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml");
+    }
+
 
 }

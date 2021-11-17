@@ -2,15 +2,18 @@ package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.ModelTournamentList;
-
+import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,10 +25,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-public class TournamentListController implements Initializable {
+public class PlayerTournamentListController implements Initializable {
     private Connection con;
     @FXML
     private Pagination pagination;
@@ -39,7 +39,7 @@ public class TournamentListController implements Initializable {
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
         }catch(SQLException ex){
-            Logger.getLogger(TournamentListController.class.getName()).log(Level.SEVERE, null , ex);
+            Logger.getLogger(PlayerTournamentListController.class.getName()).log(Level.SEVERE, null , ex);
         }
     }
 
@@ -54,34 +54,38 @@ public class TournamentListController implements Initializable {
             table.getItems().clear();
             while (rs.next()) {
                 table.getItems().addAll(
-                                new ModelTournamentList(rs.getString("tournament_name"),
-                                                        rs.getInt("tournament_prize"),
-                                                        rs.getDate("registration_date"),
-                                                        addButton(rs.getRow(), rs.getString("tournament_name"))
+                                new ModelTournamentList(rs.getInt("tournament_id"),
+                                        rs.getString("tournament_name"),
+                                        rs.getInt("tournament_prize"),
+                                        rs.getDate("registration_date"),
+                                        addButton(rs.getRow(), rs.getInt("tournament_id"))
                                 )
 
              );
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(TournamentListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerTournamentListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private TableView<ModelTournamentList> createTable(){
         TableView<ModelTournamentList> table = new TableView<>();
 
+      //  TableColumn<ModelTournamentList , String> col_id = new TableColumn<>("id");
         TableColumn<ModelTournamentList , String> col_name = new TableColumn<>("name");
         TableColumn<ModelTournamentList , String> col_prize = new TableColumn<>("prize");
         TableColumn<ModelTournamentList , Date>   col_registration  = new TableColumn<>  ("date");
         TableColumn<ModelTournamentList , Button> buttonsColumn  = new TableColumn<>("button");
 
 
+       // col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_prize.setCellValueFactory(new PropertyValueFactory<>("prize"));
         col_registration.setCellValueFactory(new PropertyValueFactory<>("date"));
         buttonsColumn.setCellValueFactory(new PropertyValueFactory<> ("button"));
-        table.getColumns().addAll( col_name  ,
+        table.getColumns().addAll( //col_id,
+                                    col_name  ,
                                    col_prize  ,
                                    col_registration,
                                    buttonsColumn
@@ -89,17 +93,30 @@ public class TournamentListController implements Initializable {
          return table;
     }
 
-    private Button addButton(int rowNumber, String tournament_name) {
+    private Button addButton(int rowNumber, int tournament_id) {
 
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));
         ret.setText(String.valueOf(rowNumber));
+        ret.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                TournamentTableButtonClickSingleton.getInstance().id = tournament_id;
+                try {
+                    SceneSwitcher.switchTo(this.getClass(), e, "PlayerViewTournamentDetails.fxml");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         return ret;
     }
 
 
+
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
 
 
     @FXML
@@ -107,13 +124,17 @@ public class TournamentListController implements Initializable {
         SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
     @FXML
-    private void verifyregisterPlayer(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
+    private void viewPlayerRegistrationForm(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml");
     }
     @FXML
-    private void viewTournamentList(ActionEvent event) throws IOException {
+    private void viewPlayerTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "TournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml");
+    }
+    @FXML
+    private void viewTeamInvites(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml");
     }
 }
 

@@ -4,13 +4,16 @@ import com.project.sportsleaguemanagementproject.player.PlayerGender;
 import com.project.sportsleaguemanagementproject.player.PlayerType;
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
+import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegistrationPlayerScreenController implements Initializable {
+public class PlayerRegistrationPlayerScreenController implements Initializable {
 
     @FXML
     private TextField name;
@@ -72,7 +75,7 @@ public class RegistrationPlayerScreenController implements Initializable {
 
 
         } catch (SQLException ex) {
-            Logger.getLogger(RegistrationPlayerScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PlayerRegistrationPlayerScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -85,4 +88,29 @@ public class RegistrationPlayerScreenController implements Initializable {
         player_typechoicebox.setOnAction(this::getPlayerType);
 
     }
+
+
+
+    @FXML
+    private Button logoutButton;
+
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
+    }
+    @FXML
+    private void viewPlayerRegistrationForm(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml");
+    }
+    @FXML
+    private void viewPlayerTournamentList(ActionEvent event) throws IOException {
+
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml");
+    }
+    @FXML
+    private void viewTeamInvites(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml");
+    }
+
 }

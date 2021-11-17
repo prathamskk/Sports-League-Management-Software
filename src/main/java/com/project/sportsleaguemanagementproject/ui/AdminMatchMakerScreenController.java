@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class MatchMakerScreenController extends Application {
+public class AdminMatchMakerScreenController extends Application {
 
     @FXML
     TextField hostField;

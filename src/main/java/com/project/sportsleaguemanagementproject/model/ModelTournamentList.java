@@ -5,17 +5,27 @@ import javafx.scene.control.Button;
 import java.util.Date;
 
 public class ModelTournamentList {
+    int id;
     String name;
     int prize;
     Date date;
 
     Button button;
 
-    public ModelTournamentList(String tournament_name, int  tournament_prize , Date tournament_date, Button button){
+    public ModelTournamentList(int tournament_id, String tournament_name, int  tournament_prize , Date tournament_date, Button button){
+        this.id = tournament_id;
         this.name = tournament_name;
         this.prize = tournament_prize;
         this.date = tournament_date;
         this.button = button;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

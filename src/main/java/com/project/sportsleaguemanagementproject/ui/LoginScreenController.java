@@ -31,7 +31,7 @@ public class LoginScreenController {
 
     @FXML
     private void loadTeamManagerScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "ManagerScreen.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerScreen.fxml");
     }
     @FXML
     private void loadPlayerScreen(ActionEvent event) throws IOException {

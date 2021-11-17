@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="bordePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminTournamentListController">
+    <center>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <VBox prefHeight="700.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pagination fx:id="pagination" prefHeight="700.0" prefWidth="1280.0" />
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </center>
+    <top>
+        <HBox prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+    </top>
+    <left>
+        <VBox alignment="CENTER" prefHeight="700.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#viewPendingPlayerTable" text="verify player registration" />
+                <Button mnemonicParsing="false" onAction="#viewTournamentList" text="tournament list" />
+                <Button mnemonicParsing="false" onAction="#logout" text="logout" />
+            </children></VBox>
+    </left>
+</BorderPane>

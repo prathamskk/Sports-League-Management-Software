@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TournamentMakerScreenController extends Application {
+public class AdminTournamentMakerScreenController extends Application {
 
     public static void main(String[] args) {
         launch();

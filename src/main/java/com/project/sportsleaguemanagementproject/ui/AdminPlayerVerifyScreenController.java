@@ -1,7 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
-import com.project.sportsleaguemanagementproject.singleton.ButtonClickSingleton;
+import com.project.sportsleaguemanagementproject.singleton.AdminPendingPlayerTableButtonClickSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PlayerVerifyScreenController implements Initializable {
+public class AdminPlayerVerifyScreenController implements Initializable {
     @FXML
     private Button acceptButton;
     @FXML
@@ -47,7 +47,7 @@ public class PlayerVerifyScreenController implements Initializable {
     private Label notifyLabel;
 
 
-    private final String id = ButtonClickSingleton.getInstance().id;
+    private final String id = AdminPendingPlayerTableButtonClickSingleton.getInstance().id;
     private Connection con;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,7 +55,7 @@ public class PlayerVerifyScreenController implements Initializable {
             con = DatabaseConnector.getConnection();
             fillData();
         }catch(SQLException ex){
-            Logger.getLogger(TournamentListController.class.getName()).log(Level.SEVERE, null , ex);
+            Logger.getLogger(AdminTournamentListController.class.getName()).log(Level.SEVERE, null , ex);
         }
     }
     private void fillData() throws SQLException {
@@ -99,10 +99,10 @@ public class PlayerVerifyScreenController implements Initializable {
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "TournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerVerification.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml");
     }
 }
