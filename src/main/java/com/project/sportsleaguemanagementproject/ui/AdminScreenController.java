@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class AdminScreenController{
 
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
 
 
     @FXML
