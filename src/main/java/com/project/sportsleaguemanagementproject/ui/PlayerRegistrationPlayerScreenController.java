@@ -8,17 +8,13 @@ import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +35,9 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
     private ChoiceBox<String> genderchoicebox;
     @FXML
     private ChoiceBox<String> player_typechoicebox;
+    @FXML
+    private VBox MainVbox;
+
 
 
     // TODO: 11/9/2021 switch to enum
@@ -47,6 +46,7 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
     private String selectedGender;
     private String selectedPlayerType;
     private final String username = LoginSingleton.getInstance().username;
+    private Connection con;
 
     private void getGender(ActionEvent event){
         selectedGender = genderchoicebox.getValue();
@@ -60,7 +60,7 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
     @FXML
     private void submitDetails(ActionEvent e){
         try {
-            Connection con = DatabaseConnector.getConnection();
+
             PreparedStatement preparedStatement = con.prepareStatement("insert into player(username,aadhar_no,name,gender,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
             preparedStatement.setString(1,username);
             preparedStatement.setString(2, aadharno.getText());
@@ -82,11 +82,37 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        genderchoicebox.getItems().addAll(genders);
-        genderchoicebox.setOnAction(this::getGender);
-        player_typechoicebox.getItems().addAll(playerTypes);
-        player_typechoicebox.setOnAction(this::getPlayerType);
+        try {
+            con = DatabaseConnector.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            if(checkAlreadyRegistered()){
+                MainVbox.getChildren().clear();
+                Label registeredLabel = new Label();
+                registeredLabel.setText("Already registered");
+                MainVbox.getChildren().add(registeredLabel);
+                MainVbox.setAlignment(Pos.CENTER);
+            }else{
+                genderchoicebox.getItems().addAll(genders);
+                genderchoicebox.setOnAction(this::getGender);
+                player_typechoicebox.getItems().addAll(playerTypes);
+                player_typechoicebox.setOnAction(this::getPlayerType);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private boolean checkAlreadyRegistered() throws SQLException {
+       ResultSet rs = con.createStatement().executeQuery("select player_id from player where username = '"+username+"'");
+       if(rs.next()){
+           return true;
+       }else{
+           return false;
+       }
     }
 
 

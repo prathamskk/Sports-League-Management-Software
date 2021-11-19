@@ -8,8 +8,10 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 public class PlayerViewTournamentDetailsController {
+
+    //TODO
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
 
 
     @FXML

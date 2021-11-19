@@ -40,6 +40,9 @@ public class AdminTournamentCreatorController implements Initializable {
     private TextField prizePoolTextField;
     @FXML
     private TextField    nameTextField;
+    @FXML
+    private Label NotifyLabel;
+
     private Connection con;
     ArrayList<DatePicker> DatePickerArrayList = new ArrayList<>();
     ArrayList<VBox> VBoxArrayList = new ArrayList<>();
@@ -59,6 +62,9 @@ public class AdminTournamentCreatorController implements Initializable {
     @FXML
     private void handleGenerateBracketButton(){
         outerHBox.getChildren().clear();
+        VBoxArrayList.clear();
+        DatePickerArrayList.clear();
+
         int noOfTeams = Integer.parseInt(noOfTeamsChoiceBox.getValue());
 
         int VBoxIndex = 0;
@@ -90,14 +96,18 @@ public class AdminTournamentCreatorController implements Initializable {
 
     @FXML
     private void handleAddTournamentButton() throws SQLException {
-        PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tournament (tournament_name, tournament_prize, registration_date, venue, max_teams,additional_details) VALUES (?,?,?,?,?,?);");
-        preparedStatement.setString(1,nameTextField.getText());
-        preparedStatement.setString(2, prizePoolTextField.getText());
-        preparedStatement.setDate(3, Date.valueOf(registrationDatePicker.getValue()));
-        preparedStatement.setString(4, venueTextField.getText());
-        preparedStatement.setString(5, noOfTeamsChoiceBox.getValue());
-        preparedStatement.setString(6,additionalDetailsTextArea.getText());
-        preparedStatement.executeUpdate();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tournament (tournament_name, tournament_prize, registration_date, venue, max_teams,additional_details) VALUES (?,?,?,?,?,?);");
+            preparedStatement.setString(1, nameTextField.getText());
+            preparedStatement.setString(2, prizePoolTextField.getText());
+            preparedStatement.setDate(3, Date.valueOf(registrationDatePicker.getValue()));
+            preparedStatement.setString(4, venueTextField.getText());
+            preparedStatement.setString(5, noOfTeamsChoiceBox.getValue());
+            preparedStatement.setString(6, additionalDetailsTextArea.getText());
+            preparedStatement.executeUpdate();
+        } catch(Exception SQLException) {
+            NotifyLabel.setText("Error: A tournament already exists with same name");//TODO
+        }
         int i;
         for(i=0;i<Integer.parseInt(noOfTeamsChoiceBox.getValue())-1;i++) {
             PreparedStatement preparedStatement1 = con.prepareStatement("INSERT INTO `sportsleaguemanagement`.`match` (`tournament_id`, `match_fixture`, `match_identifier`) VALUES ((select tournament_id from tournament where tournament_name=?), ?, ?);");

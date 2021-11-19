@@ -27,8 +27,6 @@ public class LoginScreenController {
     @FXML
     private PasswordField passwordField;
 
-    LoginSingleton loginSingleton;
-
     @FXML
     private void loadTeamManagerScreen(ActionEvent event) throws IOException {
         SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerScreen.fxml");
@@ -47,11 +45,16 @@ public class LoginScreenController {
     private void loadScorekeeperScreen(ActionEvent event) throws IOException {
         SceneSwitcher.switchTo(this.getClass(), event, "ScoreKeeperScreen.fxml");
     }
+    @FXML
+    private void loadTeamManagerTeamNameRegistration(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerTeamNameRegistration.fxml");
+    }
+
 
 
     private Connection con;
     @FXML
-    public void checkLoginPerformed(ActionEvent e) throws SQLException, IOException {
+    private void checkLoginPerformed(ActionEvent e) throws SQLException, IOException {
         con = DatabaseConnector.getConnection();
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -74,7 +77,12 @@ public class LoginScreenController {
                         }else if (temp.equals(scorekeeper)){
                             loadScorekeeperScreen(e);
                         }else if (temp.equals(team)){
-                            loadTeamManagerScreen(e);
+                            if(checkAlreadyRegistration(username)){
+                                loadTeamManagerScreen(e);
+                            }else{
+                                loadTeamManagerTeamNameRegistration(e);
+                            }
+
                         }else if (temp.equals(player)){
                                 loadPlayerScreen(e);
                         }
@@ -123,6 +131,13 @@ public class LoginScreenController {
 
                 }
         }
+    }
+
+    private boolean checkAlreadyRegistration(String username) throws SQLException {
+        ResultSet rs = con.createStatement().executeQuery("select team_id from team where username='"+username+"'");
+        if(rs.next()){
+            return true;
+        }else return false;
     }
 
 }

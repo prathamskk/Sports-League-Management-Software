@@ -47,7 +47,6 @@ public class PlayerTeamInvitesController implements Initializable {
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
             checkForTeam();
-            System.out.println(teamId);
             if(teamId==-1){
                 notifyTeamExistence.setText("No Team");
                 notifyTeamExistence.setVisible(true);
@@ -65,13 +64,15 @@ public class PlayerTeamInvitesController implements Initializable {
         }
     }
     @FXML
-    private void handleLeaveTeamButton(ActionEvent event) throws SQLException {
+    private void handleLeaveTeamButton(ActionEvent event) throws SQLException, IOException {
         con.createStatement().executeUpdate("Update player set team_id=null where username = '"+username+"';");
         notifyTeamExistence.setText("Team Left successfully");
         notifyTeamExistence.setVisible(true);
         teamNameLabel.setVisible(false);
         currentTeamNameLabel.setVisible(false);
         leaveTeamButton.setVisible(false);
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml");
+
 
     }
 
@@ -80,6 +81,7 @@ public class PlayerTeamInvitesController implements Initializable {
         if (rs.next()){
             if(rs.getInt("team_id")!=0){
                 teamId = rs.getInt("team_id");
+
             }
 
         }

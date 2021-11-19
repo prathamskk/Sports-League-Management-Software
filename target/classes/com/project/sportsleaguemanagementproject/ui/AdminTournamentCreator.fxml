@@ -2,14 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminTournamentCreatorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminTournamentCreatorController">
    <left>
-      <VBox prefHeight="700.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#viewAdminTournamentCreator" text="add new torunament" />
+            <Button mnemonicParsing="false" onAction="#viewPendingPlayerTable" text="verify player registration" />
+            <Button mnemonicParsing="false" onAction="#viewTournamentList" text="tournament list" />
+            <Button mnemonicParsing="false" onAction="#logout" text="logout" />
+         </children></VBox>
    </left>
    <top>
       <VBox prefHeight="100.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
@@ -17,11 +27,47 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+            <VBox prefHeight="700.0" prefWidth="1080.0">
                <children>
-                  <ChoiceBox fx:id="noOfTeamsChoiceBox" prefWidth="150.0" />
+                  <HBox layoutX="10.0" layoutY="10.0">
+                     <children>
+                        <Label text="Tournament Name" />
+                        <TextField fx:id="nameTextField" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Prize Pool" />
+                        <TextField fx:id="prizePoolTextField" />
+                     </children></HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Final Registration Date" />
+                        <DatePicker fx:id="registrationDatePicker" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="35.0">
+                     <children>
+                        <Label text="Venue" />
+                        <TextField fx:id="venueTextField" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Additional Details" />
+                        <TextArea fx:id="additionalDetailsTextArea" prefHeight="200.0" prefWidth="282.0" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Max No of Teams" />
+                        <ChoiceBox fx:id="noOfTeamsChoiceBox" prefWidth="100.0" />
+                     </children>
+                  </HBox>
                   <Button fx:id="generateBracketButton" mnemonicParsing="false" onAction="#handleGenerateBracketButton" text="Generate bracket" />
-                  <HBox fx:id="outerHBox" />
+                  <HBox fx:id="outerHBox" spacing="70.0" />
+                  <Label fx:id="NotifyLabel" />
+                  <Button mnemonicParsing="false" onAction="#handleAddTournamentButton" text="Add" />
                </children>
             </VBox>
          </content>

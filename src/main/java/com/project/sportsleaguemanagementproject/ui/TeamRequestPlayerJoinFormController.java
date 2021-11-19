@@ -32,6 +32,7 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
         try{
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
+
         }catch(SQLException ex){
             Logger.getLogger(TeamRequestPlayerJoinFormController.class.getName()).log(Level.SEVERE, null , ex);
         }
