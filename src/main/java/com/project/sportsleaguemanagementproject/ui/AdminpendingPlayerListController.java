@@ -63,7 +63,7 @@ public class AdminpendingPlayerListController implements Initializable {
                                 rs.getFloat("weight"),
                                 rs.getFloat("height"),
                                 rs.getString("player_type"),
-                                addButtonToOBList(rs.getRow(), rs.getString("username")) // TODO: 11/13/2021
+                                addButtonToOBList(rs.getRow(), rs.getString("username"))
                         )
                 );
             }

@@ -60,7 +60,7 @@ public class AdminTournamentListController implements Initializable {
                                         rs.getString("tournament_name"),
                                         rs.getInt("tournament_prize"),
                                         rs.getDate("registration_date"),
-                                        addButton(rs.getRow(), rs.getInt("tournament_id"))
+                                        addButton(rs.getRow(), rs.getInt("tournament_id"))//this is just view button
                                 )
 
              );
@@ -95,7 +95,7 @@ public class AdminTournamentListController implements Initializable {
          return table;
     }
 
-    private Button addButton(int rowNumber, int tournament_id) {
+    private Button addButton(int rowNumber, int tournament_id) {//this is just view button
 
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));

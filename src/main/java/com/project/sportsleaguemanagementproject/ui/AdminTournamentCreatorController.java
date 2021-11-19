@@ -106,7 +106,7 @@ public class AdminTournamentCreatorController implements Initializable {
             preparedStatement.setString(6, additionalDetailsTextArea.getText());
             preparedStatement.executeUpdate();
         } catch(Exception SQLException) {
-            NotifyLabel.setText("Error: A tournament already exists with same name");//TODO
+            NotifyLabel.setText("Error: A tournament already exists with same name");//TODO add errors properly this one shows same error for all wrong
         }
         int i;
         for(i=0;i<Integer.parseInt(noOfTeamsChoiceBox.getValue())-1;i++) {

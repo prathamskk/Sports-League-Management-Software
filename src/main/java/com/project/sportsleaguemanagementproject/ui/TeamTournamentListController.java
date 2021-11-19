@@ -36,7 +36,8 @@ public class TeamTournamentListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
             con = DatabaseConnector.getConnection();
-            pagination.setPageFactory(this::createPage);
+            pagination.setPageFactory(this::createPage);//ongoing tournament
+            //TODO add all tournaments list
         }catch(SQLException ex){
             Logger.getLogger(TeamTournamentListTable.class.getName()).log(Level.SEVERE, null , ex);
         }
@@ -117,7 +118,7 @@ public class TeamTournamentListController implements Initializable {
             public void handle(ActionEvent e) {
                 TournamentTableButtonClickSingleton.getInstance().id = tournament_id;
                 try {
-                    SceneSwitcher.switchTo(this.getClass(), e, "TeamViewTournamentDetails.fxml");//TODO
+                    SceneSwitcher.switchTo(this.getClass(), e, "TeamViewTournamentDetails.fxml");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

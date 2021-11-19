@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class ScoreKeeperScreenController {
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
