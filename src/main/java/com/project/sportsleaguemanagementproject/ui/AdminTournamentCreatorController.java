@@ -1,13 +1,19 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.match.Match;
+import com.project.sportsleaguemanagementproject.model.AdminTournamentAccessTable;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
+import com.project.sportsleaguemanagementproject.model.ModelTournamentList;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
+import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -15,12 +21,11 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AdminTournamentCreatorController implements Initializable {
     @FXML
@@ -42,6 +47,7 @@ public class AdminTournamentCreatorController implements Initializable {
     private TextField    nameTextField;
     @FXML
     private Label NotifyLabel;
+
 
     private Connection con;
     ArrayList<DatePicker> DatePickerArrayList = new ArrayList<>();
@@ -95,7 +101,7 @@ public class AdminTournamentCreatorController implements Initializable {
 
 
     @FXML
-    private void handleAddTournamentButton() throws SQLException {
+    private void handleAddTournamentButton(ActionEvent event) throws SQLException, IOException {
         try {
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tournament (tournament_name, tournament_prize, registration_date, venue, max_teams,additional_details) VALUES (?,?,?,?,?,?);");
             preparedStatement.setString(1, nameTextField.getText());
@@ -118,9 +124,13 @@ public class AdminTournamentCreatorController implements Initializable {
             preparedStatement1.executeUpdate();
         }
 
+        ResultSet rs = con.createStatement().executeQuery("select tournament_id from tournament where tournament_name = '"+nameTextField.getText()+"'");
+        rs.next();
+        TournamentTableButtonClickSingleton.getInstance().id = rs.getInt("tournament_id");
+
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentAccess.fxml");
+
     }
-
-
 
 
 //    public void thing(int x){
