@@ -125,6 +125,7 @@ public class AdminTournamentAccessController implements Initializable {
             @Override
             public void handle(ActionEvent e) {
                 try {
+                    System.out.println(id);
                     con.createStatement().executeUpdate("insert into tournament_access values('"+id+"','"+username+"');");
 
                     SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml");

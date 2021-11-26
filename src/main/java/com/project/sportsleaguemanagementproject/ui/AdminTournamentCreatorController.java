@@ -19,13 +19,16 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
 
 public class AdminTournamentCreatorController implements Initializable {
     @FXML
@@ -47,6 +50,8 @@ public class AdminTournamentCreatorController implements Initializable {
     private TextField    nameTextField;
     @FXML
     private Label NotifyLabel;
+    @FXML
+    private Button addTournamentButton;
 
 
     private Connection con;
@@ -67,6 +72,11 @@ public class AdminTournamentCreatorController implements Initializable {
 
     @FXML
     private void handleGenerateBracketButton(){
+        if(noOfTeamsChoiceBox.getValue()==null){
+            NotifyLabel.setText("select max no of teams");
+            return;
+        }
+
         outerHBox.getChildren().clear();
         VBoxArrayList.clear();
         DatePickerArrayList.clear();
@@ -97,16 +107,49 @@ public class AdminTournamentCreatorController implements Initializable {
             VBoxIndex++;
         }
         outerHBox.getChildren().addAll(VBoxArrayList);
+        addTournamentButton.setVisible(true);
     }
 
 
     @FXML
     private void handleAddTournamentButton(ActionEvent event) throws SQLException, IOException {
+
+
+        //checks final registration date is after current date
+        LocalDate todayDate = LocalDate.now();
+        if(registrationDatePicker.getValue().isBefore(todayDate)){
+            NotifyLabel.setText("Final Registration Date has already passed");
+            return;
+        }
+
+        int i;
+        //checks if tournament matches are after final registration date
+        if(DatePickerArrayList.get(0).getValue().isBefore(registrationDatePicker.getValue())){
+            NotifyLabel.setText("Match Dates should be after Final Registration Date");
+            return;
+        }
+
+        //checks if any match date is null
+        for(i=0;i<Integer.parseInt(noOfTeamsChoiceBox.getValue())-1;i++) {
+            if (DatePickerArrayList.get(i).getValue() == null) {
+                NotifyLabel.setText("Enter Date Of all matches");
+                return;
+            }
+        }
+
+        //checks for incorrect match dates (example: finals before semis)
+        for(i = Integer.parseInt(noOfTeamsChoiceBox.getValue())-2; i >=1;i--){
+            if(DatePickerArrayList.get(i).getValue().isBefore(DatePickerArrayList.get(i-1).getValue())){
+                NotifyLabel.setText("Enter Dates in Chronological sequence");
+                return;
+            }
+
+        }
         try {
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tournament (tournament_name, tournament_prize, registration_date, venue, max_teams,additional_details) VALUES (?,?,?,?,?,?);");
             preparedStatement.setString(1, nameTextField.getText());
             preparedStatement.setString(2, prizePoolTextField.getText());
-            preparedStatement.setDate(3, Date.valueOf(registrationDatePicker.getValue()));
+            preparedStatement.setDate(3, java.sql.Date.valueOf(registrationDatePicker.getValue()));
             preparedStatement.setString(4, venueTextField.getText());
             preparedStatement.setString(5, noOfTeamsChoiceBox.getValue());
             preparedStatement.setString(6, additionalDetailsTextArea.getText());
@@ -114,20 +157,25 @@ public class AdminTournamentCreatorController implements Initializable {
         } catch(Exception SQLException) {
             NotifyLabel.setText("Error: A tournament already exists with same name");//TODO add errors properly this one shows same error for all wrong
         }
-        int i;
+
         for(i=0;i<Integer.parseInt(noOfTeamsChoiceBox.getValue())-1;i++) {
             PreparedStatement preparedStatement1 = con.prepareStatement("INSERT INTO `sportsleaguemanagement`.`match` (`tournament_id`, `match_fixture`, `match_identifier`) VALUES ((select tournament_id from tournament where tournament_name=?), ?, ?);");
             preparedStatement1.setString(1, nameTextField.getText());
-            preparedStatement1.setDate(2, Date.valueOf(DatePickerArrayList.get(i).getValue()));
-            preparedStatement1.setString(3, venueTextField.getText());
+            preparedStatement1.setDate(2, java.sql.Date.valueOf(DatePickerArrayList.get(i).getValue()));
             preparedStatement1.setInt(3, i+1);
             preparedStatement1.executeUpdate();
         }
 
         ResultSet rs = con.createStatement().executeQuery("select tournament_id from tournament where tournament_name = '"+nameTextField.getText()+"'");
         rs.next();
-        TournamentTableButtonClickSingleton.getInstance().id = rs.getInt("tournament_id");
+        int j,count=0;
+        for(i=0;i<Integer.parseInt(noOfTeamsChoiceBox.getValue())-1;i++) {
+            for (j = 0; j < 2; j++) {
 
+                con.createStatement().executeUpdate("INSERT INTO teams_in_match VALUES ( '0' ,(select match_id from sportsleaguemanagement.match  where tournament_id='"+rs.getInt("tournament_id")+"'and match_identifier='"+(i+1)+"') ,'"+(j+1)+"');");
+                }
+            }
+        TournamentTableButtonClickSingleton.getInstance().id = rs.getInt("tournament_id");
         SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentAccess.fxml");
 
     }

@@ -115,14 +115,17 @@ public class AdminTournamentListController implements Initializable {
         return ret;
     }
 
-
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
 
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
         SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
+    }
+    @FXML
+    private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
@@ -132,6 +135,11 @@ public class AdminTournamentListController implements Initializable {
     private void viewTournamentList(ActionEvent event) throws IOException {
 
         SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml");
+    }
+    @FXML
+    private void viewPlayerVerification(ActionEvent event) throws IOException {
+
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml");
     }
 }
 

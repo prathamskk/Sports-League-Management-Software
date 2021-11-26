@@ -67,7 +67,7 @@
                   <Button fx:id="generateBracketButton" mnemonicParsing="false" onAction="#handleGenerateBracketButton" text="Generate bracket" />
                   <HBox fx:id="outerHBox" spacing="70.0" />
                   <Label fx:id="NotifyLabel" />
-                  <Button mnemonicParsing="false" onAction="#handleAddTournamentButton" text="Add" />
+                  <Button fx:id="addTournamentButton" mnemonicParsing="false" onAction="#handleAddTournamentButton" text="Add" visible="false" />
                </children>
             </VBox>
          </content>
