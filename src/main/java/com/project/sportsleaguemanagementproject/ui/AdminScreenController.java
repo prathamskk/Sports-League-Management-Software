@@ -30,20 +30,20 @@ public class AdminScreenController{
     }
     @FXML
     private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/AdminTournamentCreatorController.css");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/AdminpendingPlayerListController.css");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/AdminTournamentListController.css");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/AdminPlayerVerifyScreenController.css");
     }
 }

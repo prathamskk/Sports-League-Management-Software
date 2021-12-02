@@ -38,7 +38,7 @@ public class LoginScreenController {
 
     @FXML
     private void loadAdminScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml","ui/stylesheets/AdminScreenController.css");
     }
 
     @FXML

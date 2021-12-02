@@ -4,6 +4,8 @@ import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -11,10 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +58,7 @@ private Label nameLabel;
             fillData();
             displayEditableBracket();
             fillBracket();
+            insertTeamListFlowPane();
         }catch(SQLException ex){
             Logger.getLogger(AdminEditTournamentDetailsController.class.getName()).log(Level.SEVERE, null , ex);
         }
@@ -222,6 +222,7 @@ private Label nameLabel;
                     count++;
                 }
             }
+            NotifyLabel.setText("Successfully Updated");
         }
 
 
@@ -230,7 +231,7 @@ private Label nameLabel;
 
     @FXML
     private void handleGiveAccessButton(ActionEvent e) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml");
+        SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml","ui/stylesheets/AdminTournamentAccessController.css");
     }
 
 
@@ -241,14 +242,31 @@ private Label nameLabel;
         return spacer;
     }
 
-    //TODO CLIPBOARD
     @FXML
-    private void clipboardButton(ActionEvent event){
-        Clipboard clipboard = Clipboard.getSystemClipboard();
-        ClipboardContent content = new ClipboardContent();
-        content.putString("");
-        clipboard.setContent(content);
+    private FlowPane ListOFTeamsFlowPane;
+
+    private void insertTeamListFlowPane() throws SQLException {
+        ResultSet rs = con.createStatement().executeQuery("select team_name from team where team_id in(select team_id from teams_in_tournament where tournament_id='" + id + "');");
+        while (rs.next()) {
+            Label teamLabel = new Label();
+            teamLabel.setText(rs.getString("team_name"));
+            teamLabel.setOnMouseClicked(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    Clipboard clipboard = Clipboard.getSystemClipboard();
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(teamLabel.getText());
+                    clipboard.setContent(content);
+                    NotifyLabel.setText("Copied Name to Clipboard");
+                }
+            });
+            ListOFTeamsFlowPane.getChildren().add(teamLabel);
+        }
     }
+
+
+
+
 
 
 
@@ -284,20 +302,20 @@ private Label nameLabel;
     }
     @FXML
     private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/AdminTournamentCreatorController.css");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/AdminpendingPlayerListController.css");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/AdminTournamentListController.css");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/AdminPlayerVerifyScreenController.css");
     }
 }

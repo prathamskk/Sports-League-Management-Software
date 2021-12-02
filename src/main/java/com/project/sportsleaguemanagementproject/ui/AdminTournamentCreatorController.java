@@ -146,6 +146,15 @@ public class AdminTournamentCreatorController implements Initializable {
 
         }
         try {
+            if(nameTextField.getText().equals("")){
+                NotifyLabel.setText("Error: Tournament Name cannot be empty");
+                return;
+            }
+            if(registrationDatePicker.getValue()==null){
+                NotifyLabel.setText("Error: Registration Date cannot be empty");
+                return;
+            }
+
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO tournament (tournament_name, tournament_prize, registration_date, venue, max_teams,additional_details) VALUES (?,?,?,?,?,?);");
             preparedStatement.setString(1, nameTextField.getText());
             preparedStatement.setString(2, prizePoolTextField.getText());
@@ -155,7 +164,7 @@ public class AdminTournamentCreatorController implements Initializable {
             preparedStatement.setString(6, additionalDetailsTextArea.getText());
             preparedStatement.executeUpdate();
         } catch(Exception SQLException) {
-            NotifyLabel.setText("Error: A tournament already exists with same name");//TODO add errors properly this one shows same error for all wrong
+            NotifyLabel.setText("Error: Check Data entered");
         }
 
         for(i=0;i<Integer.parseInt(noOfTeamsChoiceBox.getValue())-1;i++) {
@@ -176,7 +185,7 @@ public class AdminTournamentCreatorController implements Initializable {
                 }
             }
         TournamentTableButtonClickSingleton.getInstance().id = rs.getInt("tournament_id");
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentAccess.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentAccess.fxml","ui/stylesheets/AdminTournamentAccessController.css");
 
     }
 
@@ -220,20 +229,20 @@ public class AdminTournamentCreatorController implements Initializable {
     }
     @FXML
     private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/AdminTournamentCreatorController.css");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PendingPlayerList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/AdminpendingPlayerListController.css");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/AdminTournamentListController.css");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/AdminPlayerVerifyScreenController.css");
     }
 }

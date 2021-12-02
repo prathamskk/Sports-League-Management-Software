@@ -53,11 +53,19 @@ public class PlayerTournamentListController implements Initializable {
             ResultSet rs = con.createStatement().executeQuery("select * from tournament LIMIT " + (rowsPerPage * pageIndex ) + ", " + rowsPerPage + ";");
             table.getItems().clear();
             while (rs.next()) {
+                int noOfTeamsRegistered=0;
+                ResultSet resultSet = con.createStatement().executeQuery("select team_id from teams_in_tournament where tournament_id='"+rs.getInt("tournament_id")+"';");
+                while (resultSet.next()){
+                    noOfTeamsRegistered++;
+
+                }
                 table.getItems().addAll(
                                 new ModelTournamentList(rs.getInt("tournament_id"),
                                         rs.getString("tournament_name"),
                                         rs.getInt("tournament_prize"),
                                         rs.getDate("registration_date"),
+                                        rs.getString("venue"),
+                                        noOfTeamsRegistered+"/"+rs.getInt("max_teams"),
                                         addButton(rs.getRow(), rs.getInt("tournament_id"))
                                 )
 

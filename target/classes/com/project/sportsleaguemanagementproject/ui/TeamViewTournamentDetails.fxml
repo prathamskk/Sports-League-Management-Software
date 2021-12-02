@@ -69,6 +69,7 @@
                                 </VBox>
                             </children>
                         </HBox>
+                  <HBox fx:id="outerHBox" />
                     </children>
                 </VBox>
             </content>
