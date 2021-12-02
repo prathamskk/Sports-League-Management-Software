@@ -112,11 +112,11 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
     }
     @FXML
     private void viewTeamRequestPlayerJoinForm(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "TeamRequestPlayerJoinForm.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamRequestPlayerJoinForm.fxml","ui/stylesheets/TeamRequestPlayerJoinFormController.css");
     }
     @FXML
     private void viewTeamTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "TeamTournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamTournamentList.fxml","ui/stylesheets/TeamTournamentListController.css");
     }
 }

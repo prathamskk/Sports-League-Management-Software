@@ -48,10 +48,10 @@
 -fx-background-color:#f2ebf1;
 -fx-padding:20;
 }
-
 .main-pane{
 -fx-background-color:#ffffff;
 -fx-background-radius:5;
+-fx-padding:10;
 }
 
 .pagination{

@@ -13,17 +13,17 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" styleClass="center-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.LoginScreenController">
-   <VBox layoutX="356.0" layoutY="181.0" prefHeight="438.0" prefWidth="569.0" styleClass="main-pane">
+   <VBox layoutX="365.0" layoutY="175.0" prefHeight="450.0" prefWidth="550.0" styleClass="main-pane">
       <children>
           <Label fx:id="messageDisplay" alignment="CENTER" prefHeight="17.0" prefWidth="627.0" textAlignment="CENTER" textFill="#ff5c5c" VBox.vgrow="ALWAYS" />
          <Label text="Username" />
           <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="271.0" />
          <Label text="Password" />
           <PasswordField fx:id="passwordField" prefHeight="50.0" prefWidth="271.0" />
-          <Button fx:id="loginButton" mnemonicParsing="false" onAction="#checkLoginPerformed" prefHeight="54.0" prefWidth="542.0" text="LOGIN" />
+          <Button fx:id="loginButton" mnemonicParsing="false" onAction="#checkLoginPerformed" prefHeight="50.0" prefWidth="542.0" text="LOGIN" />
          <HBox alignment="CENTER" spacing="50.0" />
          <Label text="First Time User?" />
-         <GridPane hgap="50.0" prefHeight="57.0" prefWidth="441.0">
+         <GridPane hgap="50.0" prefHeight="50.0" prefWidth="441.0">
            <columnConstraints>
              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

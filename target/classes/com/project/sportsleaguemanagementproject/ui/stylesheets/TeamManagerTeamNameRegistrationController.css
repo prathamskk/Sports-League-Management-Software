@@ -26,6 +26,6 @@
 .main-pane{
 -fx-background-color:#ffffff;
 -fx-background-radius:5;
--fx-spacing:10;
--fx-padding:10;
+-fx-spacing:20;
+-fx-padding:20;
 }

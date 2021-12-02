@@ -40,8 +40,8 @@
                   </GridPane>
                   <GridPane>
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="332.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="827.0" minWidth="10.0" prefWidth="708.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="202.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="881.0" minWidth="10.0" prefWidth="818.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -141,12 +141,12 @@
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
-                            <padding>
-                                <Insets left="10.0" />
-                            </padding>
                             <font>
                                 <Font size="10.0" />
-                            </font></Label>
+                            </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
                         <Button mnemonicParsing="false" onAction="#viewAdminTournamentCreator" prefHeight="25.0" prefWidth="200.0" text="Add Tournament" />
                         <Button mnemonicParsing="false" onAction="#viewPendingPlayerTable" prefHeight="25.0" prefWidth="200.0" text="Verify Players" />
                         <Button mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="200.0" text="Logout" />
