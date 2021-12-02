@@ -33,7 +33,7 @@ public class LoginScreenController {
     }
     @FXML
     private void loadPlayerScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerScreen.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerScreen.fxml","ui/stylesheets/PlayerScreenController.css");
     }
 
     @FXML

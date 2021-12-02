@@ -111,7 +111,7 @@ public class PlayerTournamentListController implements Initializable {
             public void handle(ActionEvent e) {
                 TournamentTableButtonClickSingleton.getInstance().id = tournament_id;
                 try {
-                    SceneSwitcher.switchTo(this.getClass(), e, "PlayerViewTournamentDetails.fxml");
+                    SceneSwitcher.switchTo(this.getClass(), e, "PlayerViewTournamentDetails.fxml","ui/stylesheets/PlayerViewTournamentDetailsController.css");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -133,16 +133,17 @@ public class PlayerTournamentListController implements Initializable {
     }
     @FXML
     private void viewPlayerRegistrationForm(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml","ui/stylesheets/PlayerRegistrationPlayerScreenController.css");
     }
     @FXML
     private void viewPlayerTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml","ui/stylesheets/PlayerTournamentListController.css");
     }
     @FXML
     private void viewTeamInvites(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/PlayerTeamInvitesController.css");
     }
+
 }
 
