@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 public class PlayerScreenController{
 
 
+
     @FXML
     private Button logoutButton;
 
@@ -32,16 +33,16 @@ public class PlayerScreenController{
     }
     @FXML
     private void viewPlayerRegistrationForm(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml","ui/stylesheets/PlayerRegistrationPlayerScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPlayerTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml","ui/stylesheets/PlayerTournamentListController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewTeamInvites(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/PlayerTeamInvitesController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/main.css");
     }
 
 }

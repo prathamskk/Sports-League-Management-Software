@@ -47,7 +47,7 @@ public class TeamManagerTeamNameRegistrationController implements Initializable 
            notifyLabel.setText("This name is already taken");
        }else{
            con.createStatement().executeUpdate("insert into team (team_name,username) values ('"+teamNameTextField.getText()+"','"+username+"'); ");
-           SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerScreen.fxml","ui/stylesheets/TeamManagerScreenController.css");
+           SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerScreen.fxml","ui/stylesheets/main.css");
 
        }
 

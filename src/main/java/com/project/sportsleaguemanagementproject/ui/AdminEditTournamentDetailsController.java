@@ -1,6 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
+import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import javafx.event.ActionEvent;
@@ -10,7 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
@@ -20,6 +23,7 @@ import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +68,7 @@ private Label nameLabel;
         }
     }
 
+
     private void fillData() throws SQLException {
         int noOfTeamsRegistered=0;
         ResultSet resultSet = con.createStatement().executeQuery("select team_id from teams_in_tournament where tournament_id='"+id+"';");
@@ -87,6 +92,7 @@ private Label nameLabel;
     ArrayList<DatePicker> DatePickerArrayList = new ArrayList<>();
     ArrayList<VBox> VBoxArrayList = new ArrayList<>();
     ArrayList<TextField> TextFieldArrayList = new ArrayList<>();
+    ArrayList<Button> ButtonArrayList = new ArrayList<>();
 
 
 
@@ -96,6 +102,7 @@ private Label nameLabel;
         VBoxArrayList.clear();
         DatePickerArrayList.clear();
         TextFieldArrayList.clear();
+        ButtonArrayList.clear();
 
         int noOfTeams =  MaxTeams ;
 
@@ -126,10 +133,17 @@ private Label nameLabel;
                 textField2.setId( "TextField" + counter2);
                 textField2.setMaxWidth(90);
                 textField2.setMaxHeight(25);
+
+                Button button = new Button();
+                button.setId("Button" + counter);
+                button.setText("Stats");
+                button.setDisable(true);
+                ButtonArrayList.add(button);
                 counter2++;
                 TextFieldArrayList.add(textField2);
 
                 VBoxArrayList.get(VBoxIndex).getChildren().add(createSpacer());
+                VBoxArrayList.get(VBoxIndex).getChildren().add(button);
                 VBoxArrayList.get(VBoxIndex).getChildren().add(textField1);
                 VBoxArrayList.get(VBoxIndex).getChildren().add(datePicker);
                 VBoxArrayList.get(VBoxIndex).getChildren().add(textField2);
@@ -153,6 +167,20 @@ private Label nameLabel;
             rs.next();
 
             DatePickerArrayList.get(i).setValue(LocalDate.parse(rs.getString("match_fixture")));
+            ButtonArrayList.get(i).setOnAction((new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+
+                    try {
+                        MatchIdSingleton.getInstance().id = rs.getInt("match_id");
+                        SceneSwitcher.switchTo(this.getClass(), e, "AdminEditMatchStats.fxml","ui/stylesheets/main.css");
+                    } catch (IOException | SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }));
+
+
             for (j = 0; j < 2; j++) {
                 ResultSet rs1 = con.createStatement().executeQuery("SELECT team_name from team where team_id in (SELECT team_id FROM teams_in_match WHERE match_id ='"+rs.getInt("match_id")+"' AND team_index ='"+(j+1)+"');");
                 if(rs1.next()) {
@@ -161,11 +189,12 @@ private Label nameLabel;
                     TextFieldArrayList.get(count).setText("-N/A-");
                 }
                 if(rs.getDate("match_fixture").toLocalDate().isBefore(todayDate)) {
+                    ButtonArrayList.get(i).setDisable(false);
                     DatePickerArrayList.get(i).setDisable(true);
                     DatePickerArrayList.get(i).setStyle("-fx-opacity: 1");
                     TextFieldArrayList.get(count).setDisable(true);
-                }
 
+                }
                 count++;
             }
 
@@ -224,15 +253,15 @@ private Label nameLabel;
             }
             NotifyLabel.setText("Successfully Updated");
         }
-
-
-
     }
+
 
     @FXML
     private void handleGiveAccessButton(ActionEvent e) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml","ui/stylesheets/AdminTournamentAccessController.css");
+        SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml","ui/stylesheets/main.css");
     }
+
+
 
 
     private Region createSpacer() {
@@ -266,32 +295,6 @@ private Label nameLabel;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @FXML
     private Button logoutButton;
 
@@ -302,20 +305,20 @@ private Label nameLabel;
     }
     @FXML
     private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/AdminTournamentCreatorController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/AdminpendingPlayerListController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/AdminTournamentListController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/AdminPlayerVerifyScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/main.css");
     }
 }

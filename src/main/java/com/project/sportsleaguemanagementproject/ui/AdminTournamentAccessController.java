@@ -128,7 +128,7 @@ public class AdminTournamentAccessController implements Initializable {
                     System.out.println(id);
                     con.createStatement().executeUpdate("insert into tournament_access values('"+id+"','"+username+"');");
 
-                    SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml","ui/stylesheets/AdminTournamentAccessController.css");
+                    SceneSwitcher.switchTo(this.getClass(), e, "AdminTournamentAccess.fxml","ui/stylesheets/main.css");
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
@@ -137,6 +137,7 @@ public class AdminTournamentAccessController implements Initializable {
 
         return ret;
     }
+
 
 
     @FXML
@@ -149,20 +150,20 @@ public class AdminTournamentAccessController implements Initializable {
     }
     @FXML
     private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/AdminTournamentCreatorController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/AdminpendingPlayerListController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/AdminTournamentListController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentList.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPlayerVerification(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/AdminPlayerVerifyScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPlayerVerification.fxml","ui/stylesheets/main.css");
     }
 }

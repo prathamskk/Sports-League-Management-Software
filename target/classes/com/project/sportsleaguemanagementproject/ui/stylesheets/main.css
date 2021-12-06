@@ -3,9 +3,7 @@
 -fx-alignment:top_left;
 }
 .left-drawer SVGPath{
--fx-fill:#9a6592
-
-;
+-fx-fill:#9a6592;
 }
 
 .left-drawer .button{
@@ -14,11 +12,7 @@
 -fx-font-weight:bold;
 -fx-alignment:center-left;
 -fx-font-size:16;
--fx-text-fill:#7892bb
-
-
-
-;
+-fx-text-fill:#7892bb;
 }
 
 
@@ -45,14 +39,18 @@
 }
 
 .center-pane{
--fx-background-color:#f2ebf1;
+-fx-background-color:#f2ebf1;   
 -fx-padding:20;
+-fx-spacing:20;
 }
+
 .main-pane{
 -fx-background-color:#ffffff;
 -fx-background-radius:5;
 -fx-padding:10;
 }
+
+
 
 .pagination{
 -fx-padding:10;

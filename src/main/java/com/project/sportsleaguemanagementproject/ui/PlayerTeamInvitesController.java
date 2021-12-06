@@ -71,7 +71,7 @@ public class PlayerTeamInvitesController implements Initializable {
         teamNameLabel.setVisible(false);
         currentTeamNameLabel.setVisible(false);
         leaveTeamButton.setVisible(false);
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/PlayerTeamInvitesController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/main.css");
 
 
     }
@@ -136,7 +136,7 @@ public class PlayerTeamInvitesController implements Initializable {
                 try {
                     con.createStatement().executeUpdate("update player set team_id = (select team_id from team where team_name = '"+team_name+"') where username = '"+username+"'; ");
                     con.createStatement().executeUpdate("DELETE FROM team_request_player WHERE player_id=(select player_id from player where username='"+username+"') and team_id =(select team_id from team where team_name = '"+team_name+"');");
-                    SceneSwitcher.switchTo(this.getClass(), e, "PlayerTeamInvites.fxml","ui/stylesheets/PlayerTeamInvitesController.css");
+                    SceneSwitcher.switchTo(this.getClass(), e, "PlayerTeamInvites.fxml","ui/stylesheets/main.css");
 
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
@@ -183,16 +183,16 @@ public class PlayerTeamInvitesController implements Initializable {
     }
     @FXML
     private void viewPlayerRegistrationForm(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml","ui/stylesheets/PlayerRegistrationPlayerScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPlayerTournamentList(ActionEvent event) throws IOException {
 
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml","ui/stylesheets/PlayerTournamentListController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTournamentList.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewTeamInvites(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/PlayerTeamInvitesController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerTeamInvites.fxml","ui/stylesheets/main.css");
     }
 
 }

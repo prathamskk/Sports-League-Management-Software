@@ -29,25 +29,25 @@ public class LoginScreenController {
 
     @FXML
     private void loadTeamManagerScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerScreen.fxml","ui/stylesheets/TeamManagerScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerScreen.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void loadPlayerScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "PlayerScreen.fxml","ui/stylesheets/PlayerScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerScreen.fxml","ui/stylesheets/main.css");
     }
 
     @FXML
     private void loadAdminScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml","ui/stylesheets/AdminScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml","ui/stylesheets/main.css");
     }
 
     @FXML
     private void loadScorekeeperScreen(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "ScoreKeeperScreen.fxml","ui/stylesheets/ScoreKeeperScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "ScoreKeeperScreen.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void loadTeamManagerTeamNameRegistration(ActionEvent event) throws IOException {
-        SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerTeamNameRegistration.fxml","ui/stylesheets/TeamManagerScreenController.css");
+        SceneSwitcher.switchTo(this.getClass(), event, "TeamManagerTeamNameRegistration.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
 
 
