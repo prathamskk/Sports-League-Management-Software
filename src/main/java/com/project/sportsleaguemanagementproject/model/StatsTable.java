@@ -14,9 +14,10 @@ public class StatsTable {
     int    stat_wide_balls;
     int    stat_wickets;
     int    stat_maidens;
+    int    stat_0s;
     Button button;
 
-    public StatsTable(int stat_id, int aadhar_no, String name, int stat_balls, int stat_runs, int stat_overs, int stat_6s, int stat_4s, int stat_wide_balls, int stat_wickets, int stat_maidens, Button button) {
+    public StatsTable(int stat_id, int aadhar_no, String name, int stat_balls, int stat_runs, int stat_overs, int stat_6s, int stat_4s, int stat_wide_balls, int stat_wickets, int stat_maidens,int stat_0s, Button button) {
         this.stat_id = stat_id;
         this.aadhar_no = aadhar_no;
         this.name = name;
@@ -28,6 +29,7 @@ public class StatsTable {
         this.stat_wide_balls = stat_wide_balls;
         this.stat_wickets = stat_wickets;
         this.stat_maidens = stat_maidens;
+        this.stat_0s = stat_0s;
         this.button = button;
     }
 
@@ -117,6 +119,15 @@ public class StatsTable {
 
     public void setStat_maidens(int stat_maidens) {
         this.stat_maidens = stat_maidens;
+    }
+
+
+    public int getStat_0s() {
+        return stat_0s;
+    }
+
+    public void setStat_0s(int stat_0s) {
+        this.stat_0s = stat_0s;
     }
 
     public Button getButton() {

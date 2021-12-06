@@ -19,7 +19,7 @@
     <center>
         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="center-pane" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
             <content>
-                <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="main-pane">
+                <VBox minHeight="1000.0" prefWidth="1040.0" styleClass="main-pane">
                     <children>
                   <GridPane minHeight="30.0" prefWidth="1040.0">
                     <columnConstraints>
