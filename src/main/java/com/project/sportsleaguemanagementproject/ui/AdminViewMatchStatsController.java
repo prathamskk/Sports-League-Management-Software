@@ -43,11 +43,15 @@ public class AdminViewMatchStatsController implements Initializable {
     private final Label TableNameLabel2 = new Label("1st Innings Bowling");
     private final Label TableNameLabel3 = new Label("2nd Innings Batting");
     private final Label TableNameLabel4 = new Label("2nd Innings Bowling");
+    private final Button addStatButton1 = createAddStatButton(id);
+    private final Button addStatButton2 = createAddStatButton(id);
+    private final Button addStatButton3 = createAddStatButton(id);
+    private final Button addStatButton4 = createAddStatButton(id);
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
-            //TODO ADD STATS FORM
             con = DatabaseConnector.getConnection();
             createData1();//Team 1 Batting
             createData2();//Team 2 Bowling
@@ -66,6 +70,12 @@ public class AdminViewMatchStatsController implements Initializable {
             table2container.getChildren().add(table2);
             table3container.getChildren().add(table3);
             table4container.getChildren().add(table4);
+            table1container.getChildren().add(addStatButton1);
+            table2container.getChildren().add(addStatButton2);
+            table3container.getChildren().add(addStatButton3);
+            table4container.getChildren().add(addStatButton4);
+
+
             table1container.setMinHeight(400);
             table2container.setMinHeight(400);
             table3container.setMinHeight(400);
@@ -83,11 +93,29 @@ public class AdminViewMatchStatsController implements Initializable {
             Logger.getLogger(AdminTournamentListController.class.getName()).log(Level.SEVERE, null , ex);
         }
     }
+    private Button createAddStatButton(int match_id){
+        Button ret = new Button();
+        ret.setId("AddStatButton");
+        ret.setText("ADD STATS");
+        ret.getStyleClass().add("button-2");
+        ret.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                try {
+                    MatchIdSingleton.getInstance().id = match_id;
+                    SceneSwitcher.switchTo(this.getClass(), e, "AdminAddStatsForm.fxml","ui/stylesheets/main.css");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
+        return ret;
+    }
 
     private void createData1() {
         try {
-            ResultSet rs = con.createStatement().executeQuery("select * from statistics where stat_id=(select stat_id from match_innings where match_id='"+id+"' and innings_id='1' and type='batting') ;");
+            ResultSet rs = con.createStatement().executeQuery("select * from statistics where match_id='"+id+"' and innings_id='1' and type='batting' ;");
             table1.getItems().clear();
             while (rs.next()) {
                 ResultSet rs1 = con.createStatement().executeQuery("select * from player where player_id='"+rs.getInt("player_id")+"';");
@@ -117,7 +145,7 @@ public class AdminViewMatchStatsController implements Initializable {
     }
     private void createData2() {
         try {
-            ResultSet rs = con.createStatement().executeQuery("select * from statistics where stat_id=(select stat_id from match_innings where match_id='"+id+"' and innings_id='1' and type='bowling') ;");
+            ResultSet rs = con.createStatement().executeQuery("select * from statistics  where match_id='"+id+"' and innings_id='1' and type='bowling' ;");
             table2.getItems().clear();
             while (rs.next()) {
                 ResultSet rs1 = con.createStatement().executeQuery("select * from player where player_id='"+rs.getInt("player_id")+"';");
@@ -147,7 +175,7 @@ public class AdminViewMatchStatsController implements Initializable {
     }
     private void createData3() {
         try {
-            ResultSet rs = con.createStatement().executeQuery("select * from statistics where stat_id=(select stat_id from match_innings where match_id='"+id+"' and innings_id='2' and type='batting') ;");
+            ResultSet rs = con.createStatement().executeQuery("select * from statistics where match_id='"+id+"' and innings_id='2' and type='batting' ;");
             table3.getItems().clear();
             while (rs.next()) {
                 ResultSet rs1 = con.createStatement().executeQuery("select * from player where player_id='"+rs.getInt("player_id")+"';");
@@ -177,7 +205,7 @@ public class AdminViewMatchStatsController implements Initializable {
     }
     private void createData4() {
         try {
-            ResultSet rs = con.createStatement().executeQuery("select * from statistics where stat_id=(select stat_id from match_innings where match_id='"+id+"' and innings_id='2' and type='bowling') ;");
+            ResultSet rs = con.createStatement().executeQuery("select * from statistics  where match_id='"+id+"' and innings_id='2' and type='bowling' ;");
             table4.getItems().clear();
             while (rs.next()) {
                 ResultSet rs1 = con.createStatement().executeQuery("select * from player where player_id='"+rs.getInt("player_id")+"';");
