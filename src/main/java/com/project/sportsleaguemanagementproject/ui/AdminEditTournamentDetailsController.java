@@ -173,7 +173,7 @@ private Label nameLabel;
 
                     try {
                         MatchIdSingleton.getInstance().id = rs.getInt("match_id");
-                        SceneSwitcher.switchTo(this.getClass(), e, "AdminEditMatchStats.fxml","ui/stylesheets/main.css");
+                        SceneSwitcher.switchTo(this.getClass(), e, "AdminViewMatchStats.fxml","ui/stylesheets/main.css");
                     } catch (IOException | SQLException ex) {
                         ex.printStackTrace();
                     }

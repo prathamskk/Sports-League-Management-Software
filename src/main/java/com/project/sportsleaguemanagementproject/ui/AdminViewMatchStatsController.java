@@ -4,14 +4,13 @@ import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.StatsTable;
 import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
+import com.project.sportsleaguemanagementproject.singleton.StatIdSingleton;
+import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
@@ -24,11 +23,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AdminEditMatchStatsController implements Initializable {
+public class AdminViewMatchStatsController implements Initializable {
     private final int id = MatchIdSingleton.getInstance().id;
     private Connection con;
-    @FXML
-    private Pagination pagination;
     @FXML
     private VBox mainPane;
 
@@ -41,16 +38,30 @@ public class AdminEditMatchStatsController implements Initializable {
     private final VBox table2container = new VBox();
     private final VBox table3container = new VBox();
     private final VBox table4container = new VBox();
+
+    private final Label TableNameLabel1 = new Label("1st Innings Batting");
+    private final Label TableNameLabel2 = new Label("1st Innings Bowling");
+    private final Label TableNameLabel3 = new Label("2nd Innings Batting");
+    private final Label TableNameLabel4 = new Label("2nd Innings Bowling");
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
             //TODO ADD STATS FORM
-            //TODO EDIT TABLE COLUMNS
             con = DatabaseConnector.getConnection();
             createData1();//Team 1 Batting
             createData2();//Team 2 Bowling
             createData3();//Team 2 Batting
             createData4();//Team 1 Bowling
+
+            TableNameLabel1.getStyleClass().add("table-heading");
+            TableNameLabel2.getStyleClass().add("table-heading");
+            TableNameLabel3.getStyleClass().add("table-heading");
+            TableNameLabel4.getStyleClass().add("table-heading");
+            table1container.getChildren().add(TableNameLabel1);
+            table2container.getChildren().add(TableNameLabel2);
+            table3container.getChildren().add(TableNameLabel3);
+            table4container.getChildren().add(TableNameLabel4);
             table1container.getChildren().add(table1);
             table2container.getChildren().add(table2);
             table3container.getChildren().add(table3);
@@ -203,13 +214,13 @@ public class AdminEditMatchStatsController implements Initializable {
         TableColumn<StatsTable , String> name              =      new TableColumn<>("Name");
         TableColumn<StatsTable , String> stat_balls        =      new TableColumn<>("Balls");
         TableColumn<StatsTable , String> stat_runs         =      new TableColumn<>("Runs");
-        TableColumn<StatsTable , String> stat_overs        =      new TableColumn<>("Overs");
+   //   TableColumn<StatsTable , String> stat_overs        =      new TableColumn<>("Overs");
         TableColumn<StatsTable , String> stat_6s           =      new TableColumn<>("6s");
         TableColumn<StatsTable , String> stat_4s           =      new TableColumn<>("4s");
-        TableColumn<StatsTable , String> stat_wide_balls   =      new TableColumn<>("Wide Balls");
-        TableColumn<StatsTable , String> stat_wickets      =      new TableColumn<>("Wickets");
-        TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
-        TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
+   //   TableColumn<StatsTable , String> stat_wide_balls   =      new TableColumn<>("Wide Balls");
+    //  TableColumn<StatsTable , String> stat_wickets      =      new TableColumn<>("Wickets");
+    //  TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
+   //   TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
         TableColumn<StatsTable , Button> button            =      new TableColumn<>("");
   /*
         stat_id         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
@@ -230,13 +241,13 @@ public class AdminEditMatchStatsController implements Initializable {
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
         stat_balls      .setCellValueFactory(new PropertyValueFactory<>("stat_balls"));
         stat_runs       .setCellValueFactory(new PropertyValueFactory<>("stat_runs"));
-        stat_overs      .setCellValueFactory(new PropertyValueFactory<>("stat_overs"));
+    //  stat_overs      .setCellValueFactory(new PropertyValueFactory<>("stat_overs"));
         stat_6s         .setCellValueFactory(new PropertyValueFactory<>("stat_6s"));
         stat_4s         .setCellValueFactory(new PropertyValueFactory<>("stat_4s"));
-        stat_wide_balls .setCellValueFactory(new PropertyValueFactory<>("stat_wide_balls"));
-        stat_wickets    .setCellValueFactory(new PropertyValueFactory<>("stat_wickets"));
-        stat_maidens    .setCellValueFactory(new PropertyValueFactory<>("stat_maidens"));
-        stat_0s         .setCellValueFactory(new PropertyValueFactory<>("stat_0s"));
+    //  stat_wide_balls .setCellValueFactory(new PropertyValueFactory<>("stat_wide_balls"));
+     // stat_wickets    .setCellValueFactory(new PropertyValueFactory<>("stat_wickets"));
+     // stat_maidens    .setCellValueFactory(new PropertyValueFactory<>("stat_maidens"));
+    //  stat_0s         .setCellValueFactory(new PropertyValueFactory<>("stat_0s"));
         button          .setCellValueFactory(new PropertyValueFactory<>("button"));
 
 
@@ -252,13 +263,13 @@ public class AdminEditMatchStatsController implements Initializable {
          name               ,
          stat_balls         ,
          stat_runs          ,
-         stat_overs         ,
+  //     stat_overs         ,
          stat_6s            ,
          stat_4s            ,
-         stat_wide_balls    ,
-         stat_wickets       ,
-         stat_maidens       ,
-         stat_0s,
+  //     stat_wide_balls    ,
+   //    stat_wickets       ,
+   //    stat_maidens       ,
+  //     stat_0s,
          button
          );
         return table;
@@ -270,11 +281,11 @@ public class AdminEditMatchStatsController implements Initializable {
         TableColumn<StatsTable , String> stat_id           =      new TableColumn<>("Stat ID");
         TableColumn<StatsTable , String> aadhar_no         =      new TableColumn<>("Aadhar No.");
         TableColumn<StatsTable , String> name              =      new TableColumn<>("Name");
-        TableColumn<StatsTable , String> stat_balls        =      new TableColumn<>("Balls");
+   //   TableColumn<StatsTable , String> stat_balls        =      new TableColumn<>("Balls");
         TableColumn<StatsTable , String> stat_runs         =      new TableColumn<>("Runs");
         TableColumn<StatsTable , String> stat_overs        =      new TableColumn<>("Overs");
-        TableColumn<StatsTable , String> stat_6s           =      new TableColumn<>("6s");
-        TableColumn<StatsTable , String> stat_4s           =      new TableColumn<>("4s");
+   //   TableColumn<StatsTable , String> stat_6s           =      new TableColumn<>("6s");
+   //   TableColumn<StatsTable , String> stat_4s           =      new TableColumn<>("4s");
         TableColumn<StatsTable , String> stat_wide_balls   =      new TableColumn<>("Wide Balls");
         TableColumn<StatsTable , String> stat_wickets      =      new TableColumn<>("Wickets");
         TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
@@ -297,11 +308,11 @@ public class AdminEditMatchStatsController implements Initializable {
         stat_id         .setCellValueFactory(new PropertyValueFactory<>("stat_id"));
         aadhar_no       .setCellValueFactory(new PropertyValueFactory<>("aadhar_no"));
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
-        stat_balls      .setCellValueFactory(new PropertyValueFactory<>("stat_balls"));
+    //  stat_balls      .setCellValueFactory(new PropertyValueFactory<>("stat_balls"));
         stat_runs       .setCellValueFactory(new PropertyValueFactory<>("stat_runs"));
         stat_overs      .setCellValueFactory(new PropertyValueFactory<>("stat_overs"));
-        stat_6s         .setCellValueFactory(new PropertyValueFactory<>("stat_6s"));
-        stat_4s         .setCellValueFactory(new PropertyValueFactory<>("stat_4s"));
+    //  stat_6s         .setCellValueFactory(new PropertyValueFactory<>("stat_6s"));
+    //  stat_4s         .setCellValueFactory(new PropertyValueFactory<>("stat_4s"));
         stat_wide_balls .setCellValueFactory(new PropertyValueFactory<>("stat_wide_balls"));
         stat_wickets    .setCellValueFactory(new PropertyValueFactory<>("stat_wickets"));
         stat_maidens    .setCellValueFactory(new PropertyValueFactory<>("stat_maidens"));
@@ -319,11 +330,11 @@ public class AdminEditMatchStatsController implements Initializable {
                 stat_id            ,
                 aadhar_no          ,
                 name               ,
-                stat_balls         ,
+           //   stat_balls         ,
                 stat_runs          ,
                 stat_overs         ,
-                stat_6s            ,
-                stat_4s            ,
+           //   stat_6s            ,
+           //   stat_4s            ,
                 stat_wide_balls    ,
                 stat_wickets       ,
                 stat_maidens       ,
@@ -341,13 +352,13 @@ public class AdminEditMatchStatsController implements Initializable {
         TableColumn<StatsTable , String> name              =      new TableColumn<>("Name");
         TableColumn<StatsTable , String> stat_balls        =      new TableColumn<>("Balls");
         TableColumn<StatsTable , String> stat_runs         =      new TableColumn<>("Runs");
-        TableColumn<StatsTable , String> stat_overs        =      new TableColumn<>("Overs");
+  //    TableColumn<StatsTable , String> stat_overs        =      new TableColumn<>("Overs");
         TableColumn<StatsTable , String> stat_6s           =      new TableColumn<>("6s");
         TableColumn<StatsTable , String> stat_4s           =      new TableColumn<>("4s");
-        TableColumn<StatsTable , String> stat_wide_balls   =      new TableColumn<>("Wide Balls");
-        TableColumn<StatsTable , String> stat_wickets      =      new TableColumn<>("Wickets");
-        TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
-        TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
+  //    TableColumn<StatsTable , String> stat_wide_balls   =      new TableColumn<>("Wide Balls");
+   //   TableColumn<StatsTable , String> stat_wickets      =      new TableColumn<>("Wickets");
+   //   TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
+  //    TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
         TableColumn<StatsTable , Button> button            =      new TableColumn<>("");
   /*
         stat_id         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
@@ -368,13 +379,13 @@ public class AdminEditMatchStatsController implements Initializable {
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
         stat_balls      .setCellValueFactory(new PropertyValueFactory<>("stat_balls"));
         stat_runs       .setCellValueFactory(new PropertyValueFactory<>("stat_runs"));
-        stat_overs      .setCellValueFactory(new PropertyValueFactory<>("stat_overs"));
+  //    stat_overs      .setCellValueFactory(new PropertyValueFactory<>("stat_overs"));
         stat_6s         .setCellValueFactory(new PropertyValueFactory<>("stat_6s"));
         stat_4s         .setCellValueFactory(new PropertyValueFactory<>("stat_4s"));
-        stat_wide_balls .setCellValueFactory(new PropertyValueFactory<>("stat_wide_balls"));
-        stat_wickets    .setCellValueFactory(new PropertyValueFactory<>("stat_wickets"));
-        stat_maidens    .setCellValueFactory(new PropertyValueFactory<>("stat_maidens"));
-        stat_0s         .setCellValueFactory(new PropertyValueFactory<>("stat_0s"));
+  //    stat_wide_balls .setCellValueFactory(new PropertyValueFactory<>("stat_wide_balls"));
+   //   stat_wickets    .setCellValueFactory(new PropertyValueFactory<>("stat_wickets"));
+   //   stat_maidens    .setCellValueFactory(new PropertyValueFactory<>("stat_maidens"));
+  //    stat_0s         .setCellValueFactory(new PropertyValueFactory<>("stat_0s"));
         button          .setCellValueFactory(new PropertyValueFactory<>("button"));
 
 
@@ -390,13 +401,13 @@ public class AdminEditMatchStatsController implements Initializable {
                 name               ,
                 stat_balls         ,
                 stat_runs          ,
-                stat_overs         ,
+      //        stat_overs         ,
                 stat_6s            ,
                 stat_4s            ,
-                stat_wide_balls    ,
-                stat_wickets       ,
-                stat_maidens       ,
-                stat_0s,
+      //        stat_wide_balls    ,
+       //       stat_wickets       ,
+       //       stat_maidens       ,
+      //        stat_0s,
                 button
         );
         return table;
@@ -408,11 +419,11 @@ public class AdminEditMatchStatsController implements Initializable {
         TableColumn<StatsTable , String> stat_id           =      new TableColumn<>("Stat ID");
         TableColumn<StatsTable , String> aadhar_no         =      new TableColumn<>("Aadhar No.");
         TableColumn<StatsTable , String> name              =      new TableColumn<>("Name");
-        TableColumn<StatsTable , String> stat_balls        =      new TableColumn<>("Balls");
+   //   TableColumn<StatsTable , String> stat_balls        =      new TableColumn<>("Balls");
         TableColumn<StatsTable , String> stat_runs         =      new TableColumn<>("Runs");
         TableColumn<StatsTable , String> stat_overs        =      new TableColumn<>("Overs");
-        TableColumn<StatsTable , String> stat_6s           =      new TableColumn<>("6s");
-        TableColumn<StatsTable , String> stat_4s           =      new TableColumn<>("4s");
+   //   TableColumn<StatsTable , String> stat_6s           =      new TableColumn<>("6s");
+   //   TableColumn<StatsTable , String> stat_4s           =      new TableColumn<>("4s");
         TableColumn<StatsTable , String> stat_wide_balls   =      new TableColumn<>("Wide Balls");
         TableColumn<StatsTable , String> stat_wickets      =      new TableColumn<>("Wickets");
         TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
@@ -435,11 +446,11 @@ public class AdminEditMatchStatsController implements Initializable {
         stat_id         .setCellValueFactory(new PropertyValueFactory<>("stat_id"));
         aadhar_no       .setCellValueFactory(new PropertyValueFactory<>("aadhar_no"));
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
-        stat_balls      .setCellValueFactory(new PropertyValueFactory<>("stat_balls"));
+    //  stat_balls      .setCellValueFactory(new PropertyValueFactory<>("stat_balls"));
         stat_runs       .setCellValueFactory(new PropertyValueFactory<>("stat_runs"));
         stat_overs      .setCellValueFactory(new PropertyValueFactory<>("stat_overs"));
-        stat_6s         .setCellValueFactory(new PropertyValueFactory<>("stat_6s"));
-        stat_4s         .setCellValueFactory(new PropertyValueFactory<>("stat_4s"));
+    //  stat_6s         .setCellValueFactory(new PropertyValueFactory<>("stat_6s"));
+    //  stat_4s         .setCellValueFactory(new PropertyValueFactory<>("stat_4s"));
         stat_wide_balls .setCellValueFactory(new PropertyValueFactory<>("stat_wide_balls"));
         stat_wickets    .setCellValueFactory(new PropertyValueFactory<>("stat_wickets"));
         stat_maidens    .setCellValueFactory(new PropertyValueFactory<>("stat_maidens"));
@@ -457,11 +468,11 @@ public class AdminEditMatchStatsController implements Initializable {
                 stat_id            ,
                 aadhar_no          ,
                 name               ,
-                stat_balls         ,
+        //      stat_balls         ,
                 stat_runs          ,
                 stat_overs         ,
-                stat_6s            ,
-                stat_4s            ,
+        //      stat_6s            ,
+        //      stat_4s            ,
                 stat_wide_balls    ,
                 stat_wickets       ,
                 stat_maidens       ,
@@ -479,7 +490,13 @@ public class AdminEditMatchStatsController implements Initializable {
         ret.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-           }
+                try {
+                    StatIdSingleton.getInstance().id = stat_id;
+                    SceneSwitcher.switchTo(this.getClass(), e, "AdminEditStatsForm.fxml","ui/stylesheets/main.css");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
         });
 
         return ret;

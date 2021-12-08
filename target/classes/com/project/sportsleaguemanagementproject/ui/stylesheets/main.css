@@ -57,7 +57,9 @@
 -fx-background-color:#ffffff;
 -fx-background-radius:5;
 }
-
+/*TODO table heading   */
+.table-heading{
+}
 
 .table-view {
     -fx-background-color: transparent;
