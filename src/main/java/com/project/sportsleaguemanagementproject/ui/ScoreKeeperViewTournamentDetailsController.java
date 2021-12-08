@@ -239,11 +239,14 @@ public class ScoreKeeperViewTournamentDetailsController implements Initializable
     private void logout(ActionEvent event) throws IOException {
         SceneSwitcher.switchTo(this.getClass(), event, "LoginScreen.fxml","ui/stylesheets/LoginScreenStyleSheet.css");
     }
-
     @FXML
     private void viewTournamentList(ActionEvent event) throws IOException {
 
         SceneSwitcher.switchTo(this.getClass(), event, "ScoreKeeperTournamentList.fxml","ui/stylesheets/main.css");
+    }
+    @FXML
+    private void viewHomeScreen(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "ScoreKeeperScreen.fxml","ui/stylesheets/main.css");
     }
 
 }

@@ -242,6 +242,9 @@ public class PlayerViewTournamentDetailsController implements Initializable {
     @FXML
     private void viewPlayerRegistrationForm(ActionEvent event) throws IOException {
         SceneSwitcher.switchTo(this.getClass(), event, "PlayerRegistrationForm.fxml","ui/stylesheets/main.css");
+    } @FXML
+    private void viewHomeScreen(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "PlayerScreen.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPlayerTournamentList(ActionEvent event) throws IOException {

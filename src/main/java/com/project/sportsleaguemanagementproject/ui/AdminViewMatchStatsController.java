@@ -548,6 +548,9 @@ public class AdminViewMatchStatsController implements Initializable {
     @FXML
     private void viewAdminTournamentCreator(ActionEvent event) throws IOException {
         SceneSwitcher.switchTo(this.getClass(), event, "AdminTournamentCreator.fxml","ui/stylesheets/main.css");
+    } @FXML
+    private void viewHomeScreen(ActionEvent event) throws IOException {
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminScreen.fxml","ui/stylesheets/main.css");
     }
     @FXML
     private void viewPendingPlayerTable(ActionEvent event) throws IOException {
