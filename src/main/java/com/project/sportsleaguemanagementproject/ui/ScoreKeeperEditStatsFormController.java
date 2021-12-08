@@ -1,6 +1,8 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
+import com.project.sportsleaguemanagementproject.singleton.ImageLoader;
+import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import com.project.sportsleaguemanagementproject.singleton.StatIdSingleton;
 import javafx.event.ActionEvent;
@@ -12,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +36,9 @@ public class ScoreKeeperEditStatsFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Score Keeper");
             con = DatabaseConnector.getConnection();
             fillData();
         } catch (SQLException e) {
@@ -177,11 +184,14 @@ public class ScoreKeeperEditStatsFormController implements Initializable {
 
 
 
-
-
-
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
+
+
 
     @FXML
     private void logout(ActionEvent event) throws IOException {

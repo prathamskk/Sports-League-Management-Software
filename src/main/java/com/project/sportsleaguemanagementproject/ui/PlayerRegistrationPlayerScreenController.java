@@ -2,6 +2,7 @@ package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.player.PlayerGender;
 import com.project.sportsleaguemanagementproject.player.PlayerType;
+import com.project.sportsleaguemanagementproject.singleton.ImageLoader;
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
@@ -11,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -83,6 +86,11 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+
+                userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+                accountNameLabel.setText(LoginSingleton.getInstance().username);
+                jobLabel.setText("Player");
+
             con = DatabaseConnector.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,7 +126,11 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
 
 
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
 
 
     @FXML

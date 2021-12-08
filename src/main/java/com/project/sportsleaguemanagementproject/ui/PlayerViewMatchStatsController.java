@@ -2,9 +2,7 @@ package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.StatsTable;
-import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
-import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
-import com.project.sportsleaguemanagementproject.singleton.StatIdSingleton;
+import com.project.sportsleaguemanagementproject.singleton.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,6 +50,9 @@ public class PlayerViewMatchStatsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
+            userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Player");
             con = DatabaseConnector.getConnection();
             createData1();//Team 1 Batting
             createData2();//Team 2 Bowling
@@ -507,10 +510,13 @@ public class PlayerViewMatchStatsController implements Initializable {
 
         return ret;
     }
-
-
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
+
 
 
     @FXML

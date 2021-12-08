@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +53,9 @@ public class ScoreKeeperViewMatchStatsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
+            userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Score Keeper");
             con = DatabaseConnector.getConnection();
             Boolean editingAccess = checkAccess(id1);
             createData1();//Team 1 Batting
@@ -549,7 +554,12 @@ public class ScoreKeeperViewMatchStatsController implements Initializable {
     }
 
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
+
 
     @FXML
     private void logout(ActionEvent event) throws IOException {

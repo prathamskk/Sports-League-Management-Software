@@ -3,6 +3,8 @@ package com.project.sportsleaguemanagementproject.ui;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.player.PlayerGender;
 import com.project.sportsleaguemanagementproject.player.PlayerType;
+import com.project.sportsleaguemanagementproject.singleton.ImageLoader;
+import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import javafx.event.ActionEvent;
@@ -15,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +47,9 @@ public class AdminAddStatsFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Admin");
             con = DatabaseConnector.getConnection();
             TypeChoiceBox     .getItems().addAll(TypeArray)     ;
             inningsChoiceBox  .getItems().addAll(inningsArray)  ;
@@ -186,9 +193,12 @@ public class AdminAddStatsFormController implements Initializable {
 
 
 
-
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
 
 
     @FXML

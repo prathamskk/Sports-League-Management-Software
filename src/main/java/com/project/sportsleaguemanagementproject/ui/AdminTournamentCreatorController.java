@@ -4,6 +4,8 @@ import com.project.sportsleaguemanagementproject.match.Match;
 import com.project.sportsleaguemanagementproject.model.AdminTournamentAccessTable;
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.ModelTournamentList;
+import com.project.sportsleaguemanagementproject.singleton.ImageLoader;
+import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import javafx.event.ActionEvent;
@@ -18,6 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 
 import java.io.IOException;
@@ -61,6 +65,9 @@ public class AdminTournamentCreatorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+        accountNameLabel.setText(LoginSingleton.getInstance().username);
+        jobLabel.setText("Admin");
         noOfTeamsChoiceBox.getItems().addAll(choicesForNoOfTeams);
 
         try {
@@ -221,7 +228,12 @@ public class AdminTournamentCreatorController implements Initializable {
 
 
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
+
 
 
     @FXML

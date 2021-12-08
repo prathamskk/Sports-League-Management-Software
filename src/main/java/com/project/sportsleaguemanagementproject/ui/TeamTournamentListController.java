@@ -2,6 +2,7 @@ package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.model.TeamTournamentListTable;
+import com.project.sportsleaguemanagementproject.singleton.ImageLoader;
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
@@ -12,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +38,9 @@ public class TeamTournamentListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
+            userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Team Manager");
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);//ongoing tournament
             //TODO add all tournaments list
@@ -179,10 +185,12 @@ public class TeamTournamentListController implements Initializable {
 
 
 
-
-
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
 
 
     @FXML

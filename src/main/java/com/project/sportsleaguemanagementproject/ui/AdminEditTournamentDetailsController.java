@@ -1,9 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
-import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
-import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
-import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
+import com.project.sportsleaguemanagementproject.singleton.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,6 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +56,9 @@ private Label nameLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try{
+        try{   userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Admin");
 
             con = DatabaseConnector.getConnection();
             fillData();
@@ -296,7 +298,13 @@ private Label nameLabel;
 
 
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
+
+
 
 
     @FXML

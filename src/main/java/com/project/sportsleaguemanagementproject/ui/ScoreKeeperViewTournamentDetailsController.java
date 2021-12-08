@@ -1,9 +1,7 @@
 package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
-import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
-import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
-import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
+import com.project.sportsleaguemanagementproject.singleton.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +12,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,6 +53,9 @@ public class ScoreKeeperViewTournamentDetailsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
+            userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
+            accountNameLabel.setText(LoginSingleton.getInstance().username);
+            jobLabel.setText("Score Keeper");
             con = DatabaseConnector.getConnection();
             fillData();
             displayBracket();
@@ -224,7 +227,13 @@ public class ScoreKeeperViewTournamentDetailsController implements Initializable
 
 
     @FXML
-    private Button logoutButton;
+    private Circle userIcon;
+    @FXML
+    private Label accountNameLabel;
+    @FXML
+    private Label jobLabel;
+
+
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
