@@ -47,7 +47,7 @@
                </rowConstraints>
                <children>
                   <Button contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Home" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Tournament" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#viewTournamentList" prefHeight="25.0" prefWidth="200.0" text="Tournament" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" prefWidth="200.0" text="Team" GridPane.rowIndex="2" />
                   <Button mnemonicParsing="false" prefWidth="200.0" text="Player" GridPane.rowIndex="3" />
                   <SVGPath content="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" GridPane.columnIndex="1">
