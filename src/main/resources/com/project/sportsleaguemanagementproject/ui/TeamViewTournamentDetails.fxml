@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -107,9 +108,9 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                                <Label text="Tournament Details">
+                                <Label minHeight="30.0" text="Tournament Details">
                                     <font>
-                                        <Font name="System Bold" size="24.0" />
+                                        <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
                         <Button fx:id="registerButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleRegisterButton" text="Register" GridPane.columnIndex="1" />
@@ -144,6 +145,7 @@
                                   <Label fx:id="additionalDetailsLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
+                  <FlowPane fx:id="ListOFTeamsFlowPane" alignment="CENTER" columnHalignment="CENTER" hgap="25.0" vgap="25.0" />
                   <HBox fx:id="outerHBox" />
                     </children>
                 </VBox>

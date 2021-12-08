@@ -81,21 +81,27 @@ public class PlayerTournamentListController implements Initializable {
         TableView<ModelTournamentList> table = new TableView<>();
 
       //  TableColumn<ModelTournamentList , String> col_id = new TableColumn<>("id");
-        TableColumn<ModelTournamentList , String> col_name = new TableColumn<>("name");
-        TableColumn<ModelTournamentList , String> col_prize = new TableColumn<>("prize");
-        TableColumn<ModelTournamentList , Date>   col_registration  = new TableColumn<>  ("date");
-        TableColumn<ModelTournamentList , Button> buttonsColumn  = new TableColumn<>("button");
+        TableColumn<ModelTournamentList , String> col_name = new TableColumn<>("Tournament Name");
+        TableColumn<ModelTournamentList , String> col_prize = new TableColumn<>("Prize");
+        TableColumn<ModelTournamentList , Date>   col_registration  = new TableColumn<>  ("Final Reg. Date");
+        TableColumn<ModelTournamentList,String> col_venue = new TableColumn<>("Venue");
+        TableColumn<ModelTournamentList,String> col_maxTeams = new TableColumn<>("No of Teams");
+        TableColumn<ModelTournamentList , Button> buttonsColumn  = new TableColumn<>("");
 
 
        // col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_prize.setCellValueFactory(new PropertyValueFactory<>("prize"));
         col_registration.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_venue.setCellValueFactory(new PropertyValueFactory<>("venue"));
+        col_maxTeams.setCellValueFactory(new PropertyValueFactory<>("maxTeams"));
         buttonsColumn.setCellValueFactory(new PropertyValueFactory<> ("button"));
         table.getColumns().addAll( //col_id,
                                     col_name  ,
                                    col_prize  ,
                                    col_registration,
+                                   col_venue,
+                                   col_maxTeams,
                                    buttonsColumn
         );
          return table;
@@ -105,7 +111,7 @@ public class PlayerTournamentListController implements Initializable {
 
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));
-        ret.setText(String.valueOf(rowNumber));
+        ret.setText("VIEW");
         ret.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

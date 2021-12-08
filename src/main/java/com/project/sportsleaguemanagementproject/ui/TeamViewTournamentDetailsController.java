@@ -2,9 +2,11 @@ package com.project.sportsleaguemanagementproject.ui;
 
 import com.project.sportsleaguemanagementproject.model.DatabaseConnector;
 import com.project.sportsleaguemanagementproject.singleton.LoginSingleton;
+import com.project.sportsleaguemanagementproject.singleton.MatchIdSingleton;
 import com.project.sportsleaguemanagementproject.singleton.SceneSwitcher;
 import com.project.sportsleaguemanagementproject.singleton.TournamentTableButtonClickSingleton;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -12,10 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -67,6 +66,8 @@ public class TeamViewTournamentDetailsController implements Initializable {
             fillData();
             displayBracket();
             fillBracket();
+            insertTeamListFlowPane();
+
         }catch(SQLException ex){
             Logger.getLogger(TeamViewTournamentDetailsController.class.getName()).log(Level.SEVERE, null , ex);
         }
@@ -131,6 +132,7 @@ private void handleRegisterButton(ActionEvent event){
     ArrayList<DatePicker> DatePickerArrayList = new ArrayList<>();
     ArrayList<VBox> VBoxArrayList = new ArrayList<>();
     ArrayList<TextField> TextFieldArrayList = new ArrayList<>();
+    ArrayList<Button> ButtonArrayList = new ArrayList<>();
 
 
     @FXML
@@ -139,6 +141,7 @@ private void handleRegisterButton(ActionEvent event){
         VBoxArrayList.clear();
         DatePickerArrayList.clear();
         TextFieldArrayList.clear();
+        ButtonArrayList.clear();
 
         int noOfTeams =  MaxTeams ;
 
@@ -157,22 +160,35 @@ private void handleRegisterButton(ActionEvent event){
                 textField1.setId( "TextField" + counter2);
                 textField1.setMaxWidth(90);
                 textField1.setMaxHeight(25);
+                textField1.setDisable(true);
+                textField1.setStyle("-fx-opacity: 1");
                 counter2++;
                 TextFieldArrayList.add(textField1);
 
 
                 DatePicker datePicker = new DatePicker();
                 datePicker.setId("DatePicker" + counter);
+                datePicker.setDisable(true);
+                datePicker.setStyle("-fx-opacity: 1");
                 DatePickerArrayList.add(datePicker);
 
                 TextField textField2 = new TextField();
                 textField2.setId( "TextField" + counter2);
                 textField2.setMaxWidth(90);
                 textField2.setMaxHeight(25);
+                textField2.setDisable(true);
+                textField2.setStyle("-fx-opacity: 1");
+
+                Button button = new Button();
+                button.setId("Button" + counter);
+                button.setText("Stats");
+                button.setDisable(true);
+                ButtonArrayList.add(button);
                 counter2++;
                 TextFieldArrayList.add(textField2);
 
                 VBoxArrayList.get(VBoxIndex).getChildren().add(createSpacer());
+                VBoxArrayList.get(VBoxIndex).getChildren().add(button);
                 VBoxArrayList.get(VBoxIndex).getChildren().add(textField1);
                 VBoxArrayList.get(VBoxIndex).getChildren().add(datePicker);
                 VBoxArrayList.get(VBoxIndex).getChildren().add(textField2);
@@ -196,6 +212,20 @@ private void handleRegisterButton(ActionEvent event){
             rs.next();
 
             DatePickerArrayList.get(i).setValue(LocalDate.parse(rs.getString("match_fixture")));
+            ButtonArrayList.get(i).setOnAction((new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+
+                    try {
+                        MatchIdSingleton.getInstance().id = rs.getInt("match_id");
+                        SceneSwitcher.switchTo(this.getClass(), e, "TeamViewMatchStats.fxml","ui/stylesheets/main.css");
+                    } catch (IOException | SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }));
+
+
             for (j = 0; j < 2; j++) {
                 ResultSet rs1 = con.createStatement().executeQuery("SELECT team_name from team where team_id in (SELECT team_id FROM teams_in_match WHERE match_id ='"+rs.getInt("match_id")+"' AND team_index ='"+(j+1)+"');");
                 if(rs1.next()) {
@@ -203,12 +233,13 @@ private void handleRegisterButton(ActionEvent event){
                 }else{
                     TextFieldArrayList.get(count).setText("-N/A-");
                 }
+                if(rs.getDate("match_fixture").toLocalDate().isBefore(todayDate)) {
+                    ButtonArrayList.get(i).setDisable(false);
+                    DatePickerArrayList.get(i).setDisable(true);
+                    DatePickerArrayList.get(i).setStyle("-fx-opacity: 1");
+                    TextFieldArrayList.get(count).setDisable(true);
 
-                DatePickerArrayList.get(i).setDisable(true);
-                DatePickerArrayList.get(i).setStyle("-fx-opacity: 1");
-                TextFieldArrayList.get(count).setDisable(true);
-
-
+                }
                 count++;
             }
 
@@ -220,6 +251,18 @@ private void handleRegisterButton(ActionEvent event){
         // Make it always grow or shrink according to the available space
         VBox.setVgrow(spacer, Priority.ALWAYS);
         return spacer;
+    }
+
+    @FXML
+    private FlowPane ListOFTeamsFlowPane;
+
+    private void insertTeamListFlowPane() throws SQLException {
+        ResultSet rs = con.createStatement().executeQuery("select team_name from team where team_id in(select team_id from teams_in_tournament where tournament_id='" + id + "');");
+        while (rs.next()) {
+            Label teamLabel = new Label();
+            teamLabel.setText(rs.getString("team_name"));
+            ListOFTeamsFlowPane.getChildren().add(teamLabel);
+        }
     }
 
 

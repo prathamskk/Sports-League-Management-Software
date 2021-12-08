@@ -84,8 +84,8 @@ public class TeamTournamentListController implements Initializable {
         TableColumn<TeamTournamentListTable, Date>   col_registration  = new TableColumn<>  ("date");
          TableColumn<TeamTournamentListTable,String> col_venue = new TableColumn<>("venue");
          TableColumn<TeamTournamentListTable,String> col_maxTeams = new TableColumn<>("maxTeams");
-         TableColumn<TeamTournamentListTable , Button> viewButtonColumn  = new TableColumn<>("viewButton");
-          TableColumn<TeamTournamentListTable , Button> joinButtonColumn  = new TableColumn<>("joinButton");
+         TableColumn<TeamTournamentListTable , Button> viewButtonColumn  = new TableColumn<>("");
+          TableColumn<TeamTournamentListTable , Button> joinButtonColumn  = new TableColumn<>("");
 
 
 
@@ -112,7 +112,7 @@ public class TeamTournamentListController implements Initializable {
 
         Button ret = new Button();
         ret.setId("view"+rowNumber);
-        ret.setText(String.valueOf(rowNumber));
+        ret.setText("VIEW");
         ret.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -134,7 +134,7 @@ public class TeamTournamentListController implements Initializable {
 
         Button ret = new Button();
         ret.setId("join"+rowNumber);
-        ret.setText(String.valueOf(tournament_id));
+        ret.setText("JOIN");
         ret.setOnAction(e -> {
             try {
                 ResultSet rs = con.createStatement().executeQuery("select team_id from teams_in_tournament where team_id in(select team_id from team where username ='"+username+"') and tournament_id = '"+tournament_id+"'; ");
