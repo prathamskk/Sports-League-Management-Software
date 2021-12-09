@@ -66,16 +66,7 @@
                                   <Label fx:id="additionalDetailsLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Registered Teams">
-                           <HBox.margin>
-                              <Insets right="15.0" />
-                           </HBox.margin>
-                        </Label>
-                        <FlowPane fx:id="ListOFTeamsFlowPane" alignment="CENTER" columnHalignment="CENTER" hgap="25.0" prefHeight="100.0" prefWidth="864.0" styleClass="flow-pane" vgap="25.0" />
-                     </children>
-                  </HBox>
+                  <FlowPane fx:id="ListOFTeamsFlowPane" alignment="CENTER" columnHalignment="CENTER" hgap="25.0" styleClass="flow-pane" vgap="25.0" />
                   <HBox fx:id="listOfTeamsHbox" />
                   <HBox fx:id="outerHBox" />
                   <Label fx:id="NotifyLabel" styleClass="notify-label" />
