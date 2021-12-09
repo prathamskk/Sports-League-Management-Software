@@ -92,6 +92,13 @@ public class ScoreKeeperTournamentListController implements Initializable {
         TableColumn<ModelTournamentList,String> col_venue = new TableColumn<>("Venue");
         TableColumn<ModelTournamentList,String> col_maxTeams = new TableColumn<>("No of Teams");
         TableColumn<ModelTournamentList , Button> buttonsColumn  = new TableColumn<>("");
+        col_id.prefWidthProperty().bind(table.widthProperty().divide(100/6));
+        col_name.prefWidthProperty().bind(table.widthProperty().divide(100/20));
+        col_prize.prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        col_registration.prefWidthProperty().bind(table.widthProperty().divide(100/15));
+        col_venue.prefWidthProperty().bind(table.widthProperty().divide(100/20));
+        col_maxTeams.prefWidthProperty().bind(table.widthProperty().divide(100/13));
+        buttonsColumn.prefWidthProperty().bind(table.widthProperty().divide(100/12));
 
 
         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));

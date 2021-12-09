@@ -70,6 +70,9 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
 
         TableColumn<TeamRequestPlayerTable , String> col_aadharno = new TableColumn<>("Aadhar No");
         TableColumn<TeamRequestPlayerTable, String> col_name = new TableColumn<>("Name");
+        col_aadharno         .prefWidthProperty().bind(table.widthProperty().divide(100/30));
+        col_name       .prefWidthProperty().bind(table.widthProperty().divide(100/50));
+
 
         col_aadharno.setCellValueFactory(new PropertyValueFactory<>("AadharNo"));
         col_name.setCellValueFactory(new PropertyValueFactory<>("name"));

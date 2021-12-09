@@ -232,20 +232,18 @@ public class PlayerViewMatchStatsController implements Initializable {
     //  TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
    //   TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
     //  TableColumn<StatsTable , Button> button            =      new TableColumn<>("");
-  /*
-        stat_id         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        aadhar_no       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        name            .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_balls      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_runs       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_overs      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_6s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_4s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wide_balls .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wickets    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_maidens    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        button          .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-    */
+
+
+        stat_id      .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        aadhar_no    .prefWidthProperty().bind(table.widthProperty().divide(100/15));
+        name         .prefWidthProperty().bind(table.widthProperty().divide(100/15));
+        stat_balls   .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        stat_runs    .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        stat_6s      .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        stat_4s      .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+
+
+
         stat_id         .setCellValueFactory(new PropertyValueFactory<>("stat_id"));
         aadhar_no       .setCellValueFactory(new PropertyValueFactory<>("aadhar_no"));
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -301,20 +299,17 @@ public class PlayerViewMatchStatsController implements Initializable {
         TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
         TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
    //   TableColumn<StatsTable , Button> button            =      new TableColumn<>("");
-  /*
-        stat_id         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        aadhar_no       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        name            .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_balls      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_runs       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_overs      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_6s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_4s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wide_balls .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wickets    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_maidens    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        button          .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-    */
+        stat_id         .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        aadhar_no       .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        name            .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_runs       .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_overs      .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_wide_balls .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_wickets    .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_maidens    .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_0s         .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+
+
         stat_id         .setCellValueFactory(new PropertyValueFactory<>("stat_id"));
         aadhar_no       .setCellValueFactory(new PropertyValueFactory<>("aadhar_no"));
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -370,20 +365,17 @@ public class PlayerViewMatchStatsController implements Initializable {
    //   TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
   //    TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
         //    TableColumn<StatsTable , Button> button            =      new TableColumn<>("");
-  /*
-        stat_id         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        aadhar_no       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        name            .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_balls      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_runs       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_overs      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_6s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_4s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wide_balls .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wickets    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_maidens    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        button          .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-    */
+        stat_id      .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        aadhar_no    .prefWidthProperty().bind(table.widthProperty().divide(100/15));
+        name         .prefWidthProperty().bind(table.widthProperty().divide(100/15));
+        stat_balls   .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        stat_runs    .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        stat_6s      .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        stat_4s      .prefWidthProperty().bind(table.widthProperty().divide(100/10));
+
+
+
+
         stat_id         .setCellValueFactory(new PropertyValueFactory<>("stat_id"));
         aadhar_no       .setCellValueFactory(new PropertyValueFactory<>("aadhar_no"));
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -439,20 +431,17 @@ public class PlayerViewMatchStatsController implements Initializable {
         TableColumn<StatsTable , String> stat_maidens      =      new TableColumn<>("Maidens");
         TableColumn<StatsTable , String> stat_0s           =      new TableColumn<>("Dots");
         //      TableColumn<StatsTable , Button> button            =      new TableColumn<>("");
-  /*
-        stat_id         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        aadhar_no       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        name            .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_balls      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_runs       .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_overs      .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_6s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_4s         .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wide_balls .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_wickets    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        stat_maidens    .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-        button          .prefWidthProperty().bind(table.prefWidthProperty().divide(100/15));
-    */
+        stat_id         .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        aadhar_no       .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        name            .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_runs       .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_overs      .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_wide_balls .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_wickets    .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_maidens    .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        stat_0s         .prefWidthProperty().bind(table.widthProperty().divide(100/9));
+
+
         stat_id         .setCellValueFactory(new PropertyValueFactory<>("stat_id"));
         aadhar_no       .setCellValueFactory(new PropertyValueFactory<>("aadhar_no"));
         name            .setCellValueFactory(new PropertyValueFactory<>("name"));

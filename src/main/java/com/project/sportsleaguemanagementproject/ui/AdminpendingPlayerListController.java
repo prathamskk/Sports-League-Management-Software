@@ -91,6 +91,15 @@ public class AdminpendingPlayerListController implements Initializable {
              TableColumn<ModelUnverifiedPlayers , Float>  heightColumn    = new TableColumn<>("Height");
              TableColumn<ModelUnverifiedPlayers , String> playerTypeColumn=new TableColumn<>("Player Type");
              TableColumn<ModelUnverifiedPlayers , Button> buttonsColumn  = new TableColumn<>("");
+            usernameColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
+            aadharNoColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
+            nameColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/13));
+            genderColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
+            dobColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/13));
+            weightColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
+            heightColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
+            playerTypeColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
+            buttonsColumn.prefWidthProperty().bind(PendingPlayerListTable.widthProperty().divide(100/10));
 
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         aadharNoColumn.setCellValueFactory(new PropertyValueFactory<>("aadharNo"));

@@ -113,9 +113,9 @@ public class AdminTournamentAccessController implements Initializable {
         TableColumn<AdminTournamentAccessTable , String> col_username = new TableColumn<>("username");
         TableColumn<AdminTournamentAccessTable , String> col_status = new TableColumn<>("status");
         TableColumn<AdminTournamentAccessTable , Button> col_Button = new TableColumn<>("");
-
-
-
+        col_username  .prefWidthProperty().bind(table.widthProperty().divide(100/25));
+        col_status    .prefWidthProperty().bind(table.widthProperty().divide(100/25));
+        col_Button    .prefWidthProperty().bind(table.widthProperty().divide(100/25));
         col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         col_Button.setCellValueFactory(new PropertyValueFactory<>("button"));

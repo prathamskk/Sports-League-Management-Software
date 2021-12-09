@@ -94,6 +94,15 @@ public class TeamTournamentListController implements Initializable {
          TableColumn<TeamTournamentListTable , Button> viewButtonColumn  = new TableColumn<>("");
           TableColumn<TeamTournamentListTable , Button> joinButtonColumn  = new TableColumn<>("");
 
+        col_name.prefWidthProperty().bind(table.widthProperty().divide(100/20));
+        col_prize.prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        col_registration.prefWidthProperty().bind(table.widthProperty().divide(100/15));
+        col_venue.prefWidthProperty().bind(table.widthProperty().divide(100/20));
+        col_maxTeams.prefWidthProperty().bind(table.widthProperty().divide(100/12));
+        viewButtonColumn.prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        joinButtonColumn.prefWidthProperty().bind(table.widthProperty().divide(100/10));
+
+
 
 
         col_name.setCellValueFactory(new PropertyValueFactory<>("name"));

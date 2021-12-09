@@ -123,6 +123,9 @@ public class PlayerTeamInvitesController implements Initializable {
         TableColumn<PlayerTeamInvitesTable , String> col_teamName = new TableColumn<>("Team Name");
         TableColumn<PlayerTeamInvitesTable, Button> col_acceptButton = new TableColumn<>("");
         TableColumn<PlayerTeamInvitesTable , Button> col_declineButton = new TableColumn<>("");
+         col_teamName       .prefWidthProperty().bind(table.widthProperty().divide(100/25));
+         col_acceptButton   .prefWidthProperty().bind(table.widthProperty().divide(100/25));
+         col_declineButton  .prefWidthProperty().bind(table.widthProperty().divide(100/25));
 
         col_teamName.setCellValueFactory(new PropertyValueFactory<>("teamName"));
         col_acceptButton.setCellValueFactory(new PropertyValueFactory<>("acceptButton"));
