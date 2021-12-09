@@ -40,8 +40,9 @@ public class TeamTournamentListController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Team Manager");
-            con = DatabaseConnector.getConnection();
+            jobLabel.getStyleClass().add("job-label");        con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);//ongoing tournament
             //TODO add all tournaments list
         }catch(SQLException ex){
@@ -85,11 +86,11 @@ public class TeamTournamentListController implements Initializable {
     private TableView<TeamTournamentListTable> createTable(){
         TableView<TeamTournamentListTable> table = new TableView<>();
 
-        TableColumn<TeamTournamentListTable,String> col_name = new TableColumn<>("name");
-        TableColumn<TeamTournamentListTable,String> col_prize = new TableColumn<>("prize");
-        TableColumn<TeamTournamentListTable, Date>   col_registration  = new TableColumn<>  ("date");
-         TableColumn<TeamTournamentListTable,String> col_venue = new TableColumn<>("venue");
-         TableColumn<TeamTournamentListTable,String> col_maxTeams = new TableColumn<>("maxTeams");
+        TableColumn<TeamTournamentListTable,String> col_name = new TableColumn<>("Name");
+        TableColumn<TeamTournamentListTable,String> col_prize = new TableColumn<>("Prize");
+        TableColumn<TeamTournamentListTable, Date>   col_registration  = new TableColumn<>  ("Final Reg. Date");
+         TableColumn<TeamTournamentListTable,String> col_venue = new TableColumn<>("Venue");
+         TableColumn<TeamTournamentListTable,String> col_maxTeams = new TableColumn<>("No Of Teams");
          TableColumn<TeamTournamentListTable , Button> viewButtonColumn  = new TableColumn<>("");
           TableColumn<TeamTournamentListTable , Button> joinButtonColumn  = new TableColumn<>("");
 
@@ -147,12 +148,20 @@ public class TeamTournamentListController implements Initializable {
                 if(rs.next()){
                     notifyLabel.setText("You are Already Registered for this tournament");
                 }else {
-                    if(noOfTeamsRegistered<max_teams){
-                        con.createStatement().executeUpdate("insert into teams_in_tournament values((select team_id from team where username = '"+username+"'),'"+tournament_id+"');");
-                        pagination.setPageFactory(this::createPage);
-                        notifyLabel.setText("Successfully Registered");
+                        ResultSet rs1 = con.createStatement().executeQuery("SELECT COUNT('team_id') from player where team_id=5 ;");
+                        rs1.next();
+                        if(rs1.getInt("count('team_id')")>10){
+                            if(noOfTeamsRegistered<max_teams) {
+                            con.createStatement().executeUpdate("insert into teams_in_tournament values((select team_id from team where username = '" + username + "'),'" + tournament_id + "');");
+                            pagination.setPageFactory(this::createPage);
+                            notifyLabel.setText("Successfully Registered");
+                        }else{
+
+                                notifyLabel.setText("Registration Full");
+                            }
                     }else {
-                        notifyLabel.setText("Registration Full");
+
+                            notifyLabel.setText("Minimum 10 players are needed in your Team");
                     }
                 }
             } catch (SQLException ex) {

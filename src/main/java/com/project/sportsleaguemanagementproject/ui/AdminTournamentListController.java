@@ -41,7 +41,9 @@ public class AdminTournamentListController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
         }catch(SQLException ex){

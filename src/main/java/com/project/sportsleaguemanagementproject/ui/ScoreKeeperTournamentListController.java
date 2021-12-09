@@ -39,8 +39,9 @@ public class ScoreKeeperTournamentListController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Score Keeper");
-            con = DatabaseConnector.getConnection();
+            jobLabel.getStyleClass().add("job-label"); con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
         }catch(SQLException ex){
             Logger.getLogger(ScoreKeeperTournamentListController.class.getName()).log(Level.SEVERE, null , ex);

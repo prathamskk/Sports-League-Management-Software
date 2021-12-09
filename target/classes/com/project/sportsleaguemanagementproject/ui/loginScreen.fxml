@@ -14,7 +14,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" styleClass="center-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.LoginScreenController">
    <VBox alignment="CENTER_LEFT" layoutX="365.0" layoutY="175.0" prefHeight="450.0" prefWidth="550.0" styleClass="main-pane">
       <children>
-          <Label fx:id="messageDisplay" alignment="CENTER" prefHeight="17.0" prefWidth="627.0" textAlignment="CENTER" textFill="#ff5c5c" VBox.vgrow="ALWAYS" />
+          <Label fx:id="messageDisplay" alignment="CENTER" prefHeight="17.0" prefWidth="627.0" styleClass="notify-label" textAlignment="CENTER" textFill="#ff5c5c" VBox.vgrow="ALWAYS" />
          <Label text="Username" />
           <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="271.0" />
          <Label text="Password" />
@@ -30,8 +30,8 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
             <children>
-               <Button fx:id="registerPlayerButton" mnemonicParsing="false" onAction="#checkLoginPerformed" prefHeight="50.0" prefWidth="240.0" text="Register As Player" />
-                <Button fx:id="registerTeamButton" mnemonicParsing="false" onAction="#checkLoginPerformed" prefHeight="50.0" prefWidth="240.0" text="Register As Team Manager" GridPane.columnIndex="1" />
+               <Button fx:id="registerPlayerButton" mnemonicParsing="false" onAction="#checkLoginPerformed" prefHeight="50.0" prefWidth="240.0" styleClass="button-2" text="Register As Player" />
+                <Button fx:id="registerTeamButton" mnemonicParsing="false" onAction="#checkLoginPerformed" prefHeight="50.0" prefWidth="240.0" styleClass="button-2" text="Register As Team Manager" GridPane.columnIndex="1" />
             </children>
             <VBox.margin>
                <Insets />

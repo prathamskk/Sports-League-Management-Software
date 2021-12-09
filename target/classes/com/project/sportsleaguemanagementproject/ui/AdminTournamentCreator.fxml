@@ -24,11 +24,11 @@
          <children>
             <HBox fx:id="profileHbox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Circle  fx:id="userIcon" fill="WHITE" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="userIcon" fill="WHITE" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="accountNameLabel" />
-                        <Label fx:id="jobLabel" />
+                        <Label id="account-label" fx:id="accountNameLabel" />
+                        <Label id="job-label" fx:id="jobLabel" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -51,7 +51,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button onAction="#viewHomeScreen" contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Home" />
+                  <Button contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" onAction="#viewHomeScreen" prefHeight="30.0" prefWidth="200.0" text="Home" />
                   <Button mnemonicParsing="false" onAction="#viewTournamentList" prefHeight="25.0" prefWidth="200.0" text="Tournament" GridPane.rowIndex="1" />
 
                   <SVGPath content="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" GridPane.columnIndex="1">
@@ -93,11 +93,12 @@
          <content>
             <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="main-pane">
                <children>
-                  <GridPane minHeight="180.0" prefHeight="180.0" prefWidth="1020.0">
+                  <Label id="heading-label" text="New Tournament" />
+                  <GridPane minHeight="300.0" prefHeight="300.0" prefWidth="1020.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="140.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="901.0" minWidth="10.0" prefWidth="213.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="901.0" minWidth="10.0" prefWidth="702.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="141.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="901.0" minWidth="10.0" prefWidth="184.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="901.0" minWidth="10.0" prefWidth="699.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -117,14 +118,17 @@
                         <Label text="Venue" GridPane.rowIndex="3" />
                         <TextField fx:id="venueTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Additional Details" GridPane.rowIndex="4" />
-                        <TextArea fx:id="additionalDetailsTextArea" prefHeight="200.0" prefWidth="282.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextArea fx:id="additionalDetailsTextArea" prefHeight="101.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Max No of Teams" GridPane.rowIndex="5" />
                         <ChoiceBox fx:id="noOfTeamsChoiceBox" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <Button fx:id="generateBracketButton" mnemonicParsing="false" onAction="#handleGenerateBracketButton" text="Generate bracket" />
+                  <Button fx:id="generateBracketButton" mnemonicParsing="false" onAction="#handleGenerateBracketButton" text="Generate bracket">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin></Button>
                   <HBox fx:id="outerHBox" spacing="70.0" />
-                  <Label fx:id="NotifyLabel" />
+                  <Label fx:id="NotifyLabel" styleClass="notify-label" />
                   <Button fx:id="addTournamentButton" mnemonicParsing="false" onAction="#handleAddTournamentButton" text="Add" visible="false" />
                </children>
             </VBox>

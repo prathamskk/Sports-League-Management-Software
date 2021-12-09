@@ -58,7 +58,9 @@ private Label nameLabel;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{   userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
 
             con = DatabaseConnector.getConnection();
             fillData();

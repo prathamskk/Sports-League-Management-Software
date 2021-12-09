@@ -41,7 +41,9 @@ public class AdminTournamentAccessController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
         accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
         jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
         pagination.setPageFactory(this::createPage);
 
         try {
@@ -110,7 +112,7 @@ public class AdminTournamentAccessController implements Initializable {
 
         TableColumn<AdminTournamentAccessTable , String> col_username = new TableColumn<>("username");
         TableColumn<AdminTournamentAccessTable , String> col_status = new TableColumn<>("status");
-        TableColumn<AdminTournamentAccessTable , Button> col_Button = new TableColumn<>("button");
+        TableColumn<AdminTournamentAccessTable , Button> col_Button = new TableColumn<>("");
 
 
 
@@ -128,6 +130,7 @@ public class AdminTournamentAccessController implements Initializable {
     private Button addButton(int rowNumber,String username){
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));
+        ret.setText("GRANT");
         ret.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

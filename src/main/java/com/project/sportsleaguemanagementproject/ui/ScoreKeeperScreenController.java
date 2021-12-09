@@ -35,6 +35,7 @@ public class ScoreKeeperScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
         accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
         jobLabel.setText("Score Keeper");
     }
    

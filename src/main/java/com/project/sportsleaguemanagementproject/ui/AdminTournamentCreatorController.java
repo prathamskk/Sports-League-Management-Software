@@ -67,7 +67,9 @@ public class AdminTournamentCreatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
         accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
         jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
         noOfTeamsChoiceBox.getItems().addAll(choicesForNoOfTeams);
 
         try {

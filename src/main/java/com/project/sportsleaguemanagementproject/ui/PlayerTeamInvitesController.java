@@ -49,7 +49,9 @@ public class PlayerTeamInvitesController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Player");
+                jobLabel.getStyleClass().add("job-label");
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
             checkForTeam();
@@ -116,10 +118,11 @@ public class PlayerTeamInvitesController implements Initializable {
 
     private TableView<PlayerTeamInvitesTable> createTable(){
         TableView<PlayerTeamInvitesTable> table = new TableView<>();
+        table.setPlaceholder(new Label("No Invites Received"));
 
-        TableColumn<PlayerTeamInvitesTable , String> col_teamName = new TableColumn<>("teamName");
-        TableColumn<PlayerTeamInvitesTable, Button> col_acceptButton = new TableColumn<>("acceptButton");
-        TableColumn<PlayerTeamInvitesTable , Button> col_declineButton = new TableColumn<>("declineButton");
+        TableColumn<PlayerTeamInvitesTable , String> col_teamName = new TableColumn<>("Team Name");
+        TableColumn<PlayerTeamInvitesTable, Button> col_acceptButton = new TableColumn<>("");
+        TableColumn<PlayerTeamInvitesTable , Button> col_declineButton = new TableColumn<>("");
 
         col_teamName.setCellValueFactory(new PropertyValueFactory<>("teamName"));
         col_acceptButton.setCellValueFactory(new PropertyValueFactory<>("acceptButton"));
@@ -136,7 +139,7 @@ public class PlayerTeamInvitesController implements Initializable {
         Button ret = new Button();
         String accept = "acceptButton";
         ret.setId(accept+rowNumber);
-        ret.setText(String.valueOf(rowNumber));
+        ret.setText("ACCEPT");
         ret.setOnAction(e -> {
             if(teamId==-1){
                 try {
@@ -162,7 +165,7 @@ public class PlayerTeamInvitesController implements Initializable {
         Button ret = new Button();
         String reject= "rejectButton";
         ret.setId(reject+rowNumber);
-        ret.setText(String.valueOf(team_name));
+        ret.setText("DECLINE");
         ret.setOnAction(e -> {
             try {
                 con.createStatement().executeUpdate("DELETE FROM team_request_player WHERE player_id=(select player_id from player where username='"+username+"') and team_id =(select team_id from team where team_name = '"+team_name+"');");

@@ -35,7 +35,9 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Team Manager");
+            jobLabel.getStyleClass().add("job-label");
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
 
@@ -66,8 +68,8 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
     private TableView<TeamRequestPlayerTable> createTable(){
         TableView<TeamRequestPlayerTable> table = new TableView<>();
 
-        TableColumn<TeamRequestPlayerTable , String> col_aadharno = new TableColumn<>("AadharNo");
-        TableColumn<TeamRequestPlayerTable, String> col_name = new TableColumn<>("name");
+        TableColumn<TeamRequestPlayerTable , String> col_aadharno = new TableColumn<>("Aadhar No");
+        TableColumn<TeamRequestPlayerTable, String> col_name = new TableColumn<>("Name");
 
         col_aadharno.setCellValueFactory(new PropertyValueFactory<>("AadharNo"));
         col_name.setCellValueFactory(new PropertyValueFactory<>("name"));

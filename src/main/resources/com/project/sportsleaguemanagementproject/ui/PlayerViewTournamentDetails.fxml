@@ -21,11 +21,11 @@
             <children>
                 <HBox fx:id="profileHbox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Circle fx:id="userIcon"  fill="WHITE" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Circle fx:id="userIcon" fill="WHITE" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                             <children>
-                                <Label fx:id="accountNameLabel" />
-                                <Label fx:id="jobLabel" />
+                                <Label id="account-label" fx:id="accountNameLabel" />
+                                <Label id="job-label" fx:id="jobLabel" />
                             </children>
                             <padding>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -48,7 +48,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button onAction="#viewHomeScreen" contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Home" />
+                        <Button contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" onAction="#viewHomeScreen" prefHeight="30.0" prefWidth="200.0" text="Home" />
                         <Button mnemonicParsing="false" onAction="#viewPlayerTournamentList" prefHeight="25.0" prefWidth="200.0" text="Tournament" GridPane.rowIndex="1" />
 
                         <SVGPath content="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" GridPane.columnIndex="1">
@@ -91,7 +91,7 @@
          <content>
             <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="main-pane">
                <children>
-                  <Label minHeight="30.0" text="Tournament Details">
+                  <Label id="heading-label" minHeight="30.0" text="Tournament Details">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -123,8 +123,11 @@
                         <Label fx:id="maxTeamsLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label fx:id="additionalDetailsLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
                   </GridPane>
-                  <FlowPane fx:id="ListOFTeamsFlowPane" alignment="CENTER" columnHalignment="CENTER" hgap="25.0" vgap="25.0" />
+                  <FlowPane fx:id="ListOFTeamsFlowPane" alignment="CENTER" columnHalignment="CENTER" hgap="25.0" styleClass="flow-pane" vgap="25.0" />
                   <HBox fx:id="outerHBox" />
                </children>
             </VBox>

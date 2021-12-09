@@ -38,8 +38,9 @@ public class ScoreKeeperEditStatsFormController implements Initializable {
         try {
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Score Keeper");
-            con = DatabaseConnector.getConnection();
+            jobLabel.getStyleClass().add("job-label"); con = DatabaseConnector.getConnection();
             fillData();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,6 +63,7 @@ public class ScoreKeeperEditStatsFormController implements Initializable {
         ResultSet rs2 = con.createStatement().executeQuery("select * from player where player_id='"+playerID+"'");
         rs2.next();
         GridPane gridPane = new GridPane();
+        gridPane.setVgap(15);
         Label AadharNoLabel  = new Label("Aadhar No") ;
         Label BallsLabel     = new Label("Balls")     ;
         Label RunsLabel      = new Label("Runs")      ;
@@ -117,6 +119,7 @@ public class ScoreKeeperEditStatsFormController implements Initializable {
         ResultSet rs2 = con.createStatement().executeQuery("select * from player where player_id='"+playerID+"'");
         rs2.next(); 
         GridPane gridPane = new GridPane();
+        gridPane.setVgap(15);
         Label AadharNoLabel  = new Label("Aadhar No")              ;
         Label OversLabel     = new Label("Overs Bowled")           ;
         Label RunsLabel      = new Label("Runs")                   ;

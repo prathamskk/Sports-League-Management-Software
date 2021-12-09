@@ -36,9 +36,12 @@ public class AdminScreenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //TODO ADD something here
         userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
         accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
         jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
     }
 
 

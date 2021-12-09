@@ -20,11 +20,11 @@
          <children>
             <HBox fx:id="profileHbox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Circle fx:id="userIcon"  fill="WHITE" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="userIcon" fill="WHITE" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="accountNameLabel" />
-                        <Label fx:id="jobLabel" />
+                        <Label id="account-label" fx:id="accountNameLabel" />
+                        <Label id="job-label" fx:id="jobLabel" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -47,7 +47,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button onAction="#viewHomeScreen" contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="Home" />
+                  <Button contentDisplay="RIGHT" graphicTextGap="50.0" mnemonicParsing="false" onAction="#viewHomeScreen" prefHeight="30.0" prefWidth="200.0" text="Home" />
                   <Button mnemonicParsing="false" onAction="#viewTournamentList" prefHeight="25.0" prefWidth="200.0" text="Tournament" GridPane.rowIndex="1" />
 
                   <SVGPath content="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" GridPane.columnIndex="1">
@@ -89,10 +89,12 @@
          <children>
             <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="main-pane">
                <children>
-                  <GridPane prefHeight="600.0" prefWidth="1040.0">
+                  <Label id="heading-label" text="Verify Player Details" />
+                  <GridPane prefHeight="300.0" prefWidth="1040.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="174.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="896.0" minWidth="10.0" prefWidth="806.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="95.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="31.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="925.0" minWidth="10.0" prefWidth="908.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -105,30 +107,41 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Username: " />
-                        <Label fx:id="usernameLabel" text="usernameLabel" GridPane.columnIndex="1" />
-                        <Label text="Aadhar No:" GridPane.rowIndex="1" />
-                        <Label fx:id="aadharNoLabel" text="Aadhar No" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Username" />
+                        <Label fx:id="usernameLabel" text="usernameLabel" GridPane.columnIndex="2" />
+                        <Label text="Aadhar No" GridPane.rowIndex="1" />
+                        <Label fx:id="aadharNoLabel" text="Aadhar No" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Label text="Name" GridPane.rowIndex="2" />
-                        <Label fx:id="nameLabel" text="Name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="nameLabel" text="Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                         <Label text="Gender" GridPane.rowIndex="3" />
-                        <Label fx:id="genderLabel" text="Gender" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="genderLabel" text="Gender" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <Label text="Date Of Birth" GridPane.rowIndex="4" />
-                        <Label fx:id="DOBLabel" text="Date Of Birth" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="DOBLabel" text="Date Of Birth" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                         <Label text="Weight" GridPane.rowIndex="5" />
-                        <Label fx:id="weightLabel" text="Weight" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="weightLabel" text="Weight" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                         <Label text="Height" GridPane.rowIndex="6" />
-                        <Label fx:id="heightLabel" text="Height" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="heightLabel" text="Height" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                         <Label text="PlayerType" GridPane.rowIndex="7" />
-                        <Label fx:id="playerTypeLabel" text="PlayerType" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="playerTypeLabel" text="PlayerType" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <Label text=":" GridPane.columnIndex="1" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
-                  <Label fx:id="notifyLabel" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <Label fx:id="notifyLabel" styleClass="notify-label" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                      <children>
                         <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#handleAcceptButton" text="Accept" />
                         <Button fx:id="rejectButton" mnemonicParsing="false" onAction="#handleRejectButton" text="Deny" />
-                        <TextArea fx:id="denyReasonTextArea" prefHeight="42.0" prefWidth="138.0" text="reason for denying&#10;" />
+                        <TextArea fx:id="denyReasonTextArea" prefHeight="100.0" prefWidth="270.0" text="reason for denying&#10;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></TextArea>
                      </children>
                   </HBox>
                </children>

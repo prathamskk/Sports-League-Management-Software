@@ -52,17 +52,18 @@ public class TeamViewMatchStatsController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Team Manager");
-            con = DatabaseConnector.getConnection();
+            jobLabel.getStyleClass().add("job-label");        con = DatabaseConnector.getConnection();
             createData1();//Team 1 Batting
             createData2();//Team 2 Bowling
             createData3();//Team 2 Batting
             createData4();//Team 1 Bowling
 
-            TableNameLabel1.getStyleClass().add("table-heading");
-            TableNameLabel2.getStyleClass().add("table-heading");
-            TableNameLabel3.getStyleClass().add("table-heading");
-            TableNameLabel4.getStyleClass().add("table-heading");
+            TableNameLabel1.getStyleClass().add("heading-label");
+            TableNameLabel2.getStyleClass().add("heading-label");
+            TableNameLabel3.getStyleClass().add("heading-label");
+            TableNameLabel4.getStyleClass().add("heading-label");
             table1container.getChildren().add(TableNameLabel1);
             table2container.getChildren().add(TableNameLabel2);
             table3container.getChildren().add(TableNameLabel3);

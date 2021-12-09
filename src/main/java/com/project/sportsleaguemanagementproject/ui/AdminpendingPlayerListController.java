@@ -39,7 +39,9 @@ public class AdminpendingPlayerListController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
             con = DatabaseConnector.getConnection();
             pagination.setPageFactory(this::createPage);
         }catch(SQLException ex){
@@ -80,15 +82,15 @@ public class AdminpendingPlayerListController implements Initializable {
         private TableView<ModelUnverifiedPlayers> createTable(){
             TableView<ModelUnverifiedPlayers> PendingPlayerListTable = new TableView<>();
 
-             TableColumn<ModelUnverifiedPlayers , String> usernameColumn = new TableColumn<>("username");
-             TableColumn<ModelUnverifiedPlayers , String> aadharNoColumn = new TableColumn<>("aadharNo");
-             TableColumn<ModelUnverifiedPlayers , String> nameColumn   = new TableColumn<>  ("name");
-             TableColumn<ModelUnverifiedPlayers , String> genderColumn = new TableColumn<>  ("gender");
-             TableColumn<ModelUnverifiedPlayers , Date>   dobColumn      = new TableColumn<>  ("dob");
-             TableColumn<ModelUnverifiedPlayers , Float>  weightColumn   = new TableColumn<> ("weight");
-             TableColumn<ModelUnverifiedPlayers , Float>  heightColumn    = new TableColumn<>("height");
-             TableColumn<ModelUnverifiedPlayers , String> playerTypeColumn=new TableColumn<>("playerType");
-             TableColumn<ModelUnverifiedPlayers , Button> buttonsColumn  = new TableColumn<>("button");
+             TableColumn<ModelUnverifiedPlayers , String> usernameColumn = new TableColumn<>("Username");
+             TableColumn<ModelUnverifiedPlayers , String> aadharNoColumn = new TableColumn<>("Aadhar No");
+             TableColumn<ModelUnverifiedPlayers , String> nameColumn   = new TableColumn<>  ("Name");
+             TableColumn<ModelUnverifiedPlayers , String> genderColumn = new TableColumn<>  ("Gender");
+             TableColumn<ModelUnverifiedPlayers , Date>   dobColumn      = new TableColumn<>  ("DOB");
+             TableColumn<ModelUnverifiedPlayers , Float>  weightColumn   = new TableColumn<> ("Weight");
+             TableColumn<ModelUnverifiedPlayers , Float>  heightColumn    = new TableColumn<>("Height");
+             TableColumn<ModelUnverifiedPlayers , String> playerTypeColumn=new TableColumn<>("Player Type");
+             TableColumn<ModelUnverifiedPlayers , Button> buttonsColumn  = new TableColumn<>("");
 
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         aadharNoColumn.setCellValueFactory(new PropertyValueFactory<>("aadharNo"));
@@ -118,7 +120,7 @@ public class AdminpendingPlayerListController implements Initializable {
 
         Button ret = new Button();
         ret.setId(String.valueOf(rowNumber));
-        ret.setText(String.valueOf(rowNumber));
+        ret.setText("VIEW");
         ret.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

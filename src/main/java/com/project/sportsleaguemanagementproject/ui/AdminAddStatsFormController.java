@@ -49,7 +49,9 @@ public class AdminAddStatsFormController implements Initializable {
         try {
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Admin");
+            jobLabel.getStyleClass().add("job-label");
             con = DatabaseConnector.getConnection();
             TypeChoiceBox     .getItems().addAll(TypeArray)     ;
             inningsChoiceBox  .getItems().addAll(inningsArray)  ;
@@ -66,6 +68,7 @@ public class AdminAddStatsFormController implements Initializable {
         notifyLabel.setText("");
         formVbox.getChildren().clear();
     GridPane gridPane = new GridPane();
+        gridPane.setVgap(15);
     if(TypeChoiceBox.getValue().equals("batting"))   {
         Label AadharNoLabel  = new Label("Aadhar No") ;
         Label BallsLabel     = new Label("Balls")     ;

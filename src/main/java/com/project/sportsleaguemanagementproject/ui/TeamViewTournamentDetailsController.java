@@ -63,8 +63,9 @@ public class TeamViewTournamentDetailsController implements Initializable {
         try{
             userIcon.setFill(new ImagePattern(ImageLoader.getInstance().loadImage()));
             accountNameLabel.setText(LoginSingleton.getInstance().username);
+            accountNameLabel.getStyleClass().add("account-label");
             jobLabel.setText("Team Manager");
-            con = DatabaseConnector.getConnection();
+            jobLabel.getStyleClass().add("job-label");        con = DatabaseConnector.getConnection();
             fillData();
             displayBracket();
             fillBracket();
