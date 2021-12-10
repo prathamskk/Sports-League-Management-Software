@@ -40,6 +40,9 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
     private ChoiceBox<String> player_typechoicebox;
     @FXML
     private VBox MainVbox;
+    private String verification_status ="NULL";
+    @FXML
+    private Label NotifyLabel;
 
 
 
@@ -62,24 +65,50 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
 
     @FXML
     private void submitDetails(ActionEvent e){
-        try {
 
-            PreparedStatement preparedStatement = con.prepareStatement("insert into player(username,aadhar_no,name,gender,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2, aadharno.getText());
-            preparedStatement.setString(3,name.getText());
-            preparedStatement.setString(4, selectedGender);
-            preparedStatement.setDate(5, Date.valueOf(DOB.getValue()));
-            preparedStatement.setString(6,weight.getText());
-            preparedStatement.setString(7,height.getText());
-            preparedStatement.setString(8, selectedPlayerType);
-            preparedStatement.executeUpdate();
+                        if(verification_status.equals("NULL")){
+                            try {
+                                PreparedStatement preparedStatement = con.prepareStatement("insert into player(username,aadhar_no,name,gender,dob,weight,height,player_type) values (? ,?,?,?,?,?,?,?)");
+                                preparedStatement.setString(1, username);
+                                preparedStatement.setString(2, aadharno.getText());
+                                preparedStatement.setString(3, name.getText());
+                                preparedStatement.setString(4, selectedGender);
+                                preparedStatement.setDate(5, Date.valueOf(DOB.getValue()));
+                                preparedStatement.setString(6, weight.getText());
+                                preparedStatement.setString(7, height.getText());
+                                preparedStatement.setString(8, selectedPlayerType);
+                                preparedStatement.executeUpdate();
+                            }catch(SQLException ex){
+                                NotifyLabel.setText("Check Your Details");
+                                Logger.getLogger(PlayerRegistrationPlayerScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                            }finally {
+                                NotifyLabel.setText("Successfully Submitted");
+                            }
 
 
+                }else{
+                            try {
+                            PreparedStatement preparedStatement = con.prepareStatement("update player set username=?,aadhar_no=?,name=?,gender=?,dob=?,weight=?,height=?,player_type=?,verification_status='pending' where username=?");
+                            preparedStatement.setString(1,username);
+                            preparedStatement.setString(2, aadharno.getText());
+                            preparedStatement.setString(3,name.getText());
+                            preparedStatement.setString(4, selectedGender);
+                            preparedStatement.setDate(5, Date.valueOf(DOB.getValue()));
+                            preparedStatement.setString(6,weight.getText());
+                            preparedStatement.setString(7,height.getText());
+                            preparedStatement.setString(8, selectedPlayerType);
+                            preparedStatement.setString(9,username);
+                            preparedStatement.executeUpdate();
+                            }catch(SQLException ex){
+                                NotifyLabel.setText("Check Your Details");
+                                Logger.getLogger(PlayerRegistrationPlayerScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                            }finally {
+                                NotifyLabel.setText("Successfully Submitted");
+                            }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(PlayerRegistrationPlayerScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                }
+
+
 
     }
 
@@ -99,11 +128,20 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
         }
         try {
             if(checkAlreadyRegistered()){
-                MainVbox.getChildren().clear();
-                Label registeredLabel = new Label();
-                registeredLabel.setText("Already registered");
-                MainVbox.getChildren().add(registeredLabel);
-                MainVbox.setAlignment(Pos.CENTER);
+                if(verification_status.equals("verified")){
+                    MainVbox.getChildren().clear();
+                    Label registeredLabel = new Label();
+                    registeredLabel.setText("Already registered");
+                    MainVbox.getChildren().add(registeredLabel);
+                    MainVbox.setAlignment(Pos.CENTER);
+                }else{
+                    genderchoicebox.getItems().addAll(genders);
+                    genderchoicebox.setOnAction(this::getGender);
+                    player_typechoicebox.getItems().addAll(playerTypes);
+                    player_typechoicebox.setOnAction(this::getPlayerType);
+
+                }
+
             }else{
                 genderchoicebox.getItems().addAll(genders);
                 genderchoicebox.setOnAction(this::getGender);
@@ -117,9 +155,11 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
 
     }
     private boolean checkAlreadyRegistered() throws SQLException {
-       ResultSet rs = con.createStatement().executeQuery("select player_id from player where username = '"+username+"'");
+       ResultSet rs = con.createStatement().executeQuery("select verification_status from player where username = '"+username+"'");
        if(rs.next()){
+           verification_status = rs.getString("verification_status");
            return true;
+
        }else{
            return false;
        }

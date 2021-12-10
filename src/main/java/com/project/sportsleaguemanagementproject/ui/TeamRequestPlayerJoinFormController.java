@@ -89,16 +89,41 @@ public class TeamRequestPlayerJoinFormController implements Initializable {
     private Button SendRequestButton;
     @FXML
     private TextField aadharTextField;
+    @FXML
+    private  Label NotifyLabel;
+    private String verification_status;
+    private boolean checkAlreadyRegistered() throws SQLException {
+        String aadharNo = aadharTextField.getText();
+        ResultSet rs = con.createStatement().executeQuery("select verification_status from player where aadhar_no = '"+aadharNo+"'");
+        if(rs.next()){
+            verification_status = rs.getString("verification_status");
+            return true;
+
+        }else{
+            return false;
+        }
+    }
+
+
 
     @FXML
-    private void handleSendRequestButton(ActionEvent event) {
+    private void handleSendRequestButton(ActionEvent event) throws SQLException {
+        checkAlreadyRegistered();
         String aadharNo = aadharTextField.getText();
-        try {
-            con.createStatement().executeUpdate("insert into team_request_player(team_id,player_id) values ((select team_id from team where username='"+username+"') ,(select player_id from player where aadhar_no = '"+aadharNo+"'));");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TeamRequestPlayerJoinFormController.class.getName()).log(Level.SEVERE, null, ex);
+        if(checkAlreadyRegistered()){
+            if(verification_status.equals("verified")){
+                try {
+                    con.createStatement().executeUpdate("insert into team_request_player(team_id,player_id) values ((select team_id from team where username='"+username+"') ,(select player_id from player where aadhar_no = '"+aadharNo+"'));");
+                } catch (SQLException ex) {
+                    Logger.getLogger(TeamRequestPlayerJoinFormController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                NotifyLabel.setText("Only Verified Players Can Join a Team");
+            }
+        }else{
+            NotifyLabel.setText("Player with the given Aadhar Number doesn't exist");
         }
+
 
         pagination.setPageFactory(this::createPage);
     }

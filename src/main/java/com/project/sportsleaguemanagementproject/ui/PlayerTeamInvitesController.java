@@ -40,6 +40,7 @@ public class PlayerTeamInvitesController implements Initializable {
     private Label currentTeamNameLabel;
     @FXML
     private Button leaveTeamButton;
+    private String verification_status;
 
     private final TableView<PlayerTeamInvitesTable> table = createTable();
     private static final int rowsPerPage = 20;
@@ -53,10 +54,15 @@ public class PlayerTeamInvitesController implements Initializable {
             jobLabel.setText("Player");
                 jobLabel.getStyleClass().add("job-label");
             con = DatabaseConnector.getConnection();
+            checkAlreadyRegistered();
             pagination.setPageFactory(this::createPage);
             checkForTeam();
-            if(teamId==-1){
-                notifyTeamExistence.setText("No Team");
+            if(teamId==-1) {
+                if (verification_status.equals("rejected")) {
+                    notifyTeamExistence.setText("Only Verified Players can join a Team");
+                } else {
+                    notifyTeamExistence.setText("No Team");
+                }
                 notifyTeamExistence.setVisible(true);
                 teamNameLabel.setVisible(false);
                 currentTeamNameLabel.setVisible(false);
@@ -69,6 +75,16 @@ public class PlayerTeamInvitesController implements Initializable {
             }
         }catch(SQLException ex){
             Logger.getLogger(PlayerTeamInvitesTable.class.getName()).log(Level.SEVERE, null , ex);
+        }
+    }
+    private boolean checkAlreadyRegistered() throws SQLException {
+        ResultSet rs = con.createStatement().executeQuery("select verification_status from player where username = '"+username+"'");
+        if(rs.next()){
+            verification_status = rs.getString("verification_status");
+            return true;
+
+        }else{
+            return false;
         }
     }
     @FXML

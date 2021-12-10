@@ -99,8 +99,8 @@ public class TeamTournamentListController implements Initializable {
         col_registration.prefWidthProperty().bind(table.widthProperty().divide(100/15));
         col_venue.prefWidthProperty().bind(table.widthProperty().divide(100/20));
         col_maxTeams.prefWidthProperty().bind(table.widthProperty().divide(100/12));
-        viewButtonColumn.prefWidthProperty().bind(table.widthProperty().divide(100/10));
-        joinButtonColumn.prefWidthProperty().bind(table.widthProperty().divide(100/10));
+        viewButtonColumn.prefWidthProperty().bind(table.widthProperty().divide(100/9));
+        joinButtonColumn.prefWidthProperty().bind(table.widthProperty().divide(100/11));
 
 
 
