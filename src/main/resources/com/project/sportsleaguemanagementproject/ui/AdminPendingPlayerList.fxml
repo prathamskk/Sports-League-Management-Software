@@ -14,10 +14,9 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bordePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminpendingPlayerListController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminpendingPlayerListController">
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
+
             <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="center-pane" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="main-pane">
@@ -28,8 +27,7 @@
                   </VBox>
                </children>
             </VBox>
-         </center>
-      </BorderPane>
+
    </center>
 
    <left>

@@ -8,19 +8,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="center-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TeamManagerTeamNameRegistrationController">
-<VBox alignment="CENTER" layoutX="365.0" layoutY="175.0" prefHeight="450.0" prefWidth="550.0" spacing="15.0" styleClass="main-pane">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" styleClass="center-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TeamManagerTeamNameRegistrationController">
+<VBox alignment="CENTER" layoutX="250.0" layoutY="125.0" prefHeight="550.0" prefWidth="500.0" spacing="15.0" styleClass="main-pane">
 <children>
    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="510.0" text="Choose Team Name">
       <font>
          <Font name="System Bold" size="24.0" />
       </font>
    </Label>
-   <Label fx:id="notifyLabel" prefHeight="17.0" prefWidth="854.0" />
-   <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="749.0" text="Team Name" />
-   <TextField fx:id="teamNameTextField" prefHeight="50.0" />
-   <HBox alignment="CENTER" />
-   <Button mnemonicParsing="false" onAction="#handleRegisterNameButton" prefHeight="50.0" prefWidth="685.0" text="Register Name" />
+         <VBox spacing="15.0">
+            <children>
+         <Label fx:id="notifyLabel" prefHeight="17.0" prefWidth="854.0" />
+         <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="749.0" text="Team Name" />
+         <TextField fx:id="teamNameTextField" prefHeight="50.0" />
+         <HBox alignment="CENTER" />
+         <Button mnemonicParsing="false" onAction="#handleRegisterNameButton" prefHeight="50.0" prefWidth="685.0" text="Register Name" />
+            </children>
+         </VBox>
 </children>
 </VBox>
 </AnchorPane>

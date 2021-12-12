@@ -43,6 +43,6 @@
 .main-pane{
 -fx-background-color:#ffffff;
 -fx-background-radius:5;
--fx-spacing:10;
+-fx-spacing:100;
 -fx-padding:10;
 }

@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TeamRequestPlayerJoinFormController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TeamRequestPlayerJoinFormController">
    <left>
       <VBox prefHeight="700.0" prefWidth="200.0" styleClass="left-drawer" BorderPane.alignment="CENTER">
          <children>
@@ -87,7 +87,7 @@
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="center-pane" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="760.0" prefWidth="530.0" styleClass="main-pane">
+            <VBox prefHeight="760.0" prefWidth="355.0" styleClass="main-pane">
                <children>
                   <Label id="heading-label" text="Send Team Invitation">
                      <font>
@@ -102,7 +102,6 @@
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="83.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="205.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" prefWidth="249.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

@@ -69,6 +69,7 @@ public class AdminAddStatsFormController implements Initializable {
         formVbox.getChildren().clear();
     GridPane gridPane = new GridPane();
         gridPane.setVgap(15);
+        gridPane.setHgap(15);
     if(TypeChoiceBox.getValue().equals("batting"))   {
         Label AadharNoLabel  = new Label("Aadhar No") ;
         Label BallsLabel     = new Label("Balls")     ;

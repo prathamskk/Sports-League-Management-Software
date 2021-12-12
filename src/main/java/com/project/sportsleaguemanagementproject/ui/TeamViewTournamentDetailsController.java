@@ -141,6 +141,7 @@ private void handleRegisterButton(ActionEvent event){
     @FXML
     private void displayBracket(){
         outerHBox.getChildren().clear();
+        outerHBox.setStyle("-fx-background-color:#fffcfa;");
         VBoxArrayList.clear();
         DatePickerArrayList.clear();
         TextFieldArrayList.clear();

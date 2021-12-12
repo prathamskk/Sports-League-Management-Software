@@ -40,7 +40,7 @@ public class PlayerTeamInvitesController implements Initializable {
     private Label currentTeamNameLabel;
     @FXML
     private Button leaveTeamButton;
-    private String verification_status;
+    private String verification_status="pending";
 
     private final TableView<PlayerTeamInvitesTable> table = createTable();
     private static final int rowsPerPage = 20;

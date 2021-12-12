@@ -39,6 +39,7 @@
     -fx-font-size:18;
     -fx-font-weight:normal;
 }
+
 #job-label{
 -fx-text-fill:#d1d1d1;
 -fx-background-color: transparent;
@@ -60,6 +61,26 @@
 -fx-text-fill:#0fcdb1;
  -fx-font-size:16;
 
+}
+.main-pane #scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.main-pane #scroll-pane{
+-fx-background-color:white;
+}
+.player-flow-pane{
+-fx-border-color: #d1d1d1;
+-fx-border-radius: 5;
+-fx-spacing:30;
+    -fx-padding: 5 5px 5 5px;
+-fx-font-size:8 ;
+-fx-text-fill:#d1d1d1;
+
+}
+
+.player-flow-pane #player-label{
+-fx-text-fill:black;
+-fx-font-size:14;
 }
 * {
 	-fx-primary-color:#fed642;
@@ -234,7 +255,7 @@
 
 
 .table-view .column-header {
-    -fx-text-fill:#000000;
+
     -fx-background-color: transparent;
     -fx-font-family: 'Roboto Medium', sans-serif;
     -fx-font-size:16;
@@ -243,9 +264,9 @@
 }
 
 .table-view .column-header .label {
-fx-text-fill:#000000;
+-fx-text-fill: #201a26;
 -fx-padding: 0px 0 0 0px;
-  -fx-alignment: center-left;
+  -fx-alignment: bottom-center;
 }
 
 .table-view .table-cell{
@@ -273,7 +294,7 @@ fx-text-fill:#000000;
 
 .table-cell {
 
-    -fx-alignment: CENTER-LEFT;
+    -fx-alignment: CENTER;
 
  }
 

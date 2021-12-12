@@ -107,7 +107,7 @@ private Label nameLabel;
         DatePickerArrayList.clear();
         TextFieldArrayList.clear();
         ButtonArrayList.clear();
-
+        outerHBox.setStyle("-fx-background-color:#fffcfa;");
         int noOfTeams =  MaxTeams ;
 
         int VBoxIndex = 0;

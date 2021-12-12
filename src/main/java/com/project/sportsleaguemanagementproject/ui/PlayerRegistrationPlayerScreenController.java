@@ -128,6 +128,13 @@ public class PlayerRegistrationPlayerScreenController implements Initializable {
         }
         try {
             if(checkAlreadyRegistered()){
+                if(verification_status.equals("pending")){
+                    MainVbox.getChildren().clear();
+                    Label registeredLabel = new Label();
+                    registeredLabel.setText("Pending Request");
+                    MainVbox.getChildren().add(registeredLabel);
+                    MainVbox.setAlignment(Pos.CENTER);
+                }else
                 if(verification_status.equals("verified")){
                     MainVbox.getChildren().clear();
                     Label registeredLabel = new Label();

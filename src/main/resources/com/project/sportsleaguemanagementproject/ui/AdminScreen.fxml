@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminScreenController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.AdminScreenController">
    <left>
       <VBox prefHeight="700.0" prefWidth="200.0" styleClass="left-drawer" BorderPane.alignment="CENTER">
          <children>
@@ -84,6 +85,14 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="center-pane" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="center-pane" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="760.0" prefWidth="1040.0" styleClass="main-pane">
+               <children>
+                  <Label id="heading-label" text="Upcoming Tournaments" />
+                  <Pagination fx:id="pagination" prefHeight="760.0" prefWidth="1040.0" />
+               </children>
+            </VBox>
+         </children></VBox>
    </center>
 </BorderPane>

@@ -86,7 +86,7 @@ public class PlayerScreenController implements Initializable {
                 String playerID = rs.getString("player_id");
                 Label informationLabel = new Label("Welcome! "+LoginSingleton.getInstance().username+" ");
                 Label StatsLabel = new Label("Lifetime Stats");
-                StatsLabel  .setStyle("-fx-font-size:28");
+                StatsLabel  .setStyle("-fx-font-size:16");
                 informationLabel.setStyle("-fx-text-fill:black");
                 informationLabel.setStyle("-fx-font-size:32");
                 mainVbox.getChildren().add(informationLabel);
@@ -95,13 +95,11 @@ public class PlayerScreenController implements Initializable {
                 mainVbox.setSpacing(50);
                 ResultSet resultSet = con.createStatement().executeQuery("select * from player where player_id='"+playerID+"'");
                 resultSet.next();
-                if(resultSet.getString("player_type")==null || resultSet.getString("player_type").equals("all_rounder") ){
-                    //ALL ROUNDER / NULL PLAYER
-
-                }else if(resultSet.getString("player_type").equals("batsman")){
-                    GridPane gridPane = new GridPane();
-                    gridPane.setVgap(50);
-                    gridPane.setHgap(50);
+                 if(resultSet.getString("player_type")==null || resultSet.getString("player_type").equals("all_rounder") || resultSet.getString("player_type").equals("batsman")){
+                    //batsman null and all round players
+                     GridPane gridPane = new GridPane();
+                    gridPane.setVgap(15);
+                    gridPane.setHgap(15);
                     Label BallsLabel     = new Label("Balls Batted")     ;
                     Label RunsLabel      = new Label("Total Runs")       ;
                     Label SixsLabel      = new Label("6s")               ;
@@ -125,8 +123,11 @@ public class PlayerScreenController implements Initializable {
                      RunsLabelValue  .setText(rs2.getString("result"));
                      SixsLabelValue  .setText(rs3.getString("result"));
                      FoursLabelValue .setText(rs4.getString("result"));
-                     StrikeRateLabelValue.setText(String.valueOf((float)Integer.parseInt(rs2.getString("result") )* 100 / Integer.parseInt(rs1.getString("result"))));
-
+                     try {
+                         StrikeRateLabelValue.setText(String.valueOf((float) Integer.parseInt(rs2.getString("result")) * 100 / Integer.parseInt(rs1.getString("result"))));
+                     }catch(NumberFormatException e){
+                         StrikeRateLabelValue.setText("0");
+                     }
                      gridPane.add(StatsLabel                         , 0, 0, 1, 1);
                              gridPane.add(BallsLabel                         , 0, 1, 1, 1);
                              gridPane.add(RunsLabel                          , 0, 2, 1, 1);
@@ -144,8 +145,8 @@ public class PlayerScreenController implements Initializable {
 
                 }else if(resultSet.getString("player_type").equals("bowler")){
                     GridPane gridPane = new GridPane();
-                    gridPane.setVgap(50);
-                    gridPane.setHgap(50);
+                    gridPane.setVgap(15);
+                    gridPane.setHgap(15);
                     Label OversLabel     = new Label("Overs Bowled")           ;
                     Label RunsLabel      = new Label("Runs")                   ;
                     Label WideBallsLabel = new Label("Wide Balls")             ;
@@ -216,9 +217,42 @@ public class PlayerScreenController implements Initializable {
 
 
                 }
-            }else{
+            }else if(verification_status.equals("rejected")){
                 //FOR REJECTED PLAYERS
+                mainVbox.getChildren().clear();
+                Button RegistrationButton = new Button("Register");
+                RegistrationButton.setOnAction((new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        try {
+                            SceneSwitcher.switchTo(this.getClass(), e, "PlayerRegistrationForm.fxml","ui/stylesheets/main.css");
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }}));
+                Label informationLabel = new Label("Your Verification request was denied");
+                informationLabel.setStyle("-fx-text-fill:black");
+                mainVbox.getChildren().add(informationLabel);
+                Label reasonLabel = new Label();
+                ResultSet rs10 = con.createStatement().executeQuery("select reason from player where username ='"+LoginSingleton.getInstance().username+"'");
+                rs10.next();
+                if(rs10.getString("reason")!=null){
+                reasonLabel.setText(rs10.getString("reason"));
+                    mainVbox.getChildren().add(reasonLabel);
+            }
 
+                mainVbox.getChildren().add(RegistrationButton);
+                mainVbox.setAlignment(Pos.CENTER);
+                mainVbox.setSpacing(50);
+
+            }else{
+                //PENDING PLAYERS
+                Label informationLabel = new Label("Welcome! "+LoginSingleton.getInstance().username+" ");
+                informationLabel.setStyle("-fx-text-fill:black");
+                informationLabel.setStyle("-fx-font-size:32");
+                mainVbox.getChildren().add(informationLabel);
+                mainVbox.setAlignment(Pos.CENTER);
+                mainVbox.setSpacing(50);
             }
 
         }else{

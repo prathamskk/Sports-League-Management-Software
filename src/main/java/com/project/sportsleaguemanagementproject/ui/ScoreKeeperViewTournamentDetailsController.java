@@ -99,6 +99,7 @@ public class ScoreKeeperViewTournamentDetailsController implements Initializable
     @FXML
     private void displayBracket(){
         outerHBox.getChildren().clear();
+        outerHBox.setStyle("-fx-background-color:#fffcfa;");
         VBoxArrayList.clear();
         DatePickerArrayList.clear();
         TextFieldArrayList.clear();

@@ -62,6 +62,7 @@ public class AdminEditStatsFormController implements Initializable {
         rs2.next();
         GridPane gridPane = new GridPane();
         gridPane.setVgap(15);
+        gridPane.setHgap(15);
         Label AadharNoLabel  = new Label("Aadhar No") ;
         Label BallsLabel     = new Label("Balls")     ;
         Label RunsLabel      = new Label("Runs")      ;
@@ -118,6 +119,7 @@ public class AdminEditStatsFormController implements Initializable {
         rs2.next(); 
         GridPane gridPane = new GridPane();
         gridPane.setVgap(15);
+        gridPane.setHgap(15);
         Label AadharNoLabel  = new Label("Aadhar No")              ;
         Label OversLabel     = new Label("Overs Bowled")           ;
         Label RunsLabel      = new Label("Runs")                   ;

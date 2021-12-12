@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.PlayerTeamInvitesController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.PlayerTeamInvitesController">
     <left>
         <VBox prefHeight="700.0" prefWidth="200.0" styleClass="left-drawer" BorderPane.alignment="CENTER">
             <children>
@@ -88,15 +88,15 @@
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="center-pane" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="700.0" prefWidth="579.0" styleClass="main-pane">
+            <VBox prefHeight="760.0" prefWidth="292.0" styleClass="main-pane">
                <children>
                   <Label id="heading-label" text="Current Team">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin></Label>
-                  <HBox>
+                  <HBox spacing="15.0">
                      <children>
-                        <Label fx:id="teamNameLabel" text="Team Name          :" />
+                        <Label fx:id="teamNameLabel" text="Team Name  :" />
                         <Label fx:id="currentTeamNameLabel" />
                      </children>
                   </HBox>

@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TeamTournamentListController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sportsleaguemanagementproject.ui.TeamTournamentListController">
     <left>
         <VBox prefHeight="700.0" prefWidth="200.0" styleClass="left-drawer" BorderPane.alignment="CENTER">
             <children>
@@ -91,7 +91,7 @@
                <children>
                   <Label id="heading-label" text="Upcoming Tournaments" />
                   <Label fx:id="notifyLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="1040.0" styleClass="notify-label" />
-                  <Pagination fx:id="pagination" prefHeight="764.0" prefWidth="1080.0" />
+                  <Pagination fx:id="pagination" prefHeight="720.0" prefWidth="740.0" />
                </children>
             </VBox>
          </children>

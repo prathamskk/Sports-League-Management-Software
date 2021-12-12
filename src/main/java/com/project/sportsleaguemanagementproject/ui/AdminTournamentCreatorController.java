@@ -87,6 +87,7 @@ public class AdminTournamentCreatorController implements Initializable {
         }
 
         outerHBox.getChildren().clear();
+        outerHBox.setStyle("-fx-background-color:#fffcfa;");
         VBoxArrayList.clear();
         DatePickerArrayList.clear();
 
