@@ -80,9 +80,10 @@ public class AdminPlayerVerifyScreenController implements Initializable {
         playerTypeLabel.setText(rs.getString("player_type"));
      }
     @FXML
-     private void handleAcceptButton(ActionEvent event) throws SQLException {
-        con.createStatement().executeUpdate("update player set verification_status = 'verified'  WHERE username = '"+id+"';");
-     }
+     private void handleAcceptButton(ActionEvent event) throws SQLException, IOException {
+        con.createStatement().executeUpdate("update player set verification_status = 'verified'  WHERE username = '" + id + "';");
+        SceneSwitcher.switchTo(this.getClass(), event, "AdminPendingPlayerList.fxml", "ui/stylesheets/main.css");
+    }
      @FXML
     private void handleRejectButton(ActionEvent event) throws SQLException {
         String reason = denyReasonTextArea.getText();

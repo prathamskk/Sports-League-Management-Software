@@ -115,11 +115,19 @@ private void handleRegisterButton(ActionEvent event){
         if(rs.next()){
             notifyLabel.setText("You are Already Registered for this tournament");
         }else {
-            if(noOfTeamsRegistered<max_teams){
-                con.createStatement().executeUpdate("insert into teams_in_tournament values((select team_id from team where username = '"+username+"'),'"+id+"');");
-                notifyLabel.setText("Successfully Registered");
+            ResultSet rs1 = con.createStatement().executeQuery("SELECT COUNT('team_id') from player where team_id=(select team_id from team where username ='"+username+"') ;");
+            rs1.next();
+            if(rs1.getInt("count('team_id')")>=10){
+                if(noOfTeamsRegistered<max_teams) {
+                    con.createStatement().executeUpdate("insert into teams_in_tournament values((select team_id from team where username = '" + username + "'),'" + id + "');");
+                    notifyLabel.setText("Successfully Registered");
+                }else{
+
+                    notifyLabel.setText("Registration Full");
+                }
             }else {
-                notifyLabel.setText("Registration Full");
+
+                notifyLabel.setText("Minimum 10 players are needed in your Team");
             }
         }
     } catch (SQLException ex) {

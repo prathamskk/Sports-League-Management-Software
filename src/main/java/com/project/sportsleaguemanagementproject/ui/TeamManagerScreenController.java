@@ -74,7 +74,8 @@ public class TeamManagerScreenController implements Initializable {
                 if(rs1.getString("player_type")==null){
                     typeLabel.setText("");
                 }else{
-                    typeLabel.setText(rs.getString("player_type"));
+                    String playerType = rs1.getString("player_type");
+                    typeLabel.setText(playerType);
                 }
 
                 Button viewPlayerStatsButton = new Button("VIEW");
